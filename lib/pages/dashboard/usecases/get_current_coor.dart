@@ -1,8 +1,12 @@
 import 'dart:async';
+import 'package:battery_plus/battery_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
+import 'package:pinmarker/components/dialog/Dialogs/failed.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
-import 'package:intl/intl.dart';
+import 'package:pinmarker/services/modules/track/command_realtime.dart';
+import 'package:pinmarker/services/modules/track/models.dart';
 
 class GetCurrentCoor extends StatefulWidget {
   @override
@@ -12,14 +16,29 @@ class GetCurrentCoor extends StatefulWidget {
 class StateGetCurrentCoor extends State<GetCurrentCoor> {
   Position? currentPosition;
   String? lastUpdated;
+  late CommandTrackRealtime realtimeService;
   late Timer timer;
+  var battery = Battery();
 
   @override
   void initState() {
     super.initState();
     getLocation();
-    timer =
-        Timer.periodic(const Duration(seconds: 3), (Timer t) => getLocation());
+    realtimeService = CommandTrackRealtime();
+    getTimer();
+  }
+
+  Future<void> getTimer() async {
+    int batteryIndicator = await battery.batteryLevel;
+    bool isSaveMode = await battery.isInBatterySaveMode;
+    int timerInterval = batteryIndicator > 60
+        ? 3
+        : batteryIndicator > 30 || isSaveMode
+            ? 5
+            : 7;
+
+    timer = Timer.periodic(
+        Duration(seconds: timerInterval), (Timer t) => getLocation());
   }
 
   @override
@@ -54,8 +73,27 @@ class StateGetCurrentCoor extends State<GetCurrentCoor> {
         desiredAccuracy: LocationAccuracy.high);
     setState(() {
       currentPosition = position;
-      lastUpdated = DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
     });
+    String dateNow = DateTime.now().toIso8601String();
+    int batteryIndicator = await battery.batteryLevel;
+
+    AddTrackModel data = AddTrackModel(
+        trackLat: currentPosition!.latitude,
+        trackLong: currentPosition!.longitude,
+        trackType: 'live',
+        batteryIndicator: batteryIndicator,
+        createdAt: dateNow);
+
+    // Firebase
+    try {
+      var res = await realtimeService.addTrack(data);
+      String realtimeId = res;
+      setState(() {
+        lastUpdated = dateNow;
+      });
+    } catch (error) {
+      Get.dialog(FailedDialog(text: "Failed to save coordinate"));
+    }
   }
 
   @override
