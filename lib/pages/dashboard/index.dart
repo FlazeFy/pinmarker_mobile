@@ -16,7 +16,10 @@ class StateDashboardPage extends State<DashboardPage> {
       body: ListView(
         padding: EdgeInsets.only(
             top: Get.height * 0.05, left: spaceMD, right: spaceMD),
-        children: <Widget>[GetCurrentCoor(), GetDashboard()],
+        children: <Widget>[
+          GetCurrentCoor(),
+          const GetDashboard(),
+        ],
       ),
     );
   }
