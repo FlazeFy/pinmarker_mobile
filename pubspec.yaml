@@ -45,6 +45,7 @@ dependencies:
   http: ^1.2.1
   firebase_crashlytics: ^4.0.1
   google_maps_flutter: ^2.6.0
+  syncfusion_flutter_charts: ^25.1.38
 
 dev_dependencies:
   flutter_test:

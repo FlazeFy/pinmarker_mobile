@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
+import 'package:pinmarker/pages/dashboard/stats/index.dart';
 import 'package:pinmarker/pages/dashboard/usecases/get_current_coor.dart';
 import 'package:pinmarker/pages/dashboard/usecases/get_dashboard.dart';
 
@@ -20,6 +21,16 @@ class StateDashboardPage extends State<DashboardPage> {
           GetCurrentCoor(),
           const GetDashboard(),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Get.to(() => DashboardStatsPage());
+        },
+        child: const Icon(
+          Icons.pie_chart,
+          color: Colors.white,
+        ),
+        backgroundColor: Colors.black,
       ),
     );
   }
