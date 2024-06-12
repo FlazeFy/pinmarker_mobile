@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
 import 'package:pinmarker/pages/dashboard/usecases/get_current_coor.dart';
+import 'package:pinmarker/pages/dashboard/usecases/get_dashboard.dart';
 
 class DashboardPage extends StatefulWidget {
   @override
@@ -15,7 +16,7 @@ class StateDashboardPage extends State<DashboardPage> {
       body: ListView(
         padding: EdgeInsets.only(
             top: Get.height * 0.05, left: spaceMD, right: spaceMD),
-        children: <Widget>[GetCurrentCoor()],
+        children: <Widget>[GetCurrentCoor(), GetDashboard()],
       ),
     );
   }

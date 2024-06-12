@@ -45,7 +45,8 @@ class _FailedDialog extends State<FailedDialog> {
                 RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(6),
             )),
-            backgroundColor: MaterialStatePropertyAll<Color>(Colors.black),
+            backgroundColor:
+                const MaterialStatePropertyAll<Color>(Colors.black),
           ),
           onPressed: () => Navigator.pop(context, 'OK'),
           child: const Text('OK'),
