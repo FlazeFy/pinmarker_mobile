@@ -32,3 +32,11 @@ double calculateDistance(coord1, coord2) {
 
   return distance;
 }
+
+double countSpeed(double distance, int time) {
+  if (time == 0) {
+    return 0.0;
+  }
+  double speed = (distance * 3600) / (time * 1000);
+  return speed;
+}

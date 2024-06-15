@@ -5,6 +5,7 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   battery_plus
   cloud_firestore
+  connectivity_plus
   firebase_core
   geolocator_windows
 )
