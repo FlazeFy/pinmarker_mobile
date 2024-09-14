@@ -48,6 +48,9 @@ dependencies:
   syncfusion_flutter_charts: ^25.1.38
   get_storage: ^2.1.1
   flutter_internet_speed_test: ^1.5.0
+  sqflite: ^2.3.3+1
+  path_provider: ^2.1.4
+  art_sweetalert: ^0.0.5
 
 dev_dependencies:
   flutter_test:

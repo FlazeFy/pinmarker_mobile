@@ -7,6 +7,8 @@ import 'package:pinmarker/pages/dashboard/stats/usecases/get_total_pin_by_catego
 import 'package:pinmarker/pages/dashboard/stats/usecases/get_total_visit_by_category.dart';
 
 class DashboardStatsPage extends StatefulWidget {
+  const DashboardStatsPage({super.key});
+
   @override
   StateDashboardStatsPage createState() => StateDashboardStatsPage();
 }
@@ -32,7 +34,7 @@ class StateDashboardStatsPage extends State<DashboardStatsPage> {
       ),
       body: ListView(
         padding: EdgeInsets.all(spaceMD),
-        children: <Widget>[
+        children: const <Widget>[
           GetTotalPinByCategory(),
           GetTotalVisitByCategory(),
           GetTotalGalleryByPin()

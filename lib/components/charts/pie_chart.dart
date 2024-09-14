@@ -13,7 +13,7 @@ Widget getPieChart(List<PieData> chartData, String title) {
           backgroundColor: Colors.white,
           position: LegendPosition.bottom,
           orientation: LegendItemOrientation.horizontal,
-          textStyle: TextStyle(color: Colors.black),
+          textStyle: const TextStyle(color: Colors.black),
           overflowMode: LegendItemOverflowMode.wrap,
           borderColor: Colors.black),
       series: <CircularSeries>[

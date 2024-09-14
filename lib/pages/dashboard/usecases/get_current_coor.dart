@@ -1,18 +1,24 @@
 import 'dart:async';
-import 'dart:ffi';
+import 'package:art_sweetalert/art_sweetalert.dart';
 import 'package:battery_plus/battery_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:pinmarker/components/dialog/Dialogs/failed.dart';
+import 'package:pinmarker/components/text/title.dart';
 import 'package:pinmarker/helpers/general/converter.dart';
 import 'package:pinmarker/helpers/variables/global.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
+import 'package:pinmarker/pages/dashboard/usecases/get_last_coor.dart';
+import 'package:pinmarker/pages/dashboard/usecases/get_speed.dart';
 import 'package:pinmarker/services/modules/track/command_realtime.dart';
 import 'package:pinmarker/services/modules/track/models.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:pinmarker/services/sqlite/helper.dart';
 
 class GetCurrentCoor extends StatefulWidget {
+  const GetCurrentCoor({super.key});
+
   @override
   StateGetCurrentCoor createState() => StateGetCurrentCoor();
 }
@@ -92,7 +98,7 @@ class StateGetCurrentCoor extends State<GetCurrentCoor> {
 
       double distance = calculateDistance(
           '${currentPosition?.latitude},${currentPosition?.longitude}',
-          '${lastLat},${lastLong}');
+          '$lastLat,$lastLong');
       bool isSaveMode = await battery.isInBatterySaveMode;
 
       int timerInterval = batteryIndicator > 60
@@ -107,9 +113,19 @@ class StateGetCurrentCoor extends State<GetCurrentCoor> {
         if (topSpeed == null || speedRaw > topSpeed!) {
           topSpeed = speedRaw;
         }
+
+        if (speedRaw > 120) {
+          ArtSweetAlert.show(
+              context: context,
+              artDialogArgs: ArtDialogArgs(
+                  type: ArtSweetAlertType.warning,
+                  title: "Be Carefull!",
+                  text: "Keep driving safe and don't use your phone"));
+        }
       });
 
-      if (distance > distanceDiffToTrack) {
+      // if (distance > distanceDiffToTrack) {
+      if (distance > 0) {
         box.write('last_lat', currentPosition?.latitude);
         box.write('last_long', currentPosition?.longitude);
 
@@ -125,8 +141,21 @@ class StateGetCurrentCoor extends State<GetCurrentCoor> {
 
         // Firebase
         try {
-          var res = await realtimeService.addTrack(data);
-          String realtimeId = res;
+          // var res = await realtimeService.addTrack(data);
+          // String realtimeId = res;
+
+          final dbHelper = DatabaseHelper();
+
+          int idTrack = await dbHelper.insertTracker(
+            batteryIndicator: data.batteryIndicator,
+            trackLat: data.trackLat,
+            trackLong: data.trackLong,
+            trackType: data.trackType,
+            createdAt: data.createdAt,
+            createdBy: "fcd3f23e-e5aa-11ee-892a-3216422910e9",
+            isSync: false,
+          );
+
           setState(() {
             lastUpdated = dateNow;
           });
@@ -143,73 +172,60 @@ class StateGetCurrentCoor extends State<GetCurrentCoor> {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      Container(
-          padding: EdgeInsets.all(spaceMD),
-          width: Get.width,
-          margin: EdgeInsets.only(top: spaceMD),
-          decoration: BoxDecoration(
-              border: Border.all(width: 1.5, color: Colors.black),
-              borderRadius: BorderRadius.all(Radius.circular(roundedSM))),
-          child: Column(
-            children: [
-              Text(
-                'Current Coordinate',
-                style: TextStyle(fontWeight: FontWeight.w600, fontSize: textLG),
-              ),
-              if (currentPosition != null)
-                Text(
-                  'Latitude: ${currentPosition!.latitude}, Longitude: ${currentPosition!.longitude}',
+      InkWell(
+        onTap: () {
+          ArtSweetAlert.show(
+              context: context,
+              artDialogArgs: ArtDialogArgs(
+                  title: null,
+                  customColumns: [
+                    const ComponentTextTitle(
+                        text: 'Last Coordinate', type: "section_title"),
+                    const GetLastCoor()
+                  ],
+                  text: null));
+        },
+        child: Container(
+            padding: EdgeInsets.all(spaceMD),
+            width: Get.width,
+            margin: EdgeInsets.only(top: spaceMD),
+            decoration: BoxDecoration(
+                border: Border.all(width: 1.5, color: Colors.black),
+                borderRadius: BorderRadius.all(Radius.circular(roundedSM))),
+            child: Column(
+              children: [
+                const ComponentTextTitle(
+                    text: 'Current Coordinate', type: "section_title"),
+                if (currentPosition != null)
+                  Text(
+                    'Latitude: ${currentPosition!.latitude}, Longitude: ${currentPosition!.longitude}',
+                  )
+                else
+                  const Text('Get current location...'),
+                SizedBox(height: spaceSM),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Last Updated : ${lastUpdated ?? 'Updating...'}",
+                      style: TextStyle(
+                          fontStyle: FontStyle.italic, fontSize: textSM),
+                    ),
+                    Text(
+                      "Last Distance : ${lastDistance ?? 'Updating...'}",
+                      style: TextStyle(
+                          fontStyle: FontStyle.italic, fontSize: textSM),
+                    ),
+                  ],
                 )
-              else
-                const Text('Get current location...'),
-              SizedBox(height: spaceSM),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    "Last Updated : ${lastUpdated ?? 'Updating...'}",
-                    style: TextStyle(
-                        fontStyle: FontStyle.italic, fontSize: textSM),
-                  ),
-                  Text(
-                    "Last Distance : ${lastDistance ?? 'Updating...'}",
-                    style: TextStyle(
-                        fontStyle: FontStyle.italic, fontSize: textSM),
-                  ),
-                ],
-              )
-            ],
-          )),
-      Container(
-          padding: EdgeInsets.all(spaceMD),
-          margin: EdgeInsets.only(top: spaceMD),
-          width: Get.width,
-          decoration: BoxDecoration(
-              border: Border.all(width: 1.5, color: Colors.black),
-              borderRadius: BorderRadius.all(Radius.circular(roundedSM))),
-          child: Column(children: [
-            Text(
-              'Current Speed',
-              style: TextStyle(fontWeight: FontWeight.w600, fontSize: textLG),
-            ),
-            Text(
-              lastSpeed ?? 'Updating...',
-              style:
-                  TextStyle(fontWeight: FontWeight.w700, fontSize: textXJumbo),
-            ),
-            Text(
-              'Top Speed',
-              style: TextStyle(fontWeight: FontWeight.w600, fontSize: textLG),
-            ),
-            Text(
-              topSpeed != null
-                  ? '${topSpeed!.toStringAsFixed(2)} Km/h'
-                  : 'Updating...',
-              style:
-                  TextStyle(fontWeight: FontWeight.w700, fontSize: textXJumbo),
-            )
-          ]))
+              ],
+            )),
+      ),
+      GetSpeed(
+        lastSpeed: lastSpeed,
+        topSpeed: topSpeed,
+      )
     ]);
   }
 }

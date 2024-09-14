@@ -19,10 +19,12 @@ Future<void> main() async {
     return true;
   };
 
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
   @override
   StateMyApp createState() => StateMyApp();
 }

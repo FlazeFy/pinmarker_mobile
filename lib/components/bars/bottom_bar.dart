@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:pinmarker/helpers/variables/global.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
 import 'package:pinmarker/pages/dashboard/index.dart';
-import 'package:pinmarker/pages/global/index.dart';
 import 'package:pinmarker/pages/list/index.dart';
 import 'package:pinmarker/pages/maps/index.dart';
 
@@ -14,7 +13,7 @@ class BottomBar extends StatefulWidget {
 }
 
 class BottomBarState extends State<BottomBar> {
-  final List<Widget> _widgetOptions = <Widget>[
+  final List<Widget> _widgetOptions = const <Widget>[
     DashboardPage(),
     MapsPage(),
     ListPage(),

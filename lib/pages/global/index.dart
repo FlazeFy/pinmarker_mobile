@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class GlobalPage extends StatefulWidget {
+  const GlobalPage({super.key});
+
   @override
   StateGlobalPage createState() => StateGlobalPage();
 }

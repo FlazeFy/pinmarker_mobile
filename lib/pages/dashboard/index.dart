@@ -6,6 +6,8 @@ import 'package:pinmarker/pages/dashboard/usecases/get_current_coor.dart';
 import 'package:pinmarker/pages/dashboard/usecases/get_dashboard.dart';
 
 class DashboardPage extends StatefulWidget {
+  const DashboardPage({super.key});
+
   @override
   StateDashboardPage createState() => StateDashboardPage();
 }
@@ -17,20 +19,20 @@ class StateDashboardPage extends State<DashboardPage> {
       body: ListView(
         padding: EdgeInsets.only(
             top: Get.height * 0.05, left: spaceMD, right: spaceMD),
-        children: <Widget>[
+        children: const <Widget>[
           GetCurrentCoor(),
-          const GetDashboard(),
+          GetDashboard(),
         ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.to(() => DashboardStatsPage());
+          Get.to(() => const DashboardStatsPage());
         },
+        backgroundColor: Colors.black,
         child: const Icon(
           Icons.pie_chart,
           color: Colors.white,
         ),
-        backgroundColor: Colors.black,
       ),
     );
   }

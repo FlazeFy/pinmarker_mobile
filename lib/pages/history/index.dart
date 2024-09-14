@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class HistoryPage extends StatefulWidget {
+  const HistoryPage({super.key});
+
   @override
   StateHistoryPage createState() => StateHistoryPage();
 }

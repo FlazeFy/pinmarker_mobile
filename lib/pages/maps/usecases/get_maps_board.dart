@@ -15,8 +15,6 @@ class GetMapsBoard extends StatefulWidget {
 
 class StateGetMapsBoard extends State<GetMapsBoard> {
   GoogleMapController? googleMapController;
-  Marker? _origin;
-  Marker? _destination;
   Position? position;
   String mylong = "", mylat = "";
   QueriesPinServices? apiService;
@@ -60,7 +58,7 @@ class StateGetMapsBoard extends State<GetMapsBoard> {
             List<PinModelHeader>? contents = snapshot.data;
             return _buildListView(contents);
           } else {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
         },
       ),

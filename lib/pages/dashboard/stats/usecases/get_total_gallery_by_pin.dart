@@ -6,6 +6,8 @@ import 'package:pinmarker/services/modules/stats/models.dart';
 import 'package:pinmarker/services/modules/stats/queries_stats.dart';
 
 class GetTotalGalleryByPin extends StatefulWidget {
+  const GetTotalGalleryByPin({super.key});
+
   @override
   State<GetTotalGalleryByPin> createState() => _GetTotalGalleryByPinState();
 }
