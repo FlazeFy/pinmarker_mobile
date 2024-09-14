@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' show Client;
 import 'package:pinmarker/services/modules/pin/models.dart';
 
@@ -14,6 +16,27 @@ class QueriesPinServices {
       return pinModelHeaderFromJson(response.body);
     } else {
       return null;
+    }
+  }
+
+  Future<List<PinModelNearestHeader>> getAllNearestPinHeader(
+      String lat, String long) async {
+    final response = await client.post(
+      Uri.parse("$localUrl/api/v1/pin/nearest/$lat/$long"),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode({
+        "id": "fcd3f23e-e5aa-11ee-892a-3216422910e9",
+        "max_distance": 1000,
+        "limit": 5
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      return pinModelNearestHeaderFromJson(response.body);
+    } else {
+      return [];
     }
   }
 }

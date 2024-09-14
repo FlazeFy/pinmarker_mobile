@@ -10,6 +10,7 @@ import 'package:pinmarker/helpers/general/converter.dart';
 import 'package:pinmarker/helpers/variables/global.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
 import 'package:pinmarker/pages/dashboard/usecases/get_last_coor.dart';
+import 'package:pinmarker/pages/dashboard/usecases/get_nearest_pin.dart';
 import 'package:pinmarker/pages/dashboard/usecases/get_speed.dart';
 import 'package:pinmarker/services/modules/track/command_realtime.dart';
 import 'package:pinmarker/services/modules/track/models.dart';
@@ -181,7 +182,7 @@ class StateGetCurrentCoor extends State<GetCurrentCoor> {
                   customColumns: [
                     const ComponentTextTitle(
                         text: 'Last Coordinate', type: "section_title"),
-                    const GetLastCoor()
+                    const GetLastCoor(),
                   ],
                   text: null));
         },
@@ -225,7 +226,14 @@ class StateGetCurrentCoor extends State<GetCurrentCoor> {
       GetSpeed(
         lastSpeed: lastSpeed,
         topSpeed: topSpeed,
-      )
+      ),
+      if (currentPosition != null)
+        GetNearestPin(
+          lat: currentPosition!.latitude.toString(),
+          long: currentPosition!.longitude.toString(),
+        )
+      else
+        Center(child: Text('Current position not available')),
     ]);
   }
 }
