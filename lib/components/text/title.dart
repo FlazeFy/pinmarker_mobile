@@ -19,6 +19,11 @@ class ComponentTextTitle extends StatelessWidget {
       return Container(
           margin: EdgeInsets.only(bottom: spaceMini),
           child: Text(text,
+              style: TextStyle(fontSize: textLG, fontWeight: FontWeight.w500)));
+    } else if (type == 'content_sub_title') {
+      return Container(
+          margin: EdgeInsets.only(bottom: spaceMini),
+          child: Text(text,
               style: TextStyle(fontSize: textMD, fontWeight: FontWeight.w500)));
     } else if (type == 'content_body') {
       return Container(

@@ -4,6 +4,7 @@ import 'package:pinmarker/helpers/variables/style.dart';
 import 'package:pinmarker/pages/dashboard/index.dart';
 import 'package:pinmarker/pages/list/index.dart';
 import 'package:pinmarker/pages/maps/index.dart';
+import 'package:pinmarker/pages/trackvisit/index.dart';
 
 class BottomBar extends StatefulWidget {
   const BottomBar({key}) : super(key: key);
@@ -17,6 +18,7 @@ class BottomBarState extends State<BottomBar> {
     DashboardPage(),
     MapsPage(),
     ListPage(),
+    TrackVisit(),
   ];
 
   @override
@@ -41,14 +43,18 @@ class BottomBarState extends State<BottomBar> {
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.location_on_sharp),
-                label: 'Global',
+                label: 'Global List',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.gps_fixed),
+                label: 'Track & Visit',
               ),
             ],
             backgroundColor: Colors.black,
             // unselectedLabelStyle: GoogleFonts.poppins(),
             // selectedLabelStyle: GoogleFonts.poppins(fontSize: 14),
-            selectedItemColor: Colors.white,
-            unselectedItemColor: Colors.white,
+            selectedItemColor: Colors.black,
+            unselectedItemColor: Colors.black,
 
             onTap: (index) {
               setState(() {

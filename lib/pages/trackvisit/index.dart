@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class GlobalPage extends StatefulWidget {
-  const GlobalPage({super.key});
+class TrackVisit extends StatefulWidget {
+  const TrackVisit({super.key});
 
   @override
-  StateGlobalPage createState() => StateGlobalPage();
+  StateTrackVisit createState() => StateTrackVisit();
 }
 
-class StateGlobalPage extends State<GlobalPage> {
+class StateTrackVisit extends State<TrackVisit> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

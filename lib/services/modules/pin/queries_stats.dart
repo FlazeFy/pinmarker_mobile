@@ -28,7 +28,7 @@ class QueriesPinServices {
       },
       body: jsonEncode({
         "id": "fcd3f23e-e5aa-11ee-892a-3216422910e9",
-        "max_distance": 1000,
+        "max_distance": 3000,
         "limit": 5
       }),
     );

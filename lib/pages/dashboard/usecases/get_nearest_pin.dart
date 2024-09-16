@@ -39,9 +39,17 @@ class StateGetNearestPin extends State<GetNearestPin> {
           } else if (snapshot.connectionState == ConnectionState.done) {
             List<PinModelNearestHeader>? contents = snapshot.data;
             if (contents == null || contents.isEmpty) {
-              return const Center(
-                child: Text("No pins found"),
-              );
+              return Container(
+                  padding: EdgeInsets.all(spaceMD),
+                  margin: EdgeInsets.only(top: spaceMD),
+                  width: Get.width,
+                  decoration: BoxDecoration(
+                    border: Border.all(width: 1.5, color: Colors.black),
+                    borderRadius: BorderRadius.all(Radius.circular(roundedSM)),
+                  ),
+                  child: const Center(
+                    child: Text("No pin found in radius 3 Km"),
+                  ));
             }
             return _buildContent(contents);
           } else {
@@ -95,7 +103,7 @@ class StateGetNearestPin extends State<GetNearestPin> {
                   Row(
                     children: [
                       ComponentTextTitle(
-                          type: 'content_title', text: dt.pinName),
+                          type: 'content_sub_title', text: dt.pinName),
                       const Spacer(),
                       ComponentTextTitle(
                           type: 'content_tag', text: dt.pinCategory),
