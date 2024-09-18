@@ -43,6 +43,48 @@ class DatabaseHelper {
         is_sync BOOLEAN
       )
     ''');
+    await db.execute('''
+      CREATE TABLE pin_local (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        pin_name TEXT,
+        pin_coor TEXT,
+        pin_category TEXT,
+        stored_at TEXT
+      )
+    ''');
+  }
+
+  Future<List<Map<String, dynamic>>> getAllPinLocal() async {
+    final db = await DatabaseHelper().database;
+    return await db.query(
+      'pin_local',
+      orderBy: 'pin_name DESC',
+      limit: 10,
+    );
+  }
+
+  Future<int> insertPinLocal({
+    required String pinName,
+    required String pinCoor,
+    required String pinCategory,
+    required String storedAt,
+  }) async {
+    final db = await database;
+
+    Map<String, dynamic> data = {
+      'pin_name': pinName,
+      'pin_coor': pinCoor,
+      'pin_category': pinCategory,
+      'stored_at': storedAt
+    };
+
+    return await db.insert('pin_local', data);
+  }
+
+  Future<int> resetPinLocal() async {
+    final db = await database;
+
+    return await db.delete('pin_local');
   }
 
   Future<int> insertTracker({

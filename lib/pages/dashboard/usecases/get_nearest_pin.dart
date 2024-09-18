@@ -33,6 +33,7 @@ class StateGetNearestPin extends State<GetNearestPin> {
         builder: (BuildContext context,
             AsyncSnapshot<List<PinModelNearestHeader>> snapshot) {
           if (snapshot.hasError) {
+            print(snapshot.error.toString());
             return const Center(
               child: Text("Something went wrong"),
             );
@@ -74,7 +75,7 @@ class StateGetNearestPin extends State<GetNearestPin> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const ComponentTextTitle(text: "Nearest Pins", type: "section_title"),
+          const ComponentTextTitle(text: "Nearest Pin", type: "section_title"),
           Column(
               children: data.map<Widget>((dt) {
             return Container(

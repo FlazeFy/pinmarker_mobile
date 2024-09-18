@@ -80,15 +80,21 @@ class StateGetDashboard extends State<GetDashboard> {
               children: [
                 getDashStatsBox(dt.totalMarker.toString(), 'Total Marker'),
                 const Spacer(),
-                getDashStatsBox(dt.mostCategory, 'Most Category'),
-                const Spacer(),
                 getDashStatsBox(dt.totalFavorite.toString(), 'Total Favorite')
               ],
             ),
             SizedBox(height: spaceSM),
-            getDashStatsBox(dt.lastVisit, 'Last Visit'),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                getDashStatsBox(dt.lastVisit, 'Last Visit'),
+                const Spacer(),
+                getDashStatsBox(dt.mostVisit, 'Most Visit'),
+              ],
+            ),
             SizedBox(height: spaceSM),
-            getDashStatsBox(dt.mostVisit, 'Most Visit'),
+            getDashStatsBox(dt.mostCategory, 'Most Category'),
             SizedBox(height: spaceSM),
             getDashStatsBox(dt.lastAdded, 'Last Added'),
           ],

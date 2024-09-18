@@ -9,7 +9,7 @@ class QueriesStatsServices {
   Future<DashboardModel?> getDashboard() async {
     final response = await client.get(
       Uri.parse(
-          "$localUrl/api/v1/stats/dashboard/fcd3f23e-e5aa-11ee-892a-3216422910e9"),
+          "$localUrl/api/v1/stats/dashboard/fcd3f23e-e5aa-11ee-892a-3216422910e9/user"),
     );
     if (response.statusCode == 200) {
       return dashboardModelFromJson(response.body);
