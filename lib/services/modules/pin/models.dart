@@ -2,26 +2,31 @@ import 'dart:convert';
 
 class PinModelHeader {
   String pinName;
-  String pinDesc;
+  String? pinDesc;
   String pinCoordinate;
   String pinCategory;
-  String pinPerson;
+  String? pinPerson;
+  int totalVisit;
+  String? lastVisit;
 
   PinModelHeader(
       {required this.pinName,
-      required this.pinDesc,
+      this.pinDesc,
       required this.pinCoordinate,
       required this.pinCategory,
-      required this.pinPerson});
+      this.pinPerson,
+      required this.totalVisit,
+      this.lastVisit});
 
-  factory PinModelHeader.fromJson(Map<String, dynamic> map) {
+  factory PinModelHeader.fromJson(Map<dynamic, dynamic> map) {
     return PinModelHeader(
-      pinName: map["pin_name"],
-      pinDesc: map["pin_desc"],
-      pinCoordinate: map["pin_coordinate"],
-      pinCategory: map["pin_category"],
-      pinPerson: map["pin_person"],
-    );
+        pinName: map["pin_name"],
+        pinDesc: map["pin_desc"] ?? '',
+        pinCoordinate: map["pin_coordinate"],
+        pinCategory: map["pin_category"],
+        pinPerson: map["pin_person"] ?? '',
+        totalVisit: map["total_visit"],
+        lastVisit: map['last_visit'] ?? '');
   }
 }
 

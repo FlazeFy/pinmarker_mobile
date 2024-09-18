@@ -45,6 +45,15 @@ class ComponentTextTitle extends StatelessWidget {
                   fontSize: textXSM,
                   fontWeight: FontWeight.w500,
                   color: Colors.white)));
+    } else if (type == 'no_data') {
+      return Container(
+          margin: EdgeInsets.only(bottom: spaceMini),
+          child: Text(text,
+              style: TextStyle(
+                  fontSize: textSM,
+                  fontStyle: FontStyle.italic,
+                  fontWeight: FontWeight.normal,
+                  color: const Color.fromARGB(255, 92, 92, 92))));
     } else {
       return const Text("Default Title");
     }

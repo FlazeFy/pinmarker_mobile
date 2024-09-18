@@ -48,9 +48,6 @@ class StateGetMapsBoard extends State<GetMapsBoard> {
         builder: (BuildContext context,
             AsyncSnapshot<List<PinModelHeader>?> snapshot) {
           if (snapshot.hasError) {
-            // Get.dialog(const FailedDialog(
-            //     text: "Unknown error, please contact the admin",
-            //     type: "error"));
             return const Center(
               child: Text("Something wrong"),
             );

@@ -62,10 +62,6 @@ class StateGetGlobalSearch extends State<GetGlobalSearch> {
     return Container(
       padding: EdgeInsets.all(spaceMD),
       width: Get.width,
-      decoration: BoxDecoration(
-        border: Border.all(width: 1.5, color: Colors.black),
-        borderRadius: BorderRadius.all(Radius.circular(roundedSM)),
-      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

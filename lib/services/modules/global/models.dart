@@ -18,14 +18,13 @@ class ListTag {
   }
 }
 
-// Model for GlobalListSearchModel
 class GlobalListSearchModel {
   String id;
   String pinList;
   int total;
   String listName;
   String listDesc;
-  List<ListTag> listTag; // Changed from String to List<ListTag>
+  List<ListTag> listTag;
   String createdAt;
   String createdBy;
 
@@ -47,8 +46,8 @@ class GlobalListSearchModel {
       total: map['total'],
       listName: map['list_name'],
       listDesc: map['list_desc'],
-      listTag: List<ListTag>.from(map['list_tag'].map(
-          (tag) => ListTag.fromJson(tag))), // Map the list_tag to ListTag model
+      listTag: List<ListTag>.from(
+          map['list_tag'].map((tag) => ListTag.fromJson(tag))),
       createdAt: map['created_at'],
       createdBy: map['created_by'],
     );
@@ -68,7 +67,6 @@ class GlobalListSearchModel {
   }
 }
 
-// Function to parse the JSON data
 List<GlobalListSearchModel> globalListSearchModelFromJson(String jsonData) {
   final data = json.decode(jsonData);
   return List<GlobalListSearchModel>.from(

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:pinmarker/pages/maps/list_view/index.dart';
 import 'package:pinmarker/pages/maps/usecases/get_maps_board.dart';
 
 class MapsPage extends StatefulWidget {
@@ -14,7 +16,9 @@ class StateMapsPage extends State<MapsPage> {
     return Scaffold(
       body: const GetMapsBoard(),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Get.to(() => const MapsListViewPage());
+        },
         backgroundColor: Colors.black,
         child: const Icon(
           Icons.list,
