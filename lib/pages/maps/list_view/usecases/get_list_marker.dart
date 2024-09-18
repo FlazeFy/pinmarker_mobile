@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:pinmarker/components/button/button_primary.dart';
 import 'package:pinmarker/components/text/title.dart';
-import 'package:pinmarker/helpers/general/validator.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
 import 'package:pinmarker/services/modules/pin/models.dart';
 import 'package:pinmarker/services/modules/pin/queries_stats.dart';

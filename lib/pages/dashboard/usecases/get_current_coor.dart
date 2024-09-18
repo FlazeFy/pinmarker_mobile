@@ -233,7 +233,7 @@ class StateGetCurrentCoor extends State<GetCurrentCoor> {
           long: currentPosition!.longitude.toString(),
         )
       else
-        Center(child: Text('Current position not available')),
+        const Center(child: Text('Current position not available')),
     ]);
   }
 }

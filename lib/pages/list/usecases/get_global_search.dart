@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pinmarker/components/button/button_primary.dart';
 import 'package:pinmarker/components/text/title.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
+import 'package:pinmarker/pages/list/detail/index.dart';
 import 'package:pinmarker/services/modules/global/models.dart';
 import 'package:pinmarker/services/modules/global/queries.dart';
 
@@ -111,31 +113,16 @@ class StateGetGlobalSearch extends State<GetGlobalSearch> {
                   SizedBox(height: spaceSM),
                   Row(
                     children: [
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                            vertical: spaceMini, horizontal: spaceXSM),
-                        decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(roundedSM)),
-                        ),
-                        child: const Text("See Detail",
-                            style: const TextStyle(color: Colors.white)),
-                      ),
+                      InkWell(
+                          onTap: () {
+                            Get.to(() => DetailListPage(id: dt.id));
+                          },
+                          child:
+                              const ComponentButtonPrimary(text: "See Detail")),
                       SizedBox(
                         width: spaceSM,
                       ),
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                            vertical: spaceMini, horizontal: spaceXSM),
-                        decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(roundedSM)),
-                        ),
-                        child: const Text("Share",
-                            style: TextStyle(color: Colors.white)),
-                      )
+                      const ComponentButtonPrimary(text: "Share"),
                     ],
                   )
                 ],

@@ -72,3 +72,37 @@ List<GlobalListSearchModel> globalListSearchModelFromJson(String jsonData) {
   return List<GlobalListSearchModel>.from(
       data['data'].map((item) => GlobalListSearchModel.fromJson(item)));
 }
+
+class GlobalListDetailModel {
+  String listName;
+  String? listDesc;
+  List<ListTag> listTag;
+  String createdAt;
+  String? updatedAt;
+  String createdBy;
+
+  GlobalListDetailModel(
+      {required this.listName,
+      required this.listDesc,
+      required this.listTag,
+      required this.createdAt,
+      required this.createdBy,
+      this.updatedAt});
+
+  factory GlobalListDetailModel.fromJson(Map<String, dynamic> map) {
+    return GlobalListDetailModel(
+      listName: map['list_name'],
+      listDesc: map['list_desc'] ?? '',
+      listTag: List<ListTag>.from(
+          map['list_tag'].map((tag) => ListTag.fromJson(tag))),
+      createdAt: map['created_at'],
+      updatedAt: map['updated_at'] ?? '',
+      createdBy: map['created_by'],
+    );
+  }
+}
+
+GlobalListDetailModel globalListDetailModelFromJson(String jsonData) {
+  final data = json.decode(jsonData);
+  return GlobalListDetailModel.fromJson(data['detail']);
+}

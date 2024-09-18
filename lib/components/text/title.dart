@@ -37,7 +37,7 @@ class ComponentTextTitle extends StatelessWidget {
       return Container(
           margin: EdgeInsets.only(bottom: spaceMini),
           decoration: BoxDecoration(
-              color: Color.fromARGB(255, 82, 82, 82),
+              color: const Color.fromARGB(255, 82, 82, 82),
               borderRadius: BorderRadius.all(Radius.circular(roundedSM))),
           padding: EdgeInsets.all(spaceXSM),
           child: Text(text,
