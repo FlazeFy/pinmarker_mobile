@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' show Client;
 import 'package:pinmarker/services/modules/global/models.dart';
 
@@ -17,13 +19,25 @@ class QueriesGlobalListServices {
     }
   }
 
-  Future<GlobalListDetailModel?> getMyGlobalListDetail(String id) async {
+  Future<Map<String, dynamic>?> getMyGlobalListDetail(String id) async {
     final response = await client.get(
       Uri.parse(
           "$localUrl/api/v1/pin_global/$id/fcd3f23e-e5aa-11ee-892a-3216422910e9"),
     );
+
     if (response.statusCode == 200) {
-      return globalListDetailModelFromJson(response.body);
+      final jsonData = json.decode(response.body);
+
+      GlobalListDetailModel detail =
+          GlobalListDetailModel.fromJson(jsonData['detail']);
+
+      List<GlobalListRelPinModel> data =
+          globalListRelPinModelFromJson(jsonData['data']);
+
+      return {
+        'detail': detail,
+        'data': data,
+      };
     } else {
       return null;
     }

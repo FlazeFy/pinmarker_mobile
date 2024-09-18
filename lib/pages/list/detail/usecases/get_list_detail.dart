@@ -28,17 +28,20 @@ class StateGetListDetail extends State<GetListDetail> {
   Widget build(BuildContext context) {
     return SafeArea(
       maintainBottomViewPadding: false,
-      child: FutureBuilder<GlobalListDetailModel?>(
+      child: FutureBuilder<Map<String, dynamic>?>(
         future: apiService?.getMyGlobalListDetail(widget.id),
         builder: (BuildContext context,
-            AsyncSnapshot<GlobalListDetailModel?> snapshot) {
+            AsyncSnapshot<Map<String, dynamic>?> snapshot) {
           if (snapshot.hasError) {
+            print(snapshot.error.toString());
             return const Center(
               child: Text("Something went wrong"),
             );
           } else if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.data != null) {
-              return _buildListView(snapshot.data!);
+              GlobalListDetailModel detail = snapshot.data!['detail'];
+              List<GlobalListRelPinModel> pins = snapshot.data!['data'];
+              return _buildListView(detail, pins);
             } else {
               return const Center(child: Text("No data found"));
             }
@@ -50,19 +53,20 @@ class StateGetListDetail extends State<GetListDetail> {
     );
   }
 
-  Widget _buildListView(GlobalListDetailModel data) {
+  Widget _buildListView(
+      GlobalListDetailModel detail, List<GlobalListRelPinModel> pins) {
     return Container(
       padding: EdgeInsets.all(spaceMD),
       width: Get.width,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ComponentTextTitle(type: "content_title", text: data.listName),
-          data.listTag.isNotEmpty
+          ComponentTextTitle(type: "section_title", text: detail.listName),
+          detail.listTag.isNotEmpty
               ? Wrap(
                   runSpacing: -spaceWrap,
                   spacing: spaceWrap,
-                  children: data.listTag.map<Widget>((tg) {
+                  children: detail.listTag.map<Widget>((tg) {
                     return ComponentButtonPrimary(text: "#${tg.tagName}");
                   }).toList(),
                 )
@@ -70,9 +74,9 @@ class StateGetListDetail extends State<GetListDetail> {
           SizedBox(
             height: spaceMD,
           ),
-          data.listDesc != ''
+          detail.listDesc != ''
               ? ComponentTextTitle(
-                  type: "content_body", text: data.listDesc ?? '-')
+                  type: "content_body", text: detail.listDesc ?? '-')
               : const ComponentTextTitle(
                   text: '- No Description Provided -', type: "no_data"),
           SizedBox(
@@ -88,7 +92,8 @@ class StateGetListDetail extends State<GetListDetail> {
                 children: [
                   const ComponentTextTitle(
                       type: "content_sub_title", text: "Created At"),
-                  ComponentTextTitle(text: data.createdAt, type: "content_body")
+                  ComponentTextTitle(
+                      text: detail.createdAt, type: "content_body")
                 ],
               ),
               const Spacer(),
@@ -99,7 +104,7 @@ class StateGetListDetail extends State<GetListDetail> {
                   const ComponentTextTitle(
                       type: "content_sub_title", text: "Updated At"),
                   ComponentTextTitle(
-                      type: "content_body", text: data.updatedAt ?? '-')
+                      type: "content_body", text: detail.updatedAt ?? '-')
                 ],
               )
             ],
@@ -114,8 +119,95 @@ class StateGetListDetail extends State<GetListDetail> {
               borderRadius: BorderRadius.all(Radius.circular(roundedSM)),
             ),
             child: ComponentTextTitle(
-                text: "@${data.createdBy}", type: "content_sub_title"),
-          )
+                text: "@${detail.createdBy}", type: "content_sub_title"),
+          ),
+          SizedBox(
+            height: spaceMD,
+          ),
+          const ComponentTextTitle(text: "List Marker", type: "content_title"),
+          detail.listTag.isNotEmpty
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: pins.map<Widget>((dt) {
+                    return Container(
+                      padding: EdgeInsets.all(spaceMD),
+                      width: Get.width,
+                      margin: EdgeInsets.only(bottom: spaceMD),
+                      decoration: BoxDecoration(
+                        border: Border.all(width: 1.5, color: Colors.black),
+                        borderRadius:
+                            BorderRadius.all(Radius.circular(roundedSM)),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              ComponentTextTitle(
+                                  text: dt.pinName, type: "content_title"),
+                            ],
+                          ),
+                          ComponentButtonPrimary(
+                            text: dt.pinCategory,
+                          ),
+                          SizedBox(
+                            height: spaceMD,
+                          ),
+                          dt.pinDesc != null && dt.pinDesc != ''
+                              ? ComponentTextTitle(
+                                  text: dt.pinDesc ?? '-', type: "content_body")
+                              : const ComponentTextTitle(
+                                  text: '- No Description Provided -',
+                                  type: "no_data"),
+                          const ComponentTextTitle(
+                              text: "Added At", type: "content_sub_title"),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              ComponentTextTitle(
+                                  text: "${dt.createdAt} by",
+                                  type: "content_body"),
+                              SizedBox(
+                                width: spaceSM,
+                              ),
+                              Container(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: spaceMini, horizontal: spaceXSM),
+                                decoration: BoxDecoration(
+                                  color:
+                                      const Color.fromARGB(255, 215, 215, 215),
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(roundedSM)),
+                                ),
+                                child: ComponentTextTitle(
+                                    text: "@${dt.createdBy}",
+                                    type: "content_sub_title"),
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: spaceMD,
+                          ),
+                          Row(
+                            children: [
+                              const ComponentButtonPrimary(
+                                  text: "Save to My Pin"),
+                              SizedBox(width: spaceXSM),
+                              const ComponentButtonPrimary(text: "Remove"),
+                              SizedBox(width: spaceXSM),
+                              const ComponentButtonPrimary(
+                                  text: "Set Direction")
+                            ],
+                          )
+                        ],
+                      ),
+                    );
+                  }).toList(),
+                )
+              : const SizedBox(),
         ],
       ),
     );

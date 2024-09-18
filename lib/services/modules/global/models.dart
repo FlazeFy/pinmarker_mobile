@@ -106,3 +106,57 @@ GlobalListDetailModel globalListDetailModelFromJson(String jsonData) {
   final data = json.decode(jsonData);
   return GlobalListDetailModel.fromJson(data['detail']);
 }
+
+class GlobalListRelPinModel {
+  String id;
+  String pinName;
+  String? pinDesc;
+  String pinLat;
+  String pinLong;
+  String? pinCall;
+  String pinCategory;
+  String createdAt;
+  String? pinAddress;
+  String createdBy;
+  String galleryUrl;
+  String galleryCaption;
+  String galleryType;
+
+  GlobalListRelPinModel(
+      {required this.id,
+      required this.pinName,
+      this.pinDesc,
+      required this.pinLat,
+      required this.pinLong,
+      this.pinCall,
+      required this.pinCategory,
+      required this.createdAt,
+      this.pinAddress,
+      required this.createdBy,
+      required this.galleryUrl,
+      required this.galleryCaption,
+      required this.galleryType});
+
+  factory GlobalListRelPinModel.fromJson(Map<String, dynamic> map) {
+    return GlobalListRelPinModel(
+      id: map['id'],
+      pinName: map['pin_name'],
+      pinDesc: map['pin_desc'] ?? '',
+      pinLat: map['pin_lat'],
+      pinLong: map['pin_long'],
+      pinCall: map['pin_call'] ?? '',
+      pinCategory: map['pin_category'],
+      createdAt: map['created_at'],
+      pinAddress: map['pin_address'],
+      createdBy: map['created_by'],
+      galleryUrl: map['gallery_url'],
+      galleryCaption: map['gallery_caption'],
+      galleryType: map['gallery_type'],
+    );
+  }
+}
+
+List<GlobalListRelPinModel> globalListRelPinModelFromJson(dynamic data) {
+  return List<GlobalListRelPinModel>.from(
+      data.map((item) => GlobalListRelPinModel.fromJson(item)));
+}
