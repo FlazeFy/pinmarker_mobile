@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:pinmarker/components/button/button_primary.dart';
 import 'package:pinmarker/components/text/title.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
 import 'package:pinmarker/pages/list/detail/index.dart';
+import 'package:pinmarker/pages/list/usecases/search_list.dart';
 import 'package:pinmarker/services/modules/global/models.dart';
 import 'package:pinmarker/services/modules/global/queries.dart';
 
@@ -15,6 +17,8 @@ class GetGlobalSearch extends StatefulWidget {
 
 class StateGetGlobalSearch extends State<GetGlobalSearch> {
   QueriesGlobalListServices? apiService;
+  final box = GetStorage();
+  late String _searchKey = "";
 
   @override
   void initState() {
@@ -22,42 +26,54 @@ class StateGetGlobalSearch extends State<GetGlobalSearch> {
     apiService = QueriesGlobalListServices();
   }
 
+  void refreshSearch(String val) {
+    setState(() {
+      _searchKey = val;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      maintainBottomViewPadding: false,
-      child: FutureBuilder<List<GlobalListSearchModel>>(
-        future: apiService?.getAllGlobalSearch("jakarta"),
-        builder: (BuildContext context,
-            AsyncSnapshot<List<GlobalListSearchModel>> snapshot) {
-          if (snapshot.hasError) {
-            return const Center(
-              child: Text("Something went wrong"),
-            );
-          } else if (snapshot.connectionState == ConnectionState.done) {
-            List<GlobalListSearchModel>? contents = snapshot.data;
-            if (contents == null || contents.isEmpty) {
-              return Container(
-                  padding: EdgeInsets.all(spaceMD),
-                  margin: EdgeInsets.only(top: spaceMD),
-                  width: Get.width,
-                  decoration: BoxDecoration(
-                    border: Border.all(width: 1.5, color: Colors.black),
-                    borderRadius: BorderRadius.all(Radius.circular(roundedSM)),
-                  ),
-                  child: const Center(
-                    child: Text("No pin found in radius 3 Km"),
-                  ));
+    if (box.hasData('search_key')) {
+      _searchKey = box.read('search_key');
+    }
+    if (_searchKey.trim() != "") {
+      return SafeArea(
+        maintainBottomViewPadding: false,
+        child: FutureBuilder<List<GlobalListSearchModel>>(
+          future: apiService?.getAllGlobalSearch(_searchKey),
+          builder: (BuildContext context,
+              AsyncSnapshot<List<GlobalListSearchModel>> snapshot) {
+            if (snapshot.hasError) {
+              return const Center(
+                child: Text("Something went wrong"),
+              );
+            } else if (snapshot.connectionState == ConnectionState.done) {
+              List<GlobalListSearchModel>? contents = snapshot.data;
+              if (contents == null || contents.isEmpty) {
+                return Column(children: [
+                  SearchList(refreshSearch: refreshSearch),
+                  const Center(child: Text('No data available.'))
+                ]);
+              }
+              return _buildContent(contents);
+            } else {
+              return Column(children: [
+                SearchList(refreshSearch: refreshSearch),
+                const Center(
+                  child: CircularProgressIndicator(color: Colors.black),
+                )
+              ]);
             }
-            return _buildContent(contents);
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(color: Colors.black),
-            );
-          }
-        },
-      ),
-    );
+          },
+        ),
+      );
+    } else {
+      return Column(children: [
+        SearchList(refreshSearch: refreshSearch),
+        const Center(child: Text('No data available.'))
+      ]);
+    }
   }
 
   Widget _buildContent(List<GlobalListSearchModel> data) {
@@ -67,12 +83,12 @@ class StateGetGlobalSearch extends State<GetGlobalSearch> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const ComponentTextTitle(
-              text: "Search result : jakarta", type: "section_title"),
+          SearchList(refreshSearch: refreshSearch),
           Column(
               children: data.map<Widget>((dt) {
             return Container(
               padding: EdgeInsets.all(spaceMD),
+              margin: EdgeInsets.only(bottom: spaceSM),
               width: Get.width,
               decoration: BoxDecoration(
                 border: Border.all(width: 1.5, color: Colors.black),

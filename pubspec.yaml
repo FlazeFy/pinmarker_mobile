@@ -52,6 +52,7 @@ dependencies:
   path_provider: ^2.1.4
   art_sweetalert: ^0.0.5
   shared_preferences: ^2.2.3
+  connectivity_plus: ^5.0.2
 
 dev_dependencies:
   flutter_test:

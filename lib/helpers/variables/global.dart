@@ -13,3 +13,5 @@ class PieData {
   final num yData;
   final String text;
 }
+
+bool isOffline = false;
