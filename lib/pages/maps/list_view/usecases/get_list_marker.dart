@@ -3,8 +3,9 @@ import 'package:get/get.dart';
 import 'package:pinmarker/components/button/button_primary.dart';
 import 'package:pinmarker/components/text/title.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
+import 'package:pinmarker/pages/maps/list_view/detail/index.dart';
 import 'package:pinmarker/services/modules/pin/models.dart';
-import 'package:pinmarker/services/modules/pin/queries_stats.dart';
+import 'package:pinmarker/services/modules/pin/queries.dart';
 
 class GetListMarker extends StatefulWidget {
   const GetListMarker({super.key});
@@ -129,7 +130,14 @@ class StateGetListMarker extends State<GetListMarker> {
                         ),
                         Row(
                           children: [
-                            const ComponentButtonPrimary(text: "See Detail"),
+                            InkWell(
+                                onTap: () {
+                                  Get.to(() => DetailPinPage(
+                                        id: dt.id,
+                                      ));
+                                },
+                                child: const ComponentButtonPrimary(
+                                    text: "See Detail")),
                             SizedBox(width: spaceSM),
                             const ComponentButtonPrimary(text: "Set Direction")
                           ],

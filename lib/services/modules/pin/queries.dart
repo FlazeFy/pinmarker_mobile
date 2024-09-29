@@ -117,4 +117,24 @@ class QueriesPinServices {
       }
     }
   }
+
+  Future<Map<String, dynamic>?> getDetailPin(String id) async {
+    final response = await client.get(
+      Uri.parse(
+          "$localUrl/api/v1/pin/detail/$id/fcd3f23e-e5aa-11ee-892a-3216422910e9"),
+    );
+    if (response.statusCode == 200) {
+      final jsonData = json.decode(response.body);
+      PinDetailModel detail = PinDetailModel.fromJson(jsonData['data']);
+      List<VisitHistoryModel> history =
+          visitHistoryModelFromJson(jsonData['history']);
+
+      return {
+        'detail': detail,
+        'history': history,
+      };
+    } else {
+      return null;
+    }
+  }
 }

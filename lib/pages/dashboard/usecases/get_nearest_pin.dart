@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:pinmarker/components/text/title.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
 import 'package:pinmarker/services/modules/pin/models.dart';
-import 'package:pinmarker/services/modules/pin/queries_stats.dart';
+import 'package:pinmarker/services/modules/pin/queries.dart';
 
 class GetNearestPin extends StatefulWidget {
   const GetNearestPin({super.key, required this.lat, required this.long});
