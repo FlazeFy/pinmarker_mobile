@@ -6,7 +6,8 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 Widget getPieChart(List<PieData> chartData, String title) {
   return SfCircularChart(
       title: ChartTitle(
-          text: title, textStyle: const TextStyle(color: Colors.black)),
+          text: title,
+          textStyle: TextStyle(color: Colors.black, fontSize: textLG)),
       legend: Legend(
           isVisible: true,
           padding: spaceLG,

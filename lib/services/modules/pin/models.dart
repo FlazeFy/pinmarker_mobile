@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 class PinModelHeader {
   String id;
@@ -140,4 +141,40 @@ class VisitHistoryModel {
 List<VisitHistoryModel> visitHistoryModelFromJson(dynamic data) {
   return List<VisitHistoryModel>.from(
       data.map((item) => VisitHistoryModel.fromJson(item)));
+}
+
+class DistancePersonalModel {
+  String id;
+  String pinName;
+  String? pinDesc;
+  String pinLat;
+  String pinLong;
+  String createdAt;
+  double distanceToMeters;
+
+  DistancePersonalModel(
+      {required this.id,
+      required this.pinName,
+      this.pinDesc,
+      required this.pinLat,
+      required this.pinLong,
+      required this.createdAt,
+      required this.distanceToMeters});
+
+  factory DistancePersonalModel.fromJson(Map<String, dynamic> map) {
+    return DistancePersonalModel(
+        id: map['id'],
+        pinName: map['pin_name'],
+        pinDesc: map['pin_desc'] ?? '',
+        pinLat: map['pin_lat'],
+        pinLong: map['pin_long'],
+        createdAt: map['created_at'],
+        distanceToMeters: map['distance_to_meters']);
+  }
+}
+
+List<DistancePersonalModel> distancePersonalModelFromJson(String jsonData) {
+  final data = json.decode(jsonData);
+  return List<DistancePersonalModel>.from(
+      data['data'].map((item) => DistancePersonalModel.fromJson(item)));
 }

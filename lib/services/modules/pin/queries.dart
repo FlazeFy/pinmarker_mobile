@@ -137,4 +137,17 @@ class QueriesPinServices {
       return null;
     }
   }
+
+  Future<List<DistancePersonalModel>> getDistanceToMyPersonalPin(
+      String id) async {
+    final response = await client.get(
+      Uri.parse(
+          "$localUrl/api/v1/pin/distance/personal/$id/fcd3f23e-e5aa-11ee-892a-3216422910e9"),
+    );
+    if (response.statusCode == 200) {
+      return distancePersonalModelFromJson(response.body);
+    } else {
+      return [];
+    }
+  }
 }
