@@ -42,6 +42,18 @@ class QueriesStatsServices {
     }
   }
 
+  Future<List<QueriesPieChartModel>> getTotalVisitByByPin(String id) async {
+    final response = await client.get(
+      Uri.parse(
+          "$localUrl/api/v1/stats/total_visit_by_by_pin/fcd3f23e-e5aa-11ee-892a-3216422910e9/$id"),
+    );
+    if (response.statusCode == 200) {
+      return queriesPieChartModelFromJson(response.body);
+    } else {
+      return [];
+    }
+  }
+
   Future<List<QueriesPieChartModel>> getTotalGalleryByPin() async {
     final response = await client.get(
       Uri.parse(

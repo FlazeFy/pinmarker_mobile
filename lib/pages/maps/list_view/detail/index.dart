@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
 import 'package:pinmarker/pages/maps/list_view/detail/usecases/get_detail.dart';
+import 'package:pinmarker/pages/maps/list_view/detail/usecases/get_total_visit_by_cat_by_pin.dart';
 import 'package:pinmarker/pages/maps/list_view/index.dart';
 
 class DetailPinPage extends StatefulWidget {
@@ -37,7 +38,8 @@ class StateDetailPinPage extends State<DetailPinPage> {
         children: <Widget>[
           GetDetailPin(
             id: widget.id,
-          )
+          ),
+          GetTotalVisitByCategoryByPin(id: widget.id)
         ],
       ),
     );
