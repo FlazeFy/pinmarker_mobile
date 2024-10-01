@@ -35,7 +35,7 @@ class StateSoftDelPin extends State<SoftDelPin> {
                   type: ArtSweetAlertType.warning,
                   confirmButtonColor: Colors.green,
                   onConfirm: () async {
-                    apiService?.hardDelete(widget.id).then((response) {
+                    apiService?.hardDeletePin(widget.id).then((response) {
                       setState(() => {});
                       var code = response['code'];
                       var message = response['message'];

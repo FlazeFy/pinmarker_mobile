@@ -5,9 +5,10 @@ import 'package:pinmarker/helpers/variables/style.dart';
 class ComponentButtonIcon extends StatelessWidget {
   final dynamic color;
   final dynamic icon;
+  final VoidCallback? func;
 
   const ComponentButtonIcon(
-      {super.key, required this.color, required this.icon});
+      {super.key, required this.color, required this.icon, this.func});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class ComponentButtonIcon extends StatelessWidget {
         color: Colors.white,
       ),
       color: color,
-      onPressed: () {},
+      onPressed: func,
     );
   }
 }
