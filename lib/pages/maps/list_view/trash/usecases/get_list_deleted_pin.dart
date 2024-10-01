@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:pinmarker/components/button/button_icon.dart';
 import 'package:pinmarker/components/text/title.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
+import 'package:pinmarker/pages/maps/list_view/trash/usecases/hard_delete_pin.dart';
 import 'package:pinmarker/pages/maps/list_view/trash/usecases/recover_pin.dart';
 import 'package:pinmarker/services/modules/pin/models.dart';
 import 'package:pinmarker/services/modules/pin/queries.dart';
@@ -190,13 +191,7 @@ class StateGetTrashPin extends State<GetTrashPin> {
                             ),
                           ),
                           TableCell(child: RecoverPin(id: dt.id)),
-                          TableCell(
-                              child: Container(
-                                  margin: EdgeInsets.all(spaceMD),
-                                  child: ComponentButtonIcon(
-                                      color: Colors.red,
-                                      icon: FontAwesomeIcons.trash,
-                                      func: () {}))),
+                          TableCell(child: HardDeletePin(id: dt.id)),
                         ],
                       );
                     }).toList(),
