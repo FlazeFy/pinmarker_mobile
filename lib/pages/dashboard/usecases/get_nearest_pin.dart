@@ -33,7 +33,6 @@ class StateGetNearestPin extends State<GetNearestPin> {
         builder: (BuildContext context,
             AsyncSnapshot<List<PinModelNearestHeader>> snapshot) {
           if (snapshot.hasError) {
-            print(snapshot.error.toString());
             return const Center(
               child: Text("Something went wrong"),
             );

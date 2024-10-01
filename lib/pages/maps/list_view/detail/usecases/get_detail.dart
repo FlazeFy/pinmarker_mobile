@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:pinmarker/components/bars/bottom_bar.dart';
 import 'package:pinmarker/components/button/button_primary.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
-import 'package:pinmarker/pages/maps/list_view/index.dart';
-import 'package:pinmarker/pages/maps/list_view/usecases/get_list_marker.dart';
 import 'package:pinmarker/services/modules/pin/models.dart';
 import 'package:pinmarker/services/modules/pin/queries.dart';
 

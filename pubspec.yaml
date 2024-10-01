@@ -53,6 +53,7 @@ dependencies:
   art_sweetalert: ^0.0.5
   shared_preferences: ^2.2.3
   connectivity_plus: ^5.0.2
+  font_awesome_flutter: ^10.7.0
 
 dev_dependencies:
   flutter_test:

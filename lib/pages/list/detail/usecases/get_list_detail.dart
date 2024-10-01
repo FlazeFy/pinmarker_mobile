@@ -33,7 +33,6 @@ class StateGetListDetail extends State<GetListDetail> {
         builder: (BuildContext context,
             AsyncSnapshot<Map<String, dynamic>?> snapshot) {
           if (snapshot.hasError) {
-            print(snapshot.error.toString());
             return const Center(
               child: Text("Something went wrong"),
             );

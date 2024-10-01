@@ -4,6 +4,7 @@ import 'package:pinmarker/helpers/variables/style.dart';
 import 'package:pinmarker/pages/maps/list_view/detail/usecases/get_detail.dart';
 import 'package:pinmarker/pages/maps/list_view/detail/usecases/get_distance_to_personal_pin.dart';
 import 'package:pinmarker/pages/maps/list_view/detail/usecases/get_total_visit_by_cat_by_pin.dart';
+import 'package:pinmarker/pages/maps/list_view/detail/usecases/soft_delete_pin.dart';
 import 'package:pinmarker/pages/maps/list_view/index.dart';
 
 class DetailPinPage extends StatefulWidget {
@@ -37,6 +38,19 @@ class StateDetailPinPage extends State<DetailPinPage> {
       body: ListView(
         padding: EdgeInsets.all(spaceMD),
         children: <Widget>[
+          Container(
+            margin: EdgeInsets.only(bottom: spaceMD),
+            padding: EdgeInsets.all(spaceXSM),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(roundedMD)),
+                border: Border.all(width: 2, color: Colors.black)),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [SoftDelPin(id: widget.id)],
+            ),
+          ),
           GetDetailPin(
             id: widget.id,
           ),

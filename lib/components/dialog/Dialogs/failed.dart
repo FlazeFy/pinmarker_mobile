@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
 
 class FailedDialog extends StatefulWidget {
-  FailedDialog({this.text});
+  FailedDialog({super.key, this.text});
   var text;
 
   @override
