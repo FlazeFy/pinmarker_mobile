@@ -150,4 +150,16 @@ class QueriesPinServices {
       return [];
     }
   }
+
+  Future<List<PinTrashModel>> getTrashPin() async {
+    final response = await client.get(
+      Uri.parse(
+          "$localUrl/api/v1/pin_trash/fcd3f23e-e5aa-11ee-892a-3216422910e9"),
+    );
+    if (response.statusCode == 200) {
+      return pinTrashModelFromJson(response.body);
+    } else {
+      return [];
+    }
+  }
 }

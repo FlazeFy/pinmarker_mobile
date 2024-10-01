@@ -177,3 +177,36 @@ List<DistancePersonalModel> distancePersonalModelFromJson(String jsonData) {
   return List<DistancePersonalModel>.from(
       data['data'].map((item) => DistancePersonalModel.fromJson(item)));
 }
+
+class PinTrashModel {
+  String id;
+  String pinName;
+  int totalVisit;
+  String createdAt;
+  String? updatedAt;
+  String deletedAt;
+
+  PinTrashModel(
+      {required this.id,
+      required this.pinName,
+      required this.totalVisit,
+      required this.createdAt,
+      this.updatedAt,
+      required this.deletedAt});
+
+  factory PinTrashModel.fromJson(Map<String, dynamic> map) {
+    return PinTrashModel(
+        id: map["id"],
+        pinName: map["pin_name"],
+        totalVisit: map["total_visit"],
+        createdAt: map["created_at"],
+        updatedAt: map["updated_at"] ?? '',
+        deletedAt: map["deleted_at"]);
+  }
+}
+
+List<PinTrashModel> pinTrashModelFromJson(String jsonData) {
+  final data = json.decode(jsonData);
+  return List<PinTrashModel>.from(
+      data['data'].map((item) => PinTrashModel.fromJson(item)));
+}
