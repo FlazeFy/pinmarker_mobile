@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pinmarker/components/text/title.dart';
 import 'package:pinmarker/pages/trackvisit/history/index.dart';
+import 'package:pinmarker/pages/trackvisit/visit/index.dart';
 
 class TrackVisit extends StatefulWidget {
   const TrackVisit({super.key});
@@ -39,9 +40,7 @@ class StateTrackVisit extends State<TrackVisit> {
               Center(
                 child: Text("It's cloudy here"),
               ),
-              Center(
-                child: Text("It's rainy here"),
-              ),
+              VisitPage(),
               HistoryPage()
             ],
           ),
