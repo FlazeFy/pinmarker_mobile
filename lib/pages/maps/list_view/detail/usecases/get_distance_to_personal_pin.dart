@@ -8,8 +8,10 @@ import 'package:pinmarker/services/modules/pin/models.dart';
 import 'package:pinmarker/services/modules/pin/queries.dart';
 
 class GetDistanceToPersonalPin extends StatefulWidget {
-  const GetDistanceToPersonalPin({super.key, required this.id});
+  const GetDistanceToPersonalPin(
+      {super.key, required this.id, required this.isFavorite});
   final String id;
+  final bool isFavorite;
 
   @override
   StateGetDistanceToPersonalPin createState() =>
@@ -126,6 +128,7 @@ class StateGetDistanceToPersonalPin extends State<GetDistanceToPersonalPin> {
                                 onTap: () {
                                   Get.to(() => DetailPinPage(
                                         id: dt.id,
+                                        isFavorite: widget.isFavorite,
                                       ));
                                 },
                                 child: const ComponentButtonPrimary(

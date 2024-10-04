@@ -61,4 +61,22 @@ class PinCommandsService {
       "message": responseData["message"],
     };
   }
+
+  Future<Map<String, dynamic>> toggleFavoritePin(String id) async {
+    final header = {
+      'Accept': 'application/json',
+      'content-type': 'application/json',
+    };
+    final response = await client.put(
+        Uri.parse(
+            "$localUrl/api/v1/pin/toggle_favorite/$id/fcd3f23e-e5aa-11ee-892a-3216422910e9"),
+        headers: header);
+
+    var responseData = jsonDecode(response.body);
+
+    return {
+      "code": response.statusCode,
+      "message": responseData["message"],
+    };
+  }
 }

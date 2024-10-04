@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:pinmarker/components/button/button_primary.dart';
 import 'package:pinmarker/components/text/title.dart';
@@ -69,14 +70,22 @@ class StateGetListMarker extends State<GetListMarker> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        ComponentTextTitle(
+                            text: dt.pinName, type: "content_title"),
                         Row(
                           children: [
-                            ComponentTextTitle(
-                                text: dt.pinName, type: "content_title"),
+                            ComponentButtonPrimary(
+                              text: dt.pinCategory,
+                            ),
+                            SizedBox(width: spaceXSM),
+                            if (dt.isFavorite != false)
+                              ComponentButtonPrimary(
+                                text: null,
+                                color: Colors.green,
+                                icon: FaIcon(FontAwesomeIcons.solidBookmark,
+                                    color: Colors.white, size: textMD),
+                              ),
                           ],
-                        ),
-                        ComponentButtonPrimary(
-                          text: dt.pinCategory,
                         ),
                         SizedBox(
                           height: spaceMD,
@@ -134,6 +143,7 @@ class StateGetListMarker extends State<GetListMarker> {
                                 onTap: () {
                                   Get.to(() => DetailPinPage(
                                         id: dt.id,
+                                        isFavorite: dt.isFavorite,
                                       ));
                                 },
                                 child: const ComponentButtonPrimary(

@@ -5,11 +5,13 @@ import 'package:pinmarker/pages/maps/list_view/detail/usecases/get_detail.dart';
 import 'package:pinmarker/pages/maps/list_view/detail/usecases/get_distance_to_personal_pin.dart';
 import 'package:pinmarker/pages/maps/list_view/detail/usecases/get_total_visit_by_cat_by_pin.dart';
 import 'package:pinmarker/pages/maps/list_view/detail/usecases/soft_delete_pin.dart';
+import 'package:pinmarker/pages/maps/list_view/detail/usecases/toggle_favorite_pin.dart';
 import 'package:pinmarker/pages/maps/list_view/index.dart';
 
 class DetailPinPage extends StatefulWidget {
-  const DetailPinPage({super.key, required this.id});
+  const DetailPinPage({super.key, required this.id, required this.isFavorite});
   final String id;
+  final bool isFavorite;
 
   @override
   StateDetailPinPage createState() => StateDetailPinPage();
@@ -48,14 +50,17 @@ class StateDetailPinPage extends State<DetailPinPage> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisAlignment: MainAxisAlignment.end,
-              children: [SoftDelPin(id: widget.id)],
+              children: [
+                ToggleFavoritePin(id: widget.id, isFavorite: widget.isFavorite),
+                SoftDelPin(id: widget.id),
+              ],
             ),
           ),
           GetDetailPin(
             id: widget.id,
           ),
           GetTotalVisitByCategoryByPin(id: widget.id),
-          GetDistanceToPersonalPin(id: widget.id)
+          GetDistanceToPersonalPin(id: widget.id, isFavorite: widget.isFavorite)
         ],
       ),
     );

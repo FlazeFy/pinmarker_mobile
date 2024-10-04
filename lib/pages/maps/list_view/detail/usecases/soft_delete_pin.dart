@@ -40,7 +40,7 @@ class StateSoftDelPin extends State<SoftDelPin> {
                       var code = response['code'];
                       var message = response['message'];
 
-                      if (code == 201) {
+                      if (code == 200) {
                         ArtSweetAlert.show(
                             context: context,
                             artDialogArgs: ArtDialogArgs(

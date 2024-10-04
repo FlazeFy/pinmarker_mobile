@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 class PinModelHeader {
   String id;
@@ -8,6 +9,7 @@ class PinModelHeader {
   String pinCategory;
   String? pinPerson;
   int totalVisit;
+  bool isFavorite;
   String? lastVisit;
 
   PinModelHeader(
@@ -18,6 +20,7 @@ class PinModelHeader {
       required this.pinCategory,
       this.pinPerson,
       required this.totalVisit,
+      required this.isFavorite,
       this.lastVisit});
 
   factory PinModelHeader.fromJson(Map<dynamic, dynamic> map) {
@@ -29,6 +32,7 @@ class PinModelHeader {
         pinCategory: map["pin_category"],
         pinPerson: map["pin_person"] ?? '',
         totalVisit: map["total_visit"],
+        isFavorite: map["is_favorite"],
         lastVisit: map['last_visit'] ?? '');
   }
 }
