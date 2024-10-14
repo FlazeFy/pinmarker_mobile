@@ -213,3 +213,33 @@ List<PinTrashModel> pinTrashModelFromJson(String jsonData) {
   return List<PinTrashModel>.from(
       data['data'].map((item) => PinTrashModel.fromJson(item)));
 }
+
+class RelatedPinModel {
+  String pinName;
+  String pinLat;
+  String pinLong;
+  String pinCat;
+  double distance;
+
+  RelatedPinModel(
+      {required this.pinName,
+      required this.pinLat,
+      required this.pinLong,
+      required this.pinCat,
+      required this.distance});
+
+  factory RelatedPinModel.fromJson(Map<dynamic, dynamic> map) {
+    return RelatedPinModel(
+      pinName: map['pin_name'],
+      pinLat: map['pin_lat'],
+      pinLong: map['pin_long'],
+      pinCat: map['pin_category'],
+      distance: map['distance_to_meters'],
+    );
+  }
+}
+
+List<RelatedPinModel> relatedPinModelFromJson(dynamic data) {
+  return List<RelatedPinModel>.from(
+      data.map((item) => RelatedPinModel.fromJson(item)));
+}

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 class AddTrackModel {
   double trackLat;
@@ -28,4 +29,33 @@ class AddTrackModel {
 String addTrackModelToJson(AddTrackModel data) {
   final jsonData = data.toJson();
   return json.encode(jsonData);
+}
+
+class LastTrackModel {
+  int batteryIndicator;
+  String trackType;
+  double trackLat;
+  double trackLong;
+  String createdAt;
+
+  LastTrackModel(
+      {required this.batteryIndicator,
+      required this.trackType,
+      required this.createdAt,
+      required this.trackLat,
+      required this.trackLong});
+
+  factory LastTrackModel.fromJson(Map<dynamic, dynamic> map) {
+    return LastTrackModel(
+        batteryIndicator: map['battery_indicator'],
+        trackLat: map['track_lat'],
+        trackLong: map['track_long'],
+        createdAt: map['created_at'],
+        trackType: map['track_type']);
+  }
+}
+
+LastTrackModel lastTrackModelFromJson(String jsonData) {
+  final data = json.decode(jsonData);
+  return LastTrackModel.fromJson(data['data_track']);
 }

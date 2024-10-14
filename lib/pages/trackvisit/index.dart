@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:pinmarker/components/text/title.dart';
 import 'package:pinmarker/pages/trackvisit/history/index.dart';
+import 'package:pinmarker/pages/trackvisit/related_pin/index.dart';
 import 'package:pinmarker/pages/trackvisit/visit/index.dart';
 
 class TrackVisit extends StatefulWidget {
@@ -43,6 +45,16 @@ class StateTrackVisit extends State<TrackVisit> {
               VisitPage(),
               HistoryPage()
             ],
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              Get.to(const RelatedPinTrackPage());
+            },
+            backgroundColor: Colors.black,
+            child: FaIcon(
+              FontAwesomeIcons.table,
+              color: Colors.white,
+            ),
           ),
         ));
   }

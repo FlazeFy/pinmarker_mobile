@@ -144,7 +144,10 @@ class StateGetTrashPin extends State<GetTrashPin> {
                           TableCell(
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text("${dt.totalVisit} Visit"),
+                              child: Text(
+                                "${dt.totalVisit} Visit",
+                                textAlign: TextAlign.center,
+                              ),
                             ),
                           ),
                           TableCell(
