@@ -35,13 +35,13 @@ DashboardModel dashboardModelFromJson(String jsonData) {
 
 class QueriesPieChartModel {
   String ctx;
-  int total;
+  dynamic total;
 
   QueriesPieChartModel({required this.ctx, required this.total});
 
   factory QueriesPieChartModel.fromJson(Map<String, dynamic> map) {
     return QueriesPieChartModel(
-      ctx: map["context"],
+      ctx: map["context"].toString(),
       total: map["total"],
     );
   }

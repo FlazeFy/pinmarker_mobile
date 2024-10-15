@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pinmarker/helpers/variables/global.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-Widget getLineChart(List<PieData> chartData, String title, String? extra) {
+Widget getBarChart(List<PieData> chartData, String title, String? extra) {
   return SfCartesianChart(
     title: ChartTitle(
       text: title,
@@ -19,8 +19,8 @@ Widget getLineChart(List<PieData> chartData, String title, String? extra) {
         text: '',
       ),
     ),
-    series: <LineSeries<PieData, String>>[
-      LineSeries<PieData, String>(
+    series: <ColumnSeries<PieData, String>>[
+      ColumnSeries<PieData, String>(
         dataSource: chartData,
         xValueMapper: (PieData data, _) => data.xData,
         yValueMapper: (PieData data, _) => data.yData,
@@ -34,10 +34,7 @@ Widget getLineChart(List<PieData> chartData, String title, String? extra) {
             color: Colors.black,
           ),
         ),
-        markerSettings: const MarkerSettings(
-          isVisible: true,
-          shape: DataMarkerType.circle,
-        ),
+        color: Colors.blue,
       ),
     ],
   );

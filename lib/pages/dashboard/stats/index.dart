@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
-import 'package:pinmarker/components/bars/bottom_bar.dart';
-import 'package:pinmarker/helpers/variables/style.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:pinmarker/components/text/title.dart';
 import 'package:pinmarker/pages/dashboard/stats/usecases/get_total_distance_track.dart';
+import 'package:pinmarker/pages/dashboard/stats/usecases/get_total_distance_track_hourly.dart';
 import 'package:pinmarker/pages/dashboard/stats/usecases/get_total_gallery_by_pin.dart';
 import 'package:pinmarker/pages/dashboard/stats/usecases/get_total_pin_by_category.dart';
 import 'package:pinmarker/pages/dashboard/stats/usecases/get_total_visit_by_category.dart';
@@ -17,31 +17,45 @@ class DashboardStatsPage extends StatefulWidget {
 class StateDashboardStatsPage extends State<DashboardStatsPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        automaticallyImplyLeading: false,
-        title: const Text('Statistic', style: TextStyle(color: Colors.white)),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.home),
-            tooltip: 'Back to Dashboard',
-            onPressed: () {
-              Get.to(const BottomBar());
-            },
-            color: Colors.white,
+    return DefaultTabController(
+        initialIndex: 1,
+        length: 2,
+        child: Scaffold(
+          appBar: AppBar(
+            title: const ComponentTextTitle(
+                type: "content_title", text: "Statistic"),
+            bottom: const TabBar(
+              tabs: <Widget>[
+                Tab(
+                  icon: FaIcon(FontAwesomeIcons.satelliteDish),
+                  text: "Tracker",
+                ),
+                Tab(
+                  icon: FaIcon(FontAwesomeIcons.mapLocation),
+                  text: "Pin",
+                ),
+              ],
+            ),
           ),
-        ],
-      ),
-      body: ListView(
-        padding: EdgeInsets.all(spaceMD),
-        children: const <Widget>[
-          GetTotalPinByCategory(),
-          GetTotalVisitByCategory(),
-          GetTotalGalleryByPin(),
-          GetTotalDistanceTrack()
-        ],
-      ),
-    );
+          body: TabBarView(
+            children: <Widget>[
+              Center(
+                  child: ListView(
+                children: const [
+                  GetTotalDistanceTrack(),
+                  GetTotalDistanceTrackHourly()
+                ],
+              )),
+              Center(
+                  child: ListView(
+                children: const [
+                  GetTotalPinByCategory(),
+                  GetTotalVisitByCategory(),
+                  GetTotalGalleryByPin(),
+                ],
+              ))
+            ],
+          ),
+        ));
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pinmarker/components/charts/line_chart.dart';
-import 'package:pinmarker/components/charts/pie_chart.dart';
 import 'package:pinmarker/helpers/variables/global.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
 import 'package:pinmarker/services/modules/stats/models.dart';
@@ -56,9 +55,9 @@ class _GetTotalDistanceTrackState extends State<GetTotalDistanceTrack> {
 
             int idx = 0;
             for (var mon in months) {
-              int total = 0;
+              dynamic total = 0;
               for (var dt in contents) {
-                if (dt.ctx == idx) {
+                if (dt.ctx == idx.toString()) {
                   total = dt.total;
                 }
               }
@@ -80,6 +79,6 @@ class _GetTotalDistanceTrackState extends State<GetTotalDistanceTrack> {
   Widget _buildListView(List<PieData> contents) {
     return Container(
         margin: EdgeInsets.all(spaceSM),
-        child: getLineChart(chartData, 'Total Distance Track Yearly'));
+        child: getLineChart(chartData, 'Total Distance Track Yearly', 'km'));
   }
 }

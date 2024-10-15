@@ -77,7 +77,7 @@ class StateGetAllVisit extends State<GetAllVisit> {
                 child: ComponentTextTitle(
                     type: 'content_body',
                     text:
-                        "Visit at ${dt.pinName != '' ? dt.pinName : dt.visitDesc} using ${dt.visitBy}${dt.pinName != '' ? dt.visitDesc : ''}${visitWith} at ${dt.createdAt}"),
+                        "Visit at ${dt.pinName != '' ? dt.pinName : dt.visitDesc} using ${dt.visitBy}${dt.pinName != '' ? dt.visitDesc : ''}$visitWith at ${dt.createdAt}"),
               );
             }).toList())
           : const ComponentTextTitle(
