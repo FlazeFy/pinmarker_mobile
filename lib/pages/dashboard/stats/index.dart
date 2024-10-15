@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:pinmarker/components/bars/bottom_bar.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
+import 'package:pinmarker/pages/dashboard/stats/usecases/get_total_distance_track.dart';
 import 'package:pinmarker/pages/dashboard/stats/usecases/get_total_gallery_by_pin.dart';
 import 'package:pinmarker/pages/dashboard/stats/usecases/get_total_pin_by_category.dart';
 import 'package:pinmarker/pages/dashboard/stats/usecases/get_total_visit_by_category.dart';
@@ -37,7 +38,8 @@ class StateDashboardStatsPage extends State<DashboardStatsPage> {
         children: const <Widget>[
           GetTotalPinByCategory(),
           GetTotalVisitByCategory(),
-          GetTotalGalleryByPin()
+          GetTotalGalleryByPin(),
+          GetTotalDistanceTrack()
         ],
       ),
     );

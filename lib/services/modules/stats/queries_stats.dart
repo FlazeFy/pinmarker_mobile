@@ -65,4 +65,16 @@ class QueriesStatsServices {
       return [];
     }
   }
+
+  Future<List<QueriesPieChartModel>> getTotalDistanceTrack() async {
+    final response = await client.get(
+      Uri.parse(
+          "$localUrl/api/v1/track/year/2024/fcd3f23e-e5aa-11ee-892a-3216422910e9"),
+    );
+    if (response.statusCode == 200) {
+      return queriesPieChartModelFromJson(response.body);
+    } else {
+      return [];
+    }
+  }
 }
