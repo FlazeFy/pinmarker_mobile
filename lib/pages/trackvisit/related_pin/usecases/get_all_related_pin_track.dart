@@ -51,7 +51,7 @@ class StateGetAllRelatedPinTrack extends State<GetAllRelatedPinTrack> {
   }
 
   Widget _buildListView(LastTrackModel track, List<RelatedPinModel> pins) {
-    return Container(
+    return SizedBox(
       width: Get.width,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

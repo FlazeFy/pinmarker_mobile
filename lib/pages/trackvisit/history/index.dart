@@ -13,7 +13,7 @@ class StateHistoryPage extends State<HistoryPage> {
   Widget build(BuildContext context) {
     return ListView(
       padding: EdgeInsets.all(spaceMD),
-      children: <Widget>[const GetAllHistory()],
+      children: const <Widget>[GetAllHistory()],
     );
   }
 }

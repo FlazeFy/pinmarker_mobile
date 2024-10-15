@@ -28,4 +28,22 @@ class QueriesTrackServices {
       return null;
     }
   }
+
+  Future<List<LastTrackModel>> getTrackHistoryPeriod() async {
+    final response = await client.post(
+        Uri.parse(
+            "$localUrl/api/v1/track/journey/period/fcd3f23e-e5aa-11ee-892a-3216422910e9"),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          "start_time": "2024-06-10T10:20:00",
+          "end_time": "2024-06-11T00:00:00"
+        }));
+    if (response.statusCode == 200) {
+      return trackModelFromJson(response.body);
+    } else {
+      return [];
+    }
+  }
 }

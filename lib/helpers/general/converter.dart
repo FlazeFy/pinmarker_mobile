@@ -33,6 +33,39 @@ double calculateDistance(coord1, coord2) {
   return distance;
 }
 
+String distanceUnit(double val) {
+  String unit = 'm';
+  double res = val;
+
+  if (val > 1000) {
+    unit = 'km';
+    res = res / 1000;
+  }
+
+  return "${res.toStringAsFixed(2)} $unit";
+}
+
+String timeUnit(int val) {
+  if (val < 1000) {
+    return "$val ms";
+  } else {
+    int diffInSeconds = (val / 1000).floor();
+    return "${diffInSeconds}s";
+  }
+}
+
+int countDatetimeStrInterval(String startTime, String endTime) {
+  String formattedStartTime = "${startTime.replaceAll(" ", "T")}Z";
+  String formattedEndTime = "${endTime.replaceAll(" ", "T")}Z";
+
+  DateTime startDateTime = DateTime.parse(formattedStartTime);
+  DateTime endDateTime = DateTime.parse(formattedEndTime);
+
+  Duration diff = endDateTime.difference(startDateTime);
+
+  return diff.inSeconds;
+}
+
 double countSpeed(double distance, int time) {
   if (time == 0) {
     return 0.0;

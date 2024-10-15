@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ffi';
 
 class AddTrackModel {
   double trackLat;
@@ -58,4 +57,10 @@ class LastTrackModel {
 LastTrackModel lastTrackModelFromJson(String jsonData) {
   final data = json.decode(jsonData);
   return LastTrackModel.fromJson(data['data_track']);
+}
+
+List<LastTrackModel> trackModelFromJson(String jsonData) {
+  final data = json.decode(jsonData);
+  return List<LastTrackModel>.from(
+      data['data'].map((item) => LastTrackModel.fromJson(item)));
 }

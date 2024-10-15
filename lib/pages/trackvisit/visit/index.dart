@@ -13,7 +13,7 @@ class StateVisitPage extends State<VisitPage> {
   Widget build(BuildContext context) {
     return ListView(
       padding: EdgeInsets.all(spaceMD),
-      children: <Widget>[const GetAllVisit()],
+      children: const <Widget>[GetAllVisit()],
     );
   }
 }
