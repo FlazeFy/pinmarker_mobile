@@ -47,13 +47,13 @@ class StateSearchList extends State<SearchList> {
           decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(
                 borderSide: const BorderSide(
-                  color: Colors.black,
+                  color: primaryColor,
                   width: 2.0,
                 ),
                 borderRadius: BorderRadius.circular(roundedSM)),
             focusedBorder: OutlineInputBorder(
               borderSide: const BorderSide(
-                color: Colors.black,
+                color: primaryColor,
                 width: 2.0,
               ),
               borderRadius: BorderRadius.circular(roundedSM),

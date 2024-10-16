@@ -8,7 +8,7 @@ Widget getBarChart(List<PieData> chartData, String? title, String? extra) {
     title: title != null
         ? ChartTitle(
             text: title,
-            textStyle: TextStyle(color: Colors.black, fontSize: textLG))
+            textStyle: TextStyle(color: primaryColor, fontSize: textLG))
         : const ChartTitle(),
     legend: const Legend(isVisible: false),
     primaryXAxis: const CategoryAxis(
@@ -33,10 +33,10 @@ Widget getBarChart(List<PieData> chartData, String? title, String? extra) {
           textStyle: TextStyle(
             fontSize: textSM,
             fontWeight: FontWeight.bold,
-            color: Colors.black,
+            color: primaryColor,
           ),
         ),
-        color: Colors.blue,
+        color: primaryColor,
       ),
     ],
   );

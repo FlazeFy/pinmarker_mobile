@@ -24,7 +24,7 @@ class ComponentButtonIcon extends StatelessWidget {
       icon: FaIcon(
         icon,
         size: textMD,
-        color: Colors.white,
+        color: whiteColor,
       ),
       color: color,
       onPressed: func,

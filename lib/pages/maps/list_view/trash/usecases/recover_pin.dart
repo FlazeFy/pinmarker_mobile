@@ -29,16 +29,16 @@ class StateRecoverPin extends State<RecoverPin> {
     return Container(
         margin: EdgeInsets.all(spaceMD),
         child: ComponentButtonIcon(
-            color: Colors.green,
+            color: successBG,
             icon: FontAwesomeIcons.rotateLeft,
             func: () {
               ArtSweetAlert.show(
                   context: context,
                   artDialogArgs: ArtDialogArgs(
                       showCancelBtn: true,
-                      cancelButtonColor: Colors.red,
+                      cancelButtonColor: dangerBG,
                       type: ArtSweetAlertType.warning,
-                      confirmButtonColor: Colors.green,
+                      confirmButtonColor: successBG,
                       onConfirm: () async {
                         apiService?.recoverPin(widget.id).then((response) {
                           setState(() => {});

@@ -60,7 +60,7 @@ class StateGetAllRelatedPinTrack extends State<GetAllRelatedPinTrack> {
               width: Get.width,
               padding: EdgeInsets.all(spaceSM),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: whiteColor,
                 borderRadius: BorderRadius.all(Radius.circular(roundedMD)),
                 boxShadow: [
                   BoxShadow(
@@ -123,7 +123,7 @@ class StateGetAllRelatedPinTrack extends State<GetAllRelatedPinTrack> {
                 border: TableBorder.all(
                     borderRadius:
                         BorderRadius.all(Radius.circular(roundedMini)),
-                    color: Colors.black),
+                    color: primaryColor),
                 columnWidths: {
                   0: FixedColumnWidth(Get.width * 0.3),
                   1: const FixedColumnWidth(50),
@@ -135,45 +135,45 @@ class StateGetAllRelatedPinTrack extends State<GetAllRelatedPinTrack> {
                     children: [
                       TableCell(
                           child: Container(
-                        color: Colors.black,
+                        color: primaryColor,
                         padding: EdgeInsets.all(spaceMD),
                         child: const Text(
                           'Pin Name',
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.white),
+                              fontWeight: FontWeight.bold, color: whiteColor),
                           textAlign: TextAlign.center,
                         ),
                       )),
                       TableCell(
                           child: Container(
-                        color: Colors.black,
+                        color: primaryColor,
                         padding: EdgeInsets.all(spaceMD),
                         child: const Text(
                           'Category',
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.white),
+                              fontWeight: FontWeight.bold, color: whiteColor),
                           textAlign: TextAlign.center,
                         ),
                       )),
                       TableCell(
                           child: Container(
-                        color: Colors.black,
+                        color: primaryColor,
                         padding: EdgeInsets.all(spaceMD),
                         child: const Text(
                           'Coordinate',
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.white),
+                              fontWeight: FontWeight.bold, color: whiteColor),
                           textAlign: TextAlign.center,
                         ),
                       )),
                       TableCell(
                           child: Container(
-                        color: Colors.black,
+                        color: primaryColor,
                         padding: EdgeInsets.all(spaceMD),
                         child: const Text(
                           'Distance',
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, color: Colors.white),
+                              fontWeight: FontWeight.bold, color: whiteColor),
                           textAlign: TextAlign.center,
                         ),
                       )),

@@ -41,7 +41,7 @@ class StateGetCurrentCoor extends State<GetLastCoor> {
                   padding: EdgeInsets.all(spaceMD),
                   decoration: BoxDecoration(
                       border: Border.all(
-                          width: spaceMini / 2.5, color: Colors.black),
+                          width: spaceMini / 2.5, color: primaryColor),
                       borderRadius:
                           BorderRadius.all(Radius.circular(roundedSM))),
                   child: Column(

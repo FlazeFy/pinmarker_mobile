@@ -71,7 +71,7 @@ class StateGetDistanceToPersonalPin extends State<GetDistanceToPersonalPin> {
                     width: Get.width,
                     margin: EdgeInsets.only(bottom: spaceMD),
                     decoration: BoxDecoration(
-                      border: Border.all(width: 1.5, color: Colors.black),
+                      border: Border.all(width: 1.5, color: primaryColor),
                       borderRadius:
                           BorderRadius.all(Radius.circular(roundedSM)),
                     ),
@@ -137,7 +137,7 @@ class StateGetDistanceToPersonalPin extends State<GetDistanceToPersonalPin> {
                                   icon: FaIcon(
                                     size: iconMD,
                                     FontAwesomeIcons.circleInfo,
-                                    color: Colors.white,
+                                    color: whiteColor,
                                   ),
                                 )),
                             SizedBox(width: spaceSM),
@@ -146,7 +146,7 @@ class StateGetDistanceToPersonalPin extends State<GetDistanceToPersonalPin> {
                               icon: FaIcon(
                                 size: iconMD,
                                 FontAwesomeIcons.locationArrow,
-                                color: Colors.white,
+                                color: whiteColor,
                               ),
                             )
                           ],

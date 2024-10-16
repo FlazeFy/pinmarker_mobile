@@ -34,6 +34,7 @@ class StateGetMapsTrackBoard extends State<GetMapsTrackBoard> {
     mylong = position!.longitude.toString();
     mylat = position!.latitude.toString();
 
+    if (!mounted) return;
     setState(() {
       //refresh UI
     });
@@ -72,10 +73,8 @@ class StateGetMapsTrackBoard extends State<GetMapsTrackBoard> {
 
     return SizedBox(
       width: Get.width,
-      height: Get.height - 100,
+      height: Get.height - 210,
       child: GoogleMap(
-        myLocationButtonEnabled: true,
-        zoomControlsEnabled: false,
         myLocationEnabled: true,
         initialCameraPosition: initialCameraPosition,
         onMapCreated: (controller) => googleMapController = controller,

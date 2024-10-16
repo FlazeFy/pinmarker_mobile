@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:pinmarker/helpers/variables/global.dart';
+import 'package:pinmarker/helpers/variables/style.dart';
 
 Future checkGps(var func) async {
   bool servicestatus = false;
@@ -16,10 +16,10 @@ Future checkGps(var func) async {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
         Get.snackbar("Alert", 'Location permissions are denied',
-            backgroundColor: Colors.white);
+            backgroundColor: whiteColor);
       } else if (permission == LocationPermission.deniedForever) {
         Get.snackbar("Alert", 'Location permissions are permanently denied',
-            backgroundColor: Colors.white);
+            backgroundColor: whiteColor);
       } else {
         haspermission = true;
       }
@@ -33,7 +33,7 @@ Future checkGps(var func) async {
   } else {
     if (!isShownOffLocationPop) {
       Get.snackbar("Alert", 'GPS Service is not enabled, turn on GPS location',
-          backgroundColor: Colors.white);
+          backgroundColor: whiteColor);
       isShownOffLocationPop = true;
     }
   }

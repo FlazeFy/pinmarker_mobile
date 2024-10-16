@@ -44,7 +44,7 @@ class ComponentTextTitle extends StatelessWidget {
               style: TextStyle(
                   fontSize: textXSM,
                   fontWeight: FontWeight.w500,
-                  color: Colors.white)));
+                  color: whiteColor)));
     } else if (type == 'no_data') {
       return Container(
           margin: EdgeInsets.only(bottom: spaceMini),

@@ -21,7 +21,7 @@ class StateGetCurrentCoor extends State<GetSpeed> {
         margin: EdgeInsets.only(top: spaceMD),
         width: Get.width,
         decoration: BoxDecoration(
-            border: Border.all(width: 1.5, color: Colors.black),
+            border: Border.all(width: 1.5, color: primaryColor),
             borderRadius: BorderRadius.all(Radius.circular(roundedSM))),
         child: Column(children: [
           const ComponentTextTitle(

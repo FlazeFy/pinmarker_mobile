@@ -44,7 +44,7 @@ class StateGetNearestPin extends State<GetNearestPin> {
                   margin: EdgeInsets.only(top: spaceMD),
                   width: Get.width,
                   decoration: BoxDecoration(
-                    border: Border.all(width: 1.5, color: Colors.black),
+                    border: Border.all(width: 1.5, color: primaryColor),
                     borderRadius: BorderRadius.all(Radius.circular(roundedSM)),
                   ),
                   child: const Center(
@@ -54,7 +54,7 @@ class StateGetNearestPin extends State<GetNearestPin> {
             return _buildContent(contents);
           } else {
             return const Center(
-              child: CircularProgressIndicator(color: Colors.black),
+              child: CircularProgressIndicator(color: primaryColor),
             );
           }
         },
@@ -68,7 +68,7 @@ class StateGetNearestPin extends State<GetNearestPin> {
       margin: EdgeInsets.only(top: spaceMD),
       width: Get.width,
       decoration: BoxDecoration(
-        border: Border.all(width: 1.5, color: Colors.black),
+        border: Border.all(width: 1.5, color: primaryColor),
         borderRadius: BorderRadius.all(Radius.circular(roundedSM)),
       ),
       child: Column(
@@ -82,7 +82,7 @@ class StateGetNearestPin extends State<GetNearestPin> {
               padding: EdgeInsets.all(spaceSM),
               margin: EdgeInsets.only(bottom: spaceSM),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: whiteColor,
                 borderRadius: BorderRadius.all(Radius.circular(roundedMD)),
                 boxShadow: [
                   BoxShadow(

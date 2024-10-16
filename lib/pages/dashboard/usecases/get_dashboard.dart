@@ -66,7 +66,7 @@ class StateGetDashboard extends State<GetDashboard> {
     return Container(
         padding: EdgeInsets.all(spaceMD),
         decoration: BoxDecoration(
-            border: Border.all(width: 1.5, color: Colors.black),
+            border: Border.all(width: 1.5, color: primaryColor),
             borderRadius: BorderRadius.all(Radius.circular(roundedSM))),
         child: Column(
           children: [

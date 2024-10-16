@@ -22,10 +22,9 @@ class StateDetailPinPage extends State<DetailPinPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: primaryColor,
         automaticallyImplyLeading: false,
-        title:
-            const Text('Detail Marker', style: TextStyle(color: Colors.white)),
+        title: const Text('Detail Marker', style: TextStyle(color: whiteColor)),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.arrow_back),
@@ -33,7 +32,7 @@ class StateDetailPinPage extends State<DetailPinPage> {
             onPressed: () {
               Get.to(const MapsListViewPage());
             },
-            color: Colors.white,
+            color: whiteColor,
           ),
         ],
       ),
@@ -44,9 +43,9 @@ class StateDetailPinPage extends State<DetailPinPage> {
             margin: EdgeInsets.only(bottom: spaceMD),
             padding: EdgeInsets.all(spaceXSM),
             decoration: BoxDecoration(
-                color: Colors.white,
+                color: whiteColor,
                 borderRadius: BorderRadius.all(Radius.circular(roundedMD)),
-                border: Border.all(width: 2, color: Colors.black)),
+                border: Border.all(width: 2, color: primaryColor)),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisAlignment: MainAxisAlignment.end,

@@ -52,10 +52,10 @@ class StateTrackVisit extends State<TrackVisit> {
                   onPressed: () {
                     Get.to(const RelatedPinTrackPage());
                   },
-                  backgroundColor: Colors.black,
+                  backgroundColor: primaryColor,
                   child: const FaIcon(
                     FontAwesomeIcons.table,
-                    color: Colors.white,
+                    color: whiteColor,
                   ),
                 ),
                 SizedBox(height: spaceMD),
@@ -64,15 +64,15 @@ class StateTrackVisit extends State<TrackVisit> {
                   onPressed: () {
                     Get.to(const TrackHistoryPage());
                   },
-                  backgroundColor: Colors.black,
+                  backgroundColor: primaryColor,
                   child: const FaIcon(
                     FontAwesomeIcons.rotateLeft,
-                    color: Colors.white,
+                    color: whiteColor,
                   ),
                 ),
-                SizedBox(height: spaceMD),
+                SizedBox(height: spaceSM),
               ]),
-          floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+          floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
         ));
   }
 }

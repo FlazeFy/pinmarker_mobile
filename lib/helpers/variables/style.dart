@@ -1,4 +1,6 @@
 // Border Radius
+import 'package:flutter/material.dart';
+
 double roundedCircle = 100;
 double roundedJumbo = 30;
 double roundedXLG = 20;
@@ -40,3 +42,9 @@ double iconLG = 24; //For floating add btn, ...
 double iconMD = 16; //For link or file btn, ...
 double iconSM = 12; //For content header ...
 
+const Color successBG = Color(0xFF198754);
+const Color dangerBG = Color(0xFFdc3545);
+const Color warningBG = Color(0xFFffc107);
+const Color primaryColor = Color(0xFF000000);
+const Color whiteColor = Color(0xFFFFFFFF);
+const Color secondaryColor = Color(0xFF414141);

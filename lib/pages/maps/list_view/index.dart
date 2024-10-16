@@ -20,23 +20,23 @@ class StateMapsListViewPage extends State<MapsListViewPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: primaryColor,
         automaticallyImplyLeading: false,
-        title: const Text('My Marker', style: TextStyle(color: Colors.white)),
+        title: const Text('My Marker', style: TextStyle(color: whiteColor)),
         actions: <Widget>[
           IconButton(
             icon: FaIcon(FontAwesomeIcons.solidTrashCan,
-                color: Colors.white, size: textXLG),
+                color: whiteColor, size: textXLG),
             tooltip: 'Trash',
             onPressed: () {
               Get.to(const TrashPage());
             },
-            color: Colors.white,
+            color: whiteColor,
           ),
           IconButton(
             icon: const FaIcon(
               FontAwesomeIcons.circleInfo,
-              color: Colors.white,
+              color: whiteColor,
             ),
             tooltip: 'Show Snackbar',
             onPressed: () {
@@ -55,7 +55,7 @@ class StateMapsListViewPage extends State<MapsListViewPage> {
             onPressed: () {
               Get.to(const BottomBar());
             },
-            color: Colors.white,
+            color: whiteColor,
           ),
         ],
       ),

@@ -17,10 +17,10 @@ class StateRelatedPinTrackPage extends State<RelatedPinTrackPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: primaryColor,
         automaticallyImplyLeading: false,
         title: const Text('Related Pin x Track',
-            style: TextStyle(color: Colors.white)),
+            style: TextStyle(color: whiteColor)),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.arrow_back),
@@ -29,7 +29,7 @@ class StateRelatedPinTrackPage extends State<RelatedPinTrackPage> {
               selectedIndex = 3;
               Get.to(const BottomBar());
             },
-            color: Colors.white,
+            color: whiteColor,
           ),
         ],
       ),

@@ -16,9 +16,9 @@ class StateTrashPage extends State<TrashPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: primaryColor,
         automaticallyImplyLeading: false,
-        title: const Text('Trash', style: TextStyle(color: Colors.white)),
+        title: const Text('Trash', style: TextStyle(color: whiteColor)),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.arrow_back),
@@ -26,7 +26,7 @@ class StateTrashPage extends State<TrashPage> {
             onPressed: () {
               Get.to(const MapsListViewPage());
             },
-            color: Colors.white,
+            color: whiteColor,
           ),
         ],
       ),

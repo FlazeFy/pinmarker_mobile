@@ -60,7 +60,7 @@ class StateGetAllVisit extends State<GetAllVisit> {
                 padding: EdgeInsets.all(spaceSM),
                 margin: EdgeInsets.only(bottom: spaceSM),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: whiteColor,
                   borderRadius: BorderRadius.all(Radius.circular(roundedMD)),
                   boxShadow: [
                     BoxShadow(

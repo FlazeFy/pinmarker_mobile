@@ -8,17 +8,17 @@ Widget getPieChart(List<PieData> chartData, String? title) {
       title: title != null
           ? ChartTitle(
               text: title,
-              textStyle: TextStyle(color: Colors.black, fontSize: textLG))
+              textStyle: TextStyle(color: primaryColor, fontSize: textLG))
           : const ChartTitle(),
       legend: Legend(
           isVisible: true,
           padding: spaceLG,
-          backgroundColor: Colors.white,
+          backgroundColor: whiteColor,
           position: LegendPosition.bottom,
           orientation: LegendItemOrientation.horizontal,
-          textStyle: const TextStyle(color: Colors.black),
+          textStyle: const TextStyle(color: primaryColor),
           overflowMode: LegendItemOverflowMode.wrap,
-          borderColor: Colors.black),
+          borderColor: primaryColor),
       series: <CircularSeries>[
         PieSeries<PieData, String>(
             explode: true,
@@ -33,7 +33,7 @@ Widget getPieChart(List<PieData> chartData, String? title) {
               textStyle: TextStyle(
                 fontSize: textSM,
                 fontWeight: FontWeight.bold,
-                color: Colors.black,
+                color: primaryColor,
               ),
               connectorLineSettings: const ConnectorLineSettings(
                 type: ConnectorType.curve,

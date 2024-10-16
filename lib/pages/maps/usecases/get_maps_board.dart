@@ -34,6 +34,7 @@ class StateGetMapsBoard extends State<GetMapsBoard> {
     mylong = position!.longitude.toString();
     mylat = position!.latitude.toString();
 
+    if (!mounted) return;
     setState(() {
       //refresh UI
     });
@@ -73,8 +74,6 @@ class StateGetMapsBoard extends State<GetMapsBoard> {
       width: Get.width,
       height: Get.height,
       child: GoogleMap(
-        myLocationButtonEnabled: false,
-        zoomControlsEnabled: false,
         myLocationEnabled: true,
         initialCameraPosition: initialCameraPosition,
         onMapCreated: (controller) => googleMapController = controller,

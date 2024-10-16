@@ -76,7 +76,7 @@ class StateGetListMarker extends State<GetListMarker> {
                     width: Get.width,
                     margin: EdgeInsets.only(bottom: spaceMD),
                     decoration: BoxDecoration(
-                      border: Border.all(width: 1.5, color: Colors.black),
+                      border: Border.all(width: 1.5, color: primaryColor),
                       borderRadius:
                           BorderRadius.all(Radius.circular(roundedSM)),
                     ),
@@ -95,9 +95,9 @@ class StateGetListMarker extends State<GetListMarker> {
                             if (dt.isFavorite != false)
                               ComponentButtonPrimary(
                                 text: null,
-                                color: Colors.green,
+                                color: successBG,
                                 icon: FaIcon(FontAwesomeIcons.solidBookmark,
-                                    color: Colors.white, size: textMD),
+                                    color: whiteColor, size: textMD),
                               ),
                           ],
                         ),
@@ -165,7 +165,7 @@ class StateGetListMarker extends State<GetListMarker> {
                                   icon: FaIcon(
                                     size: iconMD,
                                     FontAwesomeIcons.circleInfo,
-                                    color: Colors.white,
+                                    color: whiteColor,
                                   ),
                                 )),
                             SizedBox(width: spaceSM),
@@ -174,7 +174,7 @@ class StateGetListMarker extends State<GetListMarker> {
                               icon: FaIcon(
                                 size: iconMD,
                                 FontAwesomeIcons.locationArrow,
-                                color: Colors.white,
+                                color: whiteColor,
                               ),
                             )
                           ],

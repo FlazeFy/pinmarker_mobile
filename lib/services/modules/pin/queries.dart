@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:http/http.dart' show Client;
@@ -39,8 +38,8 @@ class QueriesPinServices {
             if (!isOffline) {
               Get.snackbar(
                   "Warning", "Lost connection, all data shown are local",
-                  backgroundColor: Colors.white,
-                  borderColor: Colors.black,
+                  backgroundColor: whiteColor,
+                  borderColor: primaryColor,
                   borderWidth: spaceMini / 2.5);
               isOffline = true;
             }
@@ -56,8 +55,8 @@ class QueriesPinServices {
           if (isOffline) {
             Get.snackbar(
                 "Information", "Welcome back, all data are now realtime",
-                backgroundColor: Colors.white,
-                borderColor: Colors.black,
+                backgroundColor: whiteColor,
+                borderColor: primaryColor,
                 borderWidth: spaceMini / 2.5);
             isOffline = false;
           }

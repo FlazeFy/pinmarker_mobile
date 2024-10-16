@@ -61,7 +61,7 @@ class StateGetTrackHistoryPeriod extends State<GetTrackHistoryPeriod> {
                   border: TableBorder.all(
                       borderRadius:
                           BorderRadius.all(Radius.circular(roundedMini)),
-                      color: Colors.black),
+                      color: primaryColor),
                   columnWidths: {
                     0: FixedColumnWidth(Get.width * 0.3),
                     1: const FixedColumnWidth(100),
@@ -77,97 +77,89 @@ class StateGetTrackHistoryPeriod extends State<GetTrackHistoryPeriod> {
                       children: [
                         TableCell(
                             child: Container(
-                          color: Colors.black,
+                          color: primaryColor,
                           padding: EdgeInsets.all(spaceMD),
                           child: const Text(
                             'Datetime',
                             style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
+                                fontWeight: FontWeight.bold, color: whiteColor),
                             textAlign: TextAlign.center,
                           ),
                         )),
                         TableCell(
                             child: Container(
-                          color: Colors.black,
+                          color: primaryColor,
                           padding: EdgeInsets.all(spaceMD),
                           child: const Text(
                             'Coordinate',
                             style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
+                                fontWeight: FontWeight.bold, color: whiteColor),
                             textAlign: TextAlign.center,
                           ),
                         )),
                         TableCell(
                             child: Container(
-                          color: Colors.black,
+                          color: primaryColor,
                           padding: EdgeInsets.all(spaceMD),
                           child: const Text(
                             'Route',
                             style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
+                                fontWeight: FontWeight.bold, color: whiteColor),
                             textAlign: TextAlign.center,
                           ),
                         )),
                         TableCell(
                             child: Container(
-                          color: Colors.black,
+                          color: primaryColor,
                           padding: EdgeInsets.all(spaceMD),
                           child: const Text(
                             'Distance',
                             style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
+                                fontWeight: FontWeight.bold, color: whiteColor),
                             textAlign: TextAlign.center,
                           ),
                         )),
                         TableCell(
                             child: Container(
-                          color: Colors.black,
+                          color: primaryColor,
                           padding: EdgeInsets.all(spaceMD),
                           child: const Text(
                             'Time Taken',
                             style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
+                                fontWeight: FontWeight.bold, color: whiteColor),
                             textAlign: TextAlign.center,
                           ),
                         )),
                         TableCell(
                             child: Container(
-                          color: Colors.black,
+                          color: primaryColor,
                           padding: EdgeInsets.all(spaceMD),
                           child: const Text(
                             'Speed',
                             style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
+                                fontWeight: FontWeight.bold, color: whiteColor),
                             textAlign: TextAlign.center,
                           ),
                         )),
                         TableCell(
                             child: Container(
-                          color: Colors.black,
+                          color: primaryColor,
                           padding: EdgeInsets.all(spaceMD),
                           child: const Text(
                             'Battery',
                             style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
+                                fontWeight: FontWeight.bold, color: whiteColor),
                             textAlign: TextAlign.center,
                           ),
                         )),
                         TableCell(
                             child: Container(
-                          color: Colors.black,
+                          color: primaryColor,
                           padding: EdgeInsets.all(spaceMD),
                           child: const Text(
                             'Maps',
                             style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
+                                fontWeight: FontWeight.bold, color: whiteColor),
                             textAlign: TextAlign.center,
                           ),
                         )),
@@ -276,7 +268,7 @@ class StateGetTrackHistoryPeriod extends State<GetTrackHistoryPeriod> {
                                 child: ComponentButtonPrimary(
                                   icon: FaIcon(
                                     FontAwesomeIcons.mapLocation,
-                                    color: Colors.white,
+                                    color: whiteColor,
                                   ),
                                 )),
                           ),

@@ -4,7 +4,6 @@ import 'package:battery_plus/battery_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:pinmarker/components/dialog/Dialogs/failed.dart';
 import 'package:pinmarker/components/text/title.dart';
 import 'package:pinmarker/helpers/general/converter.dart';
 import 'package:pinmarker/helpers/variables/global.dart';
@@ -81,6 +80,8 @@ class StateGetCurrentCoor extends State<GetCurrentCoor> {
 
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
+    if (!mounted) return;
+
     setState(() {
       currentPosition = position;
     });
@@ -101,6 +102,7 @@ class StateGetCurrentCoor extends State<GetCurrentCoor> {
           : batteryIndicator > 30 || isSaveMode
               ? checkIntervalTimeMid
               : checkIntervalTimeLow;
+      if (!mounted) return;
       setState(() {
         lastDistance = '${distance.toStringAsFixed(2)} m';
         double speedRaw = countSpeed(distance, timerInterval);
@@ -151,11 +153,20 @@ class StateGetCurrentCoor extends State<GetCurrentCoor> {
             isSync: false,
           );
 
+          if (!mounted) return;
           setState(() {
             lastUpdated = dateNow;
           });
         } catch (error) {
-          Get.dialog(FailedDialog(text: "Failed to save coordinate"));
+          if (mounted) {
+            ArtSweetAlert.show(
+              context: context,
+              artDialogArgs: ArtDialogArgs(
+                  type: ArtSweetAlertType.danger,
+                  title: "Failed!",
+                  text: "Failed to save coordinate"),
+            );
+          }
         }
       }
     } else if (box.read('last_lat') == null && box.read('last_long') == null) {
@@ -191,7 +202,7 @@ class StateGetCurrentCoor extends State<GetCurrentCoor> {
             width: Get.width,
             margin: EdgeInsets.only(top: spaceMD),
             decoration: BoxDecoration(
-                border: Border.all(width: 1.5, color: Colors.black),
+                border: Border.all(width: 1.5, color: primaryColor),
                 borderRadius: BorderRadius.all(Radius.circular(roundedSM))),
             child: Column(
               children: [

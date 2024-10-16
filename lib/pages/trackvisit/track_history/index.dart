@@ -17,10 +17,9 @@ class StateTrackHistoryPage extends State<TrackHistoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: primaryColor,
         automaticallyImplyLeading: false,
-        title:
-            const Text('Track History', style: TextStyle(color: Colors.white)),
+        title: const Text('Track History', style: TextStyle(color: whiteColor)),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.arrow_back),
@@ -29,7 +28,7 @@ class StateTrackHistoryPage extends State<TrackHistoryPage> {
               selectedIndex = 3;
               Get.to(const BottomBar());
             },
-            color: Colors.white,
+            color: whiteColor,
           ),
         ],
       ),

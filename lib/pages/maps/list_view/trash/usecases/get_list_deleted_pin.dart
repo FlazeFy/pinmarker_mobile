@@ -59,7 +59,7 @@ class StateGetTrashPin extends State<GetTrashPin> {
                   border: TableBorder.all(
                       borderRadius:
                           BorderRadius.all(Radius.circular(roundedMini)),
-                      color: Colors.black),
+                      color: primaryColor),
                   columnWidths: {
                     0: FixedColumnWidth(Get.width * 0.3),
                     1: const FixedColumnWidth(90),
@@ -72,61 +72,57 @@ class StateGetTrashPin extends State<GetTrashPin> {
                       children: [
                         TableCell(
                             child: Container(
-                          color: Colors.black,
+                          color: primaryColor,
                           padding: EdgeInsets.all(spaceMD),
                           child: const Text(
                             'Pin Name',
                             style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
+                                fontWeight: FontWeight.bold, color: whiteColor),
                             textAlign: TextAlign.center,
                           ),
                         )),
                         TableCell(
                             child: Container(
-                          color: Colors.black,
+                          color: primaryColor,
                           padding: EdgeInsets.all(spaceMD),
                           child: const Text(
                             'Total Visit',
                             style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
+                                fontWeight: FontWeight.bold, color: whiteColor),
                             textAlign: TextAlign.center,
                           ),
                         )),
                         TableCell(
                             child: Container(
-                          color: Colors.black,
+                          color: primaryColor,
                           padding: EdgeInsets.all(spaceMD),
                           child: const Text(
                             'Props',
                             style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
+                                fontWeight: FontWeight.bold, color: whiteColor),
                             textAlign: TextAlign.center,
                           ),
                         )),
                         TableCell(
                             child: Container(
-                          color: Colors.black,
+                          color: primaryColor,
                           padding: EdgeInsets.all(spaceMD),
                           child: const Text(
                             'Recover',
                             style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
+                                fontWeight: FontWeight.bold, color: whiteColor),
                             textAlign: TextAlign.center,
                           ),
                         )),
                         TableCell(
                           child: Container(
-                              color: Colors.black,
+                              color: primaryColor,
                               padding: EdgeInsets.all(spaceMD),
                               child: const Text(
                                 'Delete',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.white),
+                                    color: whiteColor),
                                 textAlign: TextAlign.center,
                               )),
                         ),
@@ -159,16 +155,16 @@ class StateGetTrashPin extends State<GetTrashPin> {
                                 children: [
                                   Text("Created At",
                                       style: TextStyle(
-                                          color: Colors.black,
+                                          color: primaryColor,
                                           fontSize: textMD,
                                           fontWeight: FontWeight.bold)),
                                   Text(dt.createdAt,
                                       style: TextStyle(
-                                          color: Colors.black,
+                                          color: primaryColor,
                                           fontSize: textSM)),
                                   Text("Updated At",
                                       style: TextStyle(
-                                          color: Colors.black,
+                                          color: primaryColor,
                                           fontSize: textMD,
                                           fontWeight: FontWeight.bold)),
                                   Text(
@@ -176,16 +172,16 @@ class StateGetTrashPin extends State<GetTrashPin> {
                                           ? dt.updatedAt ?? '-'
                                           : '-',
                                       style: TextStyle(
-                                          color: Colors.black,
+                                          color: primaryColor,
                                           fontSize: textSM)),
                                   Text("Deleted At",
                                       style: TextStyle(
-                                          color: Colors.black,
+                                          color: primaryColor,
                                           fontSize: textMD,
                                           fontWeight: FontWeight.bold)),
                                   Text(dt.deletedAt,
                                       style: TextStyle(
-                                          color: Colors.black,
+                                          color: primaryColor,
                                           fontSize: textSM))
                                 ],
                               ),

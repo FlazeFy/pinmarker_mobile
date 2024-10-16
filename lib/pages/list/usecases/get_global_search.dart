@@ -62,7 +62,7 @@ class StateGetGlobalSearch extends State<GetGlobalSearch> {
               return Column(children: [
                 SearchList(refreshSearch: refreshSearch),
                 const Center(
-                  child: CircularProgressIndicator(color: Colors.black),
+                  child: CircularProgressIndicator(color: primaryColor),
                 )
               ]);
             }
@@ -92,7 +92,7 @@ class StateGetGlobalSearch extends State<GetGlobalSearch> {
               margin: EdgeInsets.only(bottom: spaceSM),
               width: Get.width,
               decoration: BoxDecoration(
-                border: Border.all(width: 1.5, color: Colors.black),
+                border: Border.all(width: 1.5, color: primaryColor),
                 borderRadius: BorderRadius.all(Radius.circular(roundedSM)),
               ),
               child: Column(
@@ -139,7 +139,7 @@ class StateGetGlobalSearch extends State<GetGlobalSearch> {
                             icon: FaIcon(
                               size: iconMD,
                               FontAwesomeIcons.circleInfo,
-                              color: Colors.white,
+                              color: whiteColor,
                             ),
                           )),
                       SizedBox(
@@ -150,7 +150,7 @@ class StateGetGlobalSearch extends State<GetGlobalSearch> {
                         icon: FaIcon(
                           size: iconMD,
                           FontAwesomeIcons.paperPlane,
-                          color: Colors.white,
+                          color: whiteColor,
                         ),
                       ),
                     ],

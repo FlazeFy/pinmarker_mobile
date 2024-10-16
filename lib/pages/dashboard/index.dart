@@ -24,14 +24,15 @@ class StateDashboardPage extends State<DashboardPage> {
           GetDashboard(),
         ],
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Get.to(() => const DashboardStatsPage());
         },
-        backgroundColor: Colors.black,
+        backgroundColor: primaryColor,
         child: const Icon(
           Icons.pie_chart,
-          color: Colors.white,
+          color: whiteColor,
         ),
       ),
     );

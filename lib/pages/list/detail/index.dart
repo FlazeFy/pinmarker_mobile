@@ -18,9 +18,9 @@ class StateDetailListPage extends State<DetailListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: primaryColor,
         automaticallyImplyLeading: false,
-        title: const Text('Detail List', style: TextStyle(color: Colors.white)),
+        title: const Text('Detail List', style: TextStyle(color: whiteColor)),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.home),
@@ -28,7 +28,7 @@ class StateDetailListPage extends State<DetailListPage> {
             onPressed: () {
               Get.to(const BottomBar());
             },
-            color: Colors.white,
+            color: whiteColor,
           ),
         ],
       ),

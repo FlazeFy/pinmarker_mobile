@@ -66,7 +66,7 @@ class StateToggleFavoritePin extends State<ToggleFavoritePin> {
             widget.isFavorite
                 ? FontAwesomeIcons.solidBookmark
                 : FontAwesomeIcons.bookmark,
-            color: Colors.black,
+            color: primaryColor,
             size: textXLG));
   }
 }

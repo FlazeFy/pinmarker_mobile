@@ -50,11 +50,11 @@ class BottomBarState extends State<BottomBar> {
                 label: 'Track & Visit',
               ),
             ],
-            backgroundColor: Colors.black,
+            backgroundColor: primaryColor,
             // unselectedLabelStyle: GoogleFonts.poppins(),
             // selectedLabelStyle: GoogleFonts.poppins(fontSize: 14),
-            selectedItemColor: Colors.black,
-            unselectedItemColor: Colors.black,
+            selectedItemColor: primaryColor,
+            unselectedItemColor: primaryColor,
 
             onTap: (index) {
               setState(() {

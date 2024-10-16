@@ -31,9 +31,9 @@ class StateSoftDelPin extends State<SoftDelPin> {
               context: context,
               artDialogArgs: ArtDialogArgs(
                   showCancelBtn: true,
-                  cancelButtonColor: Colors.red,
+                  cancelButtonColor: dangerBG,
                   type: ArtSweetAlertType.warning,
-                  confirmButtonColor: Colors.green,
+                  confirmButtonColor: successBG,
                   onConfirm: () async {
                     apiService?.softDeletePin(widget.id).then((response) {
                       setState(() => {});
@@ -65,6 +65,6 @@ class StateSoftDelPin extends State<SoftDelPin> {
                   text: "Want to delete this pin?"));
         },
         icon: FaIcon(FontAwesomeIcons.solidTrashCan,
-            color: Colors.red, size: textXLG));
+            color: dangerBG, size: textXLG));
   }
 }

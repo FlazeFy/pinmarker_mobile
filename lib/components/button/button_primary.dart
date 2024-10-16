@@ -13,7 +13,7 @@ class ComponentButtonPrimary extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(vertical: spaceMini, horizontal: spaceXSM),
       decoration: BoxDecoration(
-        color: color ?? Colors.black,
+        color: color ?? primaryColor,
         borderRadius: BorderRadius.all(Radius.circular(roundedSM)),
       ),
       child: Wrap(crossAxisAlignment: WrapCrossAlignment.center, children: [
@@ -21,7 +21,7 @@ class ComponentButtonPrimary extends StatelessWidget {
             ? Container(margin: EdgeInsets.only(right: spaceXXSM), child: icon)
             : const SizedBox(),
         text != null
-            ? Text(text ?? '-', style: const TextStyle(color: Colors.white))
+            ? Text(text ?? '-', style: const TextStyle(color: whiteColor))
             : const SizedBox(),
       ]),
     );
