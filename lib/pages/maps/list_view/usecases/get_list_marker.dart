@@ -7,6 +7,7 @@ import 'package:pinmarker/helpers/variables/style.dart';
 import 'package:pinmarker/pages/maps/list_view/detail/index.dart';
 import 'package:pinmarker/services/modules/pin/models.dart';
 import 'package:pinmarker/services/modules/pin/queries.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class GetListMarker extends StatefulWidget {
   const GetListMarker({super.key});
@@ -17,11 +18,21 @@ class GetListMarker extends StatefulWidget {
 
 class StateGetListMarker extends State<GetListMarker> {
   QueriesPinServices? apiService;
+  String backupKey = "all-pin-header-sess";
+  String? lastHit;
 
   @override
   void initState() {
     super.initState();
+    _loadPreferences();
     apiService = QueriesPinServices();
+  }
+
+  Future<void> _loadPreferences() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      lastHit = prefs.getString("last-hit-$backupKey");
+    });
   }
 
   @override
@@ -54,6 +65,9 @@ class StateGetListMarker extends State<GetListMarker> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          ComponentTextTitle(
+              type: 'content_sub_title',
+              text: "Last updated : ${lastHit ?? '-'}"),
           data != null && data.isNotEmpty
               ? Column(
                   children: data.map<Widget>((dt) {
@@ -146,10 +160,23 @@ class StateGetListMarker extends State<GetListMarker> {
                                         isFavorite: dt.isFavorite,
                                       ));
                                 },
-                                child: const ComponentButtonPrimary(
-                                    text: "See Detail")),
+                                child: ComponentButtonPrimary(
+                                  text: "See Detail",
+                                  icon: FaIcon(
+                                    size: iconMD,
+                                    FontAwesomeIcons.circleInfo,
+                                    color: Colors.white,
+                                  ),
+                                )),
                             SizedBox(width: spaceSM),
-                            const ComponentButtonPrimary(text: "Set Direction")
+                            ComponentButtonPrimary(
+                              text: "Set Direction",
+                              icon: FaIcon(
+                                size: iconMD,
+                                FontAwesomeIcons.locationArrow,
+                                color: Colors.white,
+                              ),
+                            )
                           ],
                         )
                       ],

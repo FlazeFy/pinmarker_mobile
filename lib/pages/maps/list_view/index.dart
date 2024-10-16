@@ -1,7 +1,9 @@
+import 'package:art_sweetalert/art_sweetalert.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/route_manager.dart';
 import 'package:pinmarker/components/bars/bottom_bar.dart';
+import 'package:pinmarker/helpers/variables/global.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
 import 'package:pinmarker/pages/maps/list_view/trash/index.dart';
 import 'package:pinmarker/pages/maps/list_view/usecases/get_list_marker.dart';
@@ -30,6 +32,22 @@ class StateMapsListViewPage extends State<MapsListViewPage> {
               Get.to(const TrashPage());
             },
             color: Colors.white,
+          ),
+          IconButton(
+            icon: const FaIcon(
+              FontAwesomeIcons.circleInfo,
+              color: Colors.white,
+            ),
+            tooltip: 'Show Snackbar',
+            onPressed: () {
+              ArtSweetAlert.show(
+                  context: context,
+                  artDialogArgs: ArtDialogArgs(
+                      type: ArtSweetAlertType.info,
+                      title: "Information!",
+                      text:
+                          "My Marker list will refresh every ${(allPinFetchRestTime / 60).ceil()} minutes after last time you access the page"));
+            },
           ),
           IconButton(
             icon: const Icon(Icons.home),

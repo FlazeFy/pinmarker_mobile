@@ -16,3 +16,4 @@ class PieData {
 
 bool isOffline = false;
 int statsFetchRestTime = 180;
+int allPinFetchRestTime = 60;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:pinmarker/components/button/button_primary.dart';
@@ -133,12 +134,25 @@ class StateGetGlobalSearch extends State<GetGlobalSearch> {
                           onTap: () {
                             Get.to(() => DetailListPage(id: dt.id));
                           },
-                          child:
-                              const ComponentButtonPrimary(text: "See Detail")),
+                          child: ComponentButtonPrimary(
+                            text: "See Detail",
+                            icon: FaIcon(
+                              size: iconMD,
+                              FontAwesomeIcons.circleInfo,
+                              color: Colors.white,
+                            ),
+                          )),
                       SizedBox(
                         width: spaceSM,
                       ),
-                      const ComponentButtonPrimary(text: "Share"),
+                      ComponentButtonPrimary(
+                        text: "Share",
+                        icon: FaIcon(
+                          size: iconMD,
+                          FontAwesomeIcons.paperPlane,
+                          color: Colors.white,
+                        ),
+                      ),
                     ],
                   )
                 ],

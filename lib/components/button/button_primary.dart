@@ -17,12 +17,12 @@ class ComponentButtonPrimary extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(roundedSM)),
       ),
       child: Row(children: [
+        icon != null
+            ? Container(margin: EdgeInsets.only(right: spaceXXSM), child: icon)
+            : const SizedBox(),
         text != null
             ? Text(text ?? '-', style: const TextStyle(color: Colors.white))
             : const SizedBox(),
-        icon != null
-            ? Container(padding: EdgeInsets.all(spaceMini - 0.2), child: icon)
-            : const SizedBox()
       ]),
     );
   }

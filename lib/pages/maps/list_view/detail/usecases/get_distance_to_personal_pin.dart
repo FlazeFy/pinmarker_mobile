@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:pinmarker/components/button/button_primary.dart';
 import 'package:pinmarker/components/text/title.dart';
@@ -131,10 +132,23 @@ class StateGetDistanceToPersonalPin extends State<GetDistanceToPersonalPin> {
                                         isFavorite: widget.isFavorite,
                                       ));
                                 },
-                                child: const ComponentButtonPrimary(
-                                    text: "See Detail")),
+                                child: ComponentButtonPrimary(
+                                  text: "See Detail",
+                                  icon: FaIcon(
+                                    size: iconMD,
+                                    FontAwesomeIcons.circleInfo,
+                                    color: Colors.white,
+                                  ),
+                                )),
                             SizedBox(width: spaceSM),
-                            const ComponentButtonPrimary(text: "Set Direction")
+                            ComponentButtonPrimary(
+                              text: "Set Direction",
+                              icon: FaIcon(
+                                size: iconMD,
+                                FontAwesomeIcons.locationArrow,
+                                color: Colors.white,
+                              ),
+                            )
                           ],
                         )
                       ],
