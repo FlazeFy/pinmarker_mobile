@@ -16,7 +16,7 @@ class ComponentButtonPrimary extends StatelessWidget {
         color: color ?? Colors.black,
         borderRadius: BorderRadius.all(Radius.circular(roundedSM)),
       ),
-      child: Row(children: [
+      child: Wrap(crossAxisAlignment: WrapCrossAlignment.center, children: [
         icon != null
             ? Container(margin: EdgeInsets.only(right: spaceXXSM), child: icon)
             : const SizedBox(),

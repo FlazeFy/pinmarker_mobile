@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:pinmarker/components/button/button_primary.dart';
 import 'package:pinmarker/components/text/title.dart';
@@ -65,6 +66,7 @@ class StateGetListDetail extends State<GetListDetail> {
               ? Wrap(
                   runSpacing: -spaceWrap,
                   spacing: spaceWrap,
+                  direction: Axis.horizontal,
                   children: detail.listTag.map<Widget>((tg) {
                     return ComponentButtonPrimary(text: "#${tg.tagName}");
                   }).toList(),
@@ -148,9 +150,11 @@ class StateGetListDetail extends State<GetListDetail> {
                                   text: dt.pinName, type: "content_title"),
                             ],
                           ),
-                          ComponentButtonPrimary(
-                            text: dt.pinCategory,
-                          ),
+                          Row(children: [
+                            ComponentButtonPrimary(
+                              text: dt.pinCategory,
+                            ),
+                          ]),
                           SizedBox(
                             height: spaceMD,
                           ),
@@ -192,13 +196,32 @@ class StateGetListDetail extends State<GetListDetail> {
                           ),
                           Row(
                             children: [
-                              const ComponentButtonPrimary(
-                                  text: "Save to My Pin"),
+                              ComponentButtonPrimary(
+                                text: "Save",
+                                icon: FaIcon(
+                                  size: iconMD,
+                                  FontAwesomeIcons.bookmark,
+                                  color: Colors.white,
+                                ),
+                              ),
                               SizedBox(width: spaceXSM),
-                              const ComponentButtonPrimary(text: "Remove"),
+                              ComponentButtonPrimary(
+                                text: "Remove",
+                                icon: FaIcon(
+                                  size: iconMD,
+                                  FontAwesomeIcons.trash,
+                                  color: Colors.white,
+                                ),
+                              ),
                               SizedBox(width: spaceXSM),
-                              const ComponentButtonPrimary(
-                                  text: "Set Direction")
+                              ComponentButtonPrimary(
+                                text: "Direction",
+                                icon: FaIcon(
+                                  size: iconMD,
+                                  FontAwesomeIcons.locationArrow,
+                                  color: Colors.white,
+                                ),
+                              )
                             ],
                           )
                         ],

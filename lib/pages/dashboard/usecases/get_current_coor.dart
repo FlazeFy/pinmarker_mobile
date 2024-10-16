@@ -55,12 +55,6 @@ class StateGetCurrentCoor extends State<GetCurrentCoor> {
         Duration(seconds: timerInterval), (Timer t) => getLocation());
   }
 
-  @override
-  void dispose() {
-    timer.cancel();
-    super.dispose();
-  }
-
   Future<void> getLocation() async {
     int batteryIndicator = await battery.batteryLevel;
     final box = GetStorage();
@@ -168,6 +162,12 @@ class StateGetCurrentCoor extends State<GetCurrentCoor> {
       box.write('last_lat', currentPosition?.latitude);
       box.write('last_long', currentPosition?.longitude);
     }
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
   }
 
   @override
