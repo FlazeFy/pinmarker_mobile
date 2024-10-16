@@ -15,3 +15,4 @@ class PieData {
 }
 
 bool isOffline = false;
+int statsFetchRestTime = 180;

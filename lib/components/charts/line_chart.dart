@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:pinmarker/helpers/variables/global.dart';
+import 'package:pinmarker/helpers/variables/style.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-Widget getLineChart(List<PieData> chartData, String title, String? extra) {
+Widget getLineChart(List<PieData> chartData, String? title, String? extra) {
   return SfCartesianChart(
-    title: ChartTitle(
-      text: title,
-      textStyle: const TextStyle(color: Colors.black, fontSize: 16),
-    ),
+    title: title != null
+        ? ChartTitle(
+            text: title,
+            textStyle: TextStyle(color: Colors.black, fontSize: textLG))
+        : const ChartTitle(),
     legend: const Legend(isVisible: false),
     primaryXAxis: const CategoryAxis(
       title: AxisTitle(
@@ -26,15 +28,15 @@ Widget getLineChart(List<PieData> chartData, String title, String? extra) {
         yValueMapper: (PieData data, _) => data.yData,
         dataLabelMapper: (PieData data, _) =>
             '${double.parse(data.yData.toStringAsFixed(2))}$extra',
-        dataLabelSettings: const DataLabelSettings(
+        dataLabelSettings: DataLabelSettings(
           isVisible: true,
           textStyle: TextStyle(
-            fontSize: 12,
+            fontSize: textSM,
             fontWeight: FontWeight.bold,
             color: Colors.black,
           ),
         ),
-        markerSettings: const MarkerSettings(
+        markerSettings: MarkerSettings(
           isVisible: true,
           shape: DataMarkerType.circle,
         ),

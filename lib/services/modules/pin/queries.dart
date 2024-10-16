@@ -21,10 +21,10 @@ class QueriesPinServices {
     final response = await client.get(
       Uri.parse("$localUrl/api/v1/pin/fcd3f23e-e5aa-11ee-892a-3216422910e9"),
     );
-
+    String backupKey = "all-pin-header-sess";
     if (connectivityResult == ConnectivityResult.none) {
-      if (prefs.containsKey("all-pin-header-sess")) {
-        final data = prefs.getString("all-pin-header-sess");
+      if (prefs.containsKey(backupKey)) {
+        final data = prefs.getString(backupKey);
         if (data != null) {
           if (!isOffline) {
             Get.snackbar("Warning", "Lost connection, all data shown are local",
@@ -49,11 +49,11 @@ class QueriesPinServices {
               borderWidth: spaceMini / 2.5);
           isOffline = false;
         }
-        prefs.setString("all-pin-header-sess", response.body);
+        prefs.setString(backupKey, response.body);
         return pinModelHeaderFromJson(response.body);
       } else {
-        if (prefs.containsKey("all-pin-header-sess")) {
-          final data = prefs.getString("all-pin-header-sess");
+        if (prefs.containsKey(backupKey)) {
+          final data = prefs.getString(backupKey);
           if (data != null) {
             return pinModelHeaderFromJson(data);
           } else {

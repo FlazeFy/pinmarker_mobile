@@ -1,6 +1,8 @@
+import 'package:art_sweetalert/art_sweetalert.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pinmarker/components/text/title.dart';
+import 'package:pinmarker/helpers/variables/global.dart';
 import 'package:pinmarker/pages/dashboard/stats/usecases/get_total_distance_track.dart';
 import 'package:pinmarker/pages/dashboard/stats/usecases/get_total_distance_track_hourly.dart';
 import 'package:pinmarker/pages/dashboard/stats/usecases/get_total_gallery_by_pin.dart';
@@ -36,6 +38,21 @@ class StateDashboardStatsPage extends State<DashboardStatsPage> {
                 ),
               ],
             ),
+            actions: <Widget>[
+              IconButton(
+                icon: const FaIcon(FontAwesomeIcons.circleInfo),
+                tooltip: 'Show Snackbar',
+                onPressed: () {
+                  ArtSweetAlert.show(
+                      context: context,
+                      artDialogArgs: ArtDialogArgs(
+                          type: ArtSweetAlertType.info,
+                          title: "Information!",
+                          text:
+                              "Statistic will refresh every ${(statsFetchRestTime / 60).ceil()} minutes after last time you access the page"));
+                },
+              )
+            ],
           ),
           body: TabBarView(
             children: <Widget>[

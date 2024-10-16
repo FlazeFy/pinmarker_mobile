@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pinmarker/components/charts/bar_chart.dart';
+import 'package:pinmarker/components/text/title.dart';
 import 'package:pinmarker/helpers/variables/global.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
 import 'package:pinmarker/services/modules/stats/models.dart';
 import 'package:pinmarker/services/modules/stats/queries_stats.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class GetTotalDistanceTrackHourly extends StatefulWidget {
   const GetTotalDistanceTrackHourly({super.key});
@@ -17,11 +19,21 @@ class _GetTotalDistanceTrackHourlyState
     extends State<GetTotalDistanceTrackHourly> {
   List<PieData> chartData = [];
   QueriesStatsServices? apiService;
+  String backupKey = "total-distance-track-hourly-sess";
+  String? lastHit;
 
   @override
   void initState() {
     super.initState();
+    _loadPreferences();
     apiService = QueriesStatsServices();
+  }
+
+  Future<void> _loadPreferences() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      lastHit = prefs.getString("last-hit-$backupKey");
+    });
   }
 
   @override
@@ -72,8 +84,15 @@ class _GetTotalDistanceTrackHourlyState
   }
 
   Widget _buildListView(List<PieData> contents) {
-    return Container(
-        margin: EdgeInsets.all(spaceSM),
-        child: getBarChart(chartData, 'Total Distance Track Hourly', 'km'));
+    return Column(children: [
+      SizedBox(height: spaceMD),
+      const ComponentTextTitle(
+          type: 'content_title', text: 'Total Distance Track Hourly'),
+      ComponentTextTitle(
+          type: 'content_sub_title', text: "Last updated : ${lastHit ?? '-'}"),
+      Container(
+          margin: EdgeInsets.all(spaceSM),
+          child: getBarChart(chartData, null, 'km'))
+    ]);
   }
 }

@@ -3,11 +3,13 @@ import 'package:pinmarker/helpers/variables/global.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-Widget getPieChart(List<PieData> chartData, String title) {
+Widget getPieChart(List<PieData> chartData, String? title) {
   return SfCircularChart(
-      title: ChartTitle(
-          text: title,
-          textStyle: TextStyle(color: Colors.black, fontSize: textLG)),
+      title: title != null
+          ? ChartTitle(
+              text: title,
+              textStyle: TextStyle(color: Colors.black, fontSize: textLG))
+          : const ChartTitle(),
       legend: Legend(
           isVisible: true,
           padding: spaceLG,
@@ -26,14 +28,14 @@ Widget getPieChart(List<PieData> chartData, String title) {
             yValueMapper: (PieData data, _) => data.yData,
             dataLabelMapper: (PieData data, _) =>
                 '${data.xData}: ${data.yData}',
-            dataLabelSettings: const DataLabelSettings(
+            dataLabelSettings: DataLabelSettings(
               isVisible: true,
               textStyle: TextStyle(
-                fontSize: 12,
+                fontSize: textSM,
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
               ),
-              connectorLineSettings: ConnectorLineSettings(
+              connectorLineSettings: const ConnectorLineSettings(
                 type: ConnectorType.curve,
                 length: '10%',
               ),
