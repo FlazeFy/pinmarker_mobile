@@ -10,6 +10,7 @@ import 'package:pinmarker/helpers/variables/style.dart';
 import 'package:pinmarker/pages/list/detail/index.dart';
 import 'package:pinmarker/services/modules/pin/models.dart';
 import 'package:pinmarker/services/modules/pin/queries.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class GetMapsBoard extends StatefulWidget {
   const GetMapsBoard({super.key});
@@ -94,13 +95,28 @@ class StateGetMapsBoard extends State<GetMapsBoard> {
                 position: LatLng(lat, lng),
                 onTap: () {
                   Get.dialog(AlertDialog(
-                    title: ComponentTextTitle(
-                        text: dt.pinName, type: 'content_title'),
                     content: SizedBox(
                       height: 240,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Row(
+                            children: [
+                              ComponentTextTitle(
+                                  text: dt.pinName, type: 'content_title'),
+                              const Spacer(),
+                              IconButton(
+                                icon: const FaIcon(
+                                  FontAwesomeIcons.circleXmark,
+                                  color: primaryColor,
+                                ),
+                                tooltip: 'Close Detail',
+                                onPressed: () {
+                                  Get.back();
+                                },
+                              )
+                            ],
+                          ),
                           Row(
                             children: [
                               ComponentButtonPrimary(text: dt.pinCategory)
@@ -147,7 +163,10 @@ class StateGetMapsBoard extends State<GetMapsBoard> {
                             ),
                           )),
                       InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            launchUrl(Uri.parse(
+                                "https://www.google.com/maps/dir/My+Location/${dt.pinCoordinate}"));
+                          },
                           child: ComponentButtonPrimary(
                             text: "Set Direction",
                             icon: FaIcon(

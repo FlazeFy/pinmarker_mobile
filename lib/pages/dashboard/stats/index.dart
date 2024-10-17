@@ -1,6 +1,7 @@
 import 'package:art_sweetalert/art_sweetalert.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:pinmarker/components/bars/left_bar.dart';
 import 'package:pinmarker/components/text/title.dart';
 import 'package:pinmarker/helpers/variables/global.dart';
 import 'package:pinmarker/pages/dashboard/stats/usecases/get_total_distance_track.dart';
@@ -54,6 +55,7 @@ class StateDashboardStatsPage extends State<DashboardStatsPage> {
               )
             ],
           ),
+          drawer: const LeftBar(),
           body: TabBarView(
             children: <Widget>[
               Center(

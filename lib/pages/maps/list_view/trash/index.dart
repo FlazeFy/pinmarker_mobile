@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
+import 'package:pinmarker/components/bars/left_bar.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
 import 'package:pinmarker/pages/maps/list_view/index.dart';
 import 'package:pinmarker/pages/maps/list_view/trash/usecases/get_list_deleted_pin.dart';
@@ -30,6 +31,7 @@ class StateTrashPage extends State<TrashPage> {
           ),
         ],
       ),
+      drawer: const LeftBar(),
       body: ListView(
         padding: EdgeInsets.all(spaceMD),
         children: const <Widget>[GetTrashPin()],

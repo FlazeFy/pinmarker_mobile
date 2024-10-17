@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:pinmarker/components/bars/bottom_bar.dart';
+import 'package:pinmarker/components/bars/left_bar.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
 import 'package:pinmarker/pages/list/detail/usecases/get_list_detail.dart';
 
@@ -32,6 +33,7 @@ class StateDetailListPage extends State<DetailListPage> {
           ),
         ],
       ),
+      drawer: const LeftBar(),
       body: ListView(
         padding: EdgeInsets.all(spaceMD),
         children: <Widget>[GetListDetail(id: widget.id)],

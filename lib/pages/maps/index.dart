@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pinmarker/components/bars/left_bar.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
 import 'package:pinmarker/pages/maps/list_view/index.dart';
 import 'package:pinmarker/pages/maps/usecases/get_maps_board.dart';
@@ -16,6 +17,7 @@ class StateMapsPage extends State<MapsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: const GetMapsBoard(),
+      drawer: const LeftBar(),
       floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () {

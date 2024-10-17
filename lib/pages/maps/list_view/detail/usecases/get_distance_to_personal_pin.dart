@@ -7,6 +7,7 @@ import 'package:pinmarker/helpers/variables/style.dart';
 import 'package:pinmarker/pages/maps/list_view/detail/index.dart';
 import 'package:pinmarker/services/modules/pin/models.dart';
 import 'package:pinmarker/services/modules/pin/queries.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class GetDistanceToPersonalPin extends StatefulWidget {
   const GetDistanceToPersonalPin(
@@ -141,12 +142,18 @@ class StateGetDistanceToPersonalPin extends State<GetDistanceToPersonalPin> {
                                   ),
                                 )),
                             SizedBox(width: spaceSM),
-                            ComponentButtonPrimary(
-                              text: "Set Direction",
-                              icon: FaIcon(
-                                size: iconMD,
-                                FontAwesomeIcons.locationArrow,
-                                color: whiteColor,
+                            InkWell(
+                              onTap: () {
+                                launchUrl(Uri.parse(
+                                    "https://www.google.com/maps/dir/My+Location/${dt.pinLat},${dt.pinLong}"));
+                              },
+                              child: ComponentButtonPrimary(
+                                text: "Set Direction",
+                                icon: FaIcon(
+                                  size: iconMD,
+                                  FontAwesomeIcons.locationArrow,
+                                  color: whiteColor,
+                                ),
                               ),
                             )
                           ],

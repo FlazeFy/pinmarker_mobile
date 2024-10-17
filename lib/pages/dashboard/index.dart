@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
+import 'package:pinmarker/components/bars/left_bar.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
 import 'package:pinmarker/pages/dashboard/stats/index.dart';
 import 'package:pinmarker/pages/dashboard/usecases/get_current_coor.dart';
@@ -24,6 +25,7 @@ class StateDashboardPage extends State<DashboardPage> {
           GetDashboard(),
         ],
       ),
+      drawer: const LeftBar(),
       floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () {

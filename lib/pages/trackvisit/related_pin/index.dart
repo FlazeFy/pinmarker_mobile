@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:pinmarker/components/bars/bottom_bar.dart';
+import 'package:pinmarker/components/bars/left_bar.dart';
 import 'package:pinmarker/helpers/variables/global.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
 import 'package:pinmarker/pages/trackvisit/related_pin/usecases/get_all_related_pin_track.dart';
@@ -26,13 +27,14 @@ class StateRelatedPinTrackPage extends State<RelatedPinTrackPage> {
             icon: const Icon(Icons.arrow_back),
             tooltip: 'Back to List',
             onPressed: () {
-              selectedIndex = 3;
+              selectedIndexBottomBar = 3;
               Get.to(const BottomBar());
             },
             color: whiteColor,
           ),
         ],
       ),
+      drawer: const LeftBar(),
       body: ListView(
         padding: EdgeInsets.all(spaceMD),
         children: const <Widget>[GetAllRelatedPinTrack()],

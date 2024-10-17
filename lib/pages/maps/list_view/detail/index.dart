@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
+import 'package:pinmarker/components/bars/left_bar.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
 import 'package:pinmarker/pages/maps/list_view/detail/usecases/get_detail.dart';
 import 'package:pinmarker/pages/maps/list_view/detail/usecases/get_distance_to_personal_pin.dart';
@@ -36,6 +37,7 @@ class StateDetailPinPage extends State<DetailPinPage> {
           ),
         ],
       ),
+      drawer: const LeftBar(),
       body: ListView(
         padding: EdgeInsets.all(spaceMD),
         children: <Widget>[

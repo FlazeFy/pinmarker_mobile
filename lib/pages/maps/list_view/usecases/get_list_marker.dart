@@ -8,6 +8,7 @@ import 'package:pinmarker/pages/maps/list_view/detail/index.dart';
 import 'package:pinmarker/services/modules/pin/models.dart';
 import 'package:pinmarker/services/modules/pin/queries.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class GetListMarker extends StatefulWidget {
   const GetListMarker({super.key});
@@ -169,12 +170,18 @@ class StateGetListMarker extends State<GetListMarker> {
                                   ),
                                 )),
                             SizedBox(width: spaceSM),
-                            ComponentButtonPrimary(
-                              text: "Set Direction",
-                              icon: FaIcon(
-                                size: iconMD,
-                                FontAwesomeIcons.locationArrow,
-                                color: whiteColor,
+                            InkWell(
+                              onTap: () {
+                                launchUrl(Uri.parse(
+                                    "https://www.google.com/maps/dir/My+Location/${dt.pinCoordinate}"));
+                              },
+                              child: ComponentButtonPrimary(
+                                text: "Set Direction",
+                                icon: FaIcon(
+                                  size: iconMD,
+                                  FontAwesomeIcons.locationArrow,
+                                  color: whiteColor,
+                                ),
                               ),
                             )
                           ],

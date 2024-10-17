@@ -97,6 +97,7 @@ class StateGetDashboard extends State<GetDashboard> {
                   icon: FaIcon(
                     FontAwesomeIcons.circleInfo,
                     size: iconMD,
+                    color: primaryColor,
                   ),
                   tooltip: 'Show Snackbar',
                   onPressed: () {

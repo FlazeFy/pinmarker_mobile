@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:pinmarker/components/text/title.dart';
+import 'package:pinmarker/components/bars/left_bar.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
 import 'package:pinmarker/pages/trackvisit/history/index.dart';
 import 'package:pinmarker/pages/trackvisit/related_pin/index.dart';
@@ -23,26 +23,37 @@ class StateTrackVisit extends State<TrackVisit> {
         initialIndex: 1,
         length: 3,
         child: Scaffold(
-          appBar: AppBar(
-            title: const ComponentTextTitle(
-                type: "content_title", text: "Last track : 5 seconds ago"),
-            bottom: const TabBar(
-              tabs: <Widget>[
-                Tab(
-                  icon: FaIcon(FontAwesomeIcons.satelliteDish),
-                  text: "Tracker",
+          appBar: TabBar(
+            labelColor: primaryColor,
+            indicatorColor: primaryColor,
+            padding: EdgeInsets.only(top: Get.height * 0.05),
+            tabs: const <Widget>[
+              Tab(
+                icon: FaIcon(
+                  FontAwesomeIcons.satelliteDish,
+                  color: primaryColor,
                 ),
-                Tab(icon: FaIcon(FontAwesomeIcons.car), text: "Visit"),
-                Tab(
-                  icon: FaIcon(FontAwesomeIcons.clockRotateLeft),
-                  text: "History",
+                text: "Tracker",
+              ),
+              Tab(
+                  icon: FaIcon(
+                    FontAwesomeIcons.car,
+                    color: primaryColor,
+                  ),
+                  text: "Visit"),
+              Tab(
+                icon: FaIcon(
+                  FontAwesomeIcons.clockRotateLeft,
+                  color: primaryColor,
                 ),
-              ],
-            ),
+                text: "History",
+              ),
+            ],
           ),
           body: const TabBarView(
             children: <Widget>[TrackMapPage(), VisitPage(), HistoryPage()],
           ),
+          drawer: const LeftBar(),
           floatingActionButton: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisAlignment: MainAxisAlignment.end,

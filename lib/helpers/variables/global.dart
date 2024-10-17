@@ -1,4 +1,9 @@
-int selectedIndex = 0;
+import 'package:camera/camera.dart';
+
+int selectedIndexBottomBar = 0;
+int selectedIndexLeftBar = 0;
+
+FlashMode flashMode = FlashMode.off;
 
 int checkIntervalTimeHigh = 5; // in second
 int checkIntervalTimeMid = 7; // in second

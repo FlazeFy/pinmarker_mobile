@@ -24,14 +24,14 @@ class BottomBarState extends State<BottomBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: _widgetOptions.elementAt(selectedIndex),
+        body: _widgetOptions.elementAt(selectedIndexBottomBar),
         bottomNavigationBar: ClipRRect(
           borderRadius: BorderRadius.only(
             topRight: Radius.circular(roundedLG),
             topLeft: Radius.circular(roundedLG),
           ),
           child: BottomNavigationBar(
-            currentIndex: selectedIndex,
+            currentIndex: selectedIndexBottomBar,
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
                 icon: Icon(Icons.dashboard),
@@ -58,7 +58,7 @@ class BottomBarState extends State<BottomBar> {
 
             onTap: (index) {
               setState(() {
-                selectedIndex = index;
+                selectedIndexBottomBar = index;
               });
             },
           ),
