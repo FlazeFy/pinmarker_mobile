@@ -1,6 +1,5 @@
 int selectedIndex = 0;
 
-double distanceDiffToTrack = 10; // In meter
 int checkIntervalTimeHigh = 5; // in second
 int checkIntervalTimeMid = 7; // in second
 int checkIntervalTimeLow = 10; // in second
@@ -15,5 +14,8 @@ class PieData {
 }
 
 bool isOffline = false;
-int statsFetchRestTime = 180;
-int allPinFetchRestTime = 60;
+int statsFetchRestTime = 180; // in second
+int allPinFetchRestTime = 60; // in second
+int nearestPinFetchRestTime = 60; // in second
+double nearestPinFetchRestDistance = 10; // In meter
+double generalFetchRestDistance = 10; // In meter

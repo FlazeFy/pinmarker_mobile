@@ -50,7 +50,8 @@ class DatabaseHelper {
         pin_name TEXT,
         pin_coor TEXT,
         pin_category TEXT,
-        stored_at TEXT
+        stored_at TEXT,
+        distance REAL
       )
     ''');
   }
@@ -64,19 +65,20 @@ class DatabaseHelper {
     );
   }
 
-  Future<int> insertPinLocal({
-    required String pinName,
-    required String pinCoor,
-    required String pinCategory,
-    required String storedAt,
-  }) async {
+  Future<int> insertPinLocal(
+      {required String pinName,
+      required String pinCoor,
+      required String pinCategory,
+      required String storedAt,
+      required double distance}) async {
     final db = await database;
 
     Map<String, dynamic> data = {
       'pin_name': pinName,
       'pin_coor': pinCoor,
       'pin_category': pinCategory,
-      'stored_at': storedAt
+      'stored_at': storedAt,
+      'distance': distance
     };
 
     return await db.insert('pin_local', data);

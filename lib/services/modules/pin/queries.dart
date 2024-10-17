@@ -3,6 +3,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get/get.dart';
 
 import 'package:http/http.dart' show Client;
+import 'package:pinmarker/helpers/general/converter.dart';
 import 'package:pinmarker/helpers/general/generator.dart';
 import 'package:pinmarker/helpers/variables/global.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
@@ -89,9 +90,13 @@ class QueriesPinServices {
   Future<List<PinModelNearestHeader>> getAllNearestPinHeader(
       String lat, String long) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String backupKey = "nearest-pin";
+    DateTime? lastHit;
+    lastHit = prefs.containsKey("last-hit-$backupKey")
+        ? DateTime.tryParse(prefs.getString("last-hit-$backupKey") ?? '')
+        : null;
 
-    String? lastPinRecord = prefs.getString('last_pin_record');
-    if (lastPinRecord != null) {
+    Future<List<PinModelNearestHeader>> fetchNearestTempData() async {
       final dbHelper = DatabaseHelper();
       final data = await dbHelper.getAllPinLocal();
 
@@ -100,10 +105,12 @@ class QueriesPinServices {
               pinName: item['pin_name'],
               pinCoor: item['pin_coor'],
               pinCategory: item['pin_category'],
-              distance: 0.0,
+              distance: item['distance'],
             )),
       );
-    } else {
+    }
+
+    Future<List<PinModelNearestHeader>> fetchNearestLiveData() async {
       final response = await client.post(
         Uri.parse("$localUrl/api/v1/pin/nearest/$lat/$long"),
         headers: {
@@ -123,17 +130,40 @@ class QueriesPinServices {
         await dbHelper.resetPinLocal();
         for (var data in jsonData) {
           await dbHelper.insertPinLocal(
-            pinName: data['pin_name'],
-            pinCoor: data['pin_coor'],
-            pinCategory: data['pin_category'],
-            storedAt: DateTime.now().toString(),
-          );
+              pinName: data['pin_name'],
+              pinCoor: data['pin_coor'],
+              pinCategory: data['pin_category'],
+              storedAt: DateTime.now().toString(),
+              distance: data['distance']);
         }
 
-        prefs.setString('last_pin_record', DateTime.now().toString());
+        prefs.setString("last-hit-$backupKey", generateTempDataKey());
         return pinModelNearestHeaderFromJson(response.body);
       } else {
         return [];
+      }
+    }
+
+    if (!prefs.containsKey("last-coor-$backupKey")) {
+      prefs.setString("last-coor-$backupKey", "$lat, $long");
+      return await fetchNearestLiveData();
+    } else {
+      String? lastCoor = prefs.getString("last-coor-$backupKey");
+      if (lastCoor != null) {
+        double distance = calculateDistance(lastCoor, "$lat, $long");
+
+        if (distance > nearestPinFetchRestDistance) {
+          return await fetchNearestLiveData();
+        } else {
+          if (lastHit == null ||
+              now.difference(lastHit).inSeconds < nearestPinFetchRestTime) {
+            return await fetchNearestTempData();
+          } else {
+            return await fetchNearestLiveData();
+          }
+        }
+      } else {
+        return await fetchNearestLiveData();
       }
     }
   }

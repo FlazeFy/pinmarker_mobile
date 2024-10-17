@@ -29,12 +29,13 @@ class StateGetNearestPin extends State<GetNearestPin> {
     return SafeArea(
       maintainBottomViewPadding: false,
       child: FutureBuilder<List<PinModelNearestHeader>>(
-        future: apiService?.getAllNearestPinHeader(widget.lat, widget.long),
+        future: apiService?.getAllNearestPinHeader(
+            '-6.2333934867861975', '106.82363788271587'),
         builder: (BuildContext context,
             AsyncSnapshot<List<PinModelNearestHeader>> snapshot) {
           if (snapshot.hasError) {
-            return const Center(
-              child: Text("Something went wrong"),
+            return Center(
+              child: Text("Something went wrong ${snapshot.error.toString()}"),
             );
           } else if (snapshot.connectionState == ConnectionState.done) {
             List<PinModelNearestHeader>? contents = snapshot.data;

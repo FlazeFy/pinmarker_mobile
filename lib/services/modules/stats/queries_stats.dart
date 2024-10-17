@@ -21,39 +21,26 @@ class QueriesStatsServices {
           "$localUrl/api/v1/stats/dashboard/fcd3f23e-e5aa-11ee-892a-3216422910e9/user"),
     );
     String backupKey = "dashboard-sess";
-    if (connectivityResult == ConnectivityResult.none) {
-      if (prefs.containsKey(backupKey)) {
-        final data = prefs.getString(backupKey);
-        if (data != null) {
-          if (!isOffline) {
-            Get.snackbar("Warning", "Lost connection, all data shown are local",
-                backgroundColor: whiteColor,
-                borderColor: primaryColor,
-                borderWidth: spaceMini / 2.5);
-            isOffline = true;
-          }
-          return dashboardModelFromJson(data);
-        } else {
-          return null;
-        }
-      } else {
-        return null;
-      }
-    } else {
-      if (response.statusCode == 200) {
-        if (isOffline) {
-          Get.snackbar("Information", "Welcome back, all data are now realtime",
-              backgroundColor: whiteColor,
-              borderColor: primaryColor,
-              borderWidth: spaceMini / 2.5);
-          isOffline = false;
-        }
-        prefs.setString(backupKey, response.body);
-        return dashboardModelFromJson(response.body);
-      } else {
+    DateTime? lastHit;
+    lastHit = prefs.containsKey("last-hit-$backupKey")
+        ? DateTime.tryParse(prefs.getString("last-hit-$backupKey") ?? '')
+        : null;
+
+    if (!prefs.containsKey(backupKey) ||
+        lastHit == null ||
+        now.difference(lastHit).inSeconds >= statsFetchRestTime) {
+      if (connectivityResult == ConnectivityResult.none) {
         if (prefs.containsKey(backupKey)) {
           final data = prefs.getString(backupKey);
           if (data != null) {
+            if (!isOffline) {
+              Get.snackbar(
+                  "Warning", "Lost connection, all data shown are local",
+                  backgroundColor: whiteColor,
+                  borderColor: primaryColor,
+                  borderWidth: spaceMini / 2.5);
+              isOffline = true;
+            }
             return dashboardModelFromJson(data);
           } else {
             return null;
@@ -61,6 +48,37 @@ class QueriesStatsServices {
         } else {
           return null;
         }
+      } else {
+        if (response.statusCode == 200) {
+          if (isOffline) {
+            Get.snackbar(
+                "Information", "Welcome back, all data are now realtime",
+                backgroundColor: whiteColor,
+                borderColor: primaryColor,
+                borderWidth: spaceMini / 2.5);
+            isOffline = false;
+          }
+          prefs.setString(backupKey, response.body);
+          return dashboardModelFromJson(response.body);
+        } else {
+          if (prefs.containsKey(backupKey)) {
+            final data = prefs.getString(backupKey);
+            if (data != null) {
+              return dashboardModelFromJson(data);
+            } else {
+              return null;
+            }
+          } else {
+            return null;
+          }
+        }
+      }
+    } else {
+      final data = prefs.getString(backupKey);
+      if (data != null) {
+        return dashboardModelFromJson(data);
+      } else {
+        return null;
       }
     }
   }

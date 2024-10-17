@@ -1,7 +1,12 @@
+import 'package:art_sweetalert/art_sweetalert.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:pinmarker/components/text/title.dart';
+import 'package:pinmarker/helpers/variables/global.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
 import 'package:pinmarker/services/modules/stats/models.dart';
 import 'package:pinmarker/services/modules/stats/queries_stats.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class GetDashboard extends StatefulWidget {
   const GetDashboard({super.key});
@@ -12,11 +17,21 @@ class GetDashboard extends StatefulWidget {
 
 class StateGetDashboard extends State<GetDashboard> {
   QueriesStatsServices? apiService;
+  String? lastHit;
+  String backupKey = "dashboard-sess";
 
   @override
   void initState() {
     super.initState();
+    _loadPreferences();
     apiService = QueriesStatsServices();
+  }
+
+  Future<void> _loadPreferences() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      lastHit = prefs.getString("last-hit-$backupKey");
+    });
   }
 
   @override
@@ -70,9 +85,35 @@ class StateGetDashboard extends State<GetDashboard> {
             borderRadius: BorderRadius.all(Radius.circular(roundedSM))),
         child: Column(
           children: [
-            Text('Summary',
-                style:
-                    TextStyle(fontWeight: FontWeight.w500, fontSize: textXLG)),
+            Row(
+              children: [
+                SizedBox(width: spaceLG),
+                const Spacer(),
+                const ComponentTextTitle(
+                    type: 'content_title', text: 'Summary'),
+                const Spacer(),
+                IconButton(
+                  padding: EdgeInsets.zero,
+                  icon: FaIcon(
+                    FontAwesomeIcons.circleInfo,
+                    size: iconMD,
+                  ),
+                  tooltip: 'Show Snackbar',
+                  onPressed: () {
+                    ArtSweetAlert.show(
+                        context: context,
+                        artDialogArgs: ArtDialogArgs(
+                            type: ArtSweetAlertType.info,
+                            title: "Information!",
+                            text:
+                                "Dashboard will refresh every ${(statsFetchRestTime / 60).ceil()} minutes after last time you access the page"));
+                  },
+                )
+              ],
+            ),
+            ComponentTextTitle(
+                type: 'content_sub_title',
+                text: "Last updated : ${lastHit ?? '-'}"),
             SizedBox(height: spaceMD),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,

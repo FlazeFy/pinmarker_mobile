@@ -121,7 +121,7 @@ class StateGetCurrentCoor extends State<GetCurrentCoor> {
         }
       });
 
-      // if (distance > distanceDiffToTrack) {
+      // if (distance > generalFetchRestDistance) {
       if (distance > 0) {
         box.write('last_lat', currentPosition?.latitude);
         box.write('last_long', currentPosition?.longitude);
