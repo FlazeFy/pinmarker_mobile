@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:pinmarker/components/text/title.dart';
 import 'package:pinmarker/helpers/general/validator.dart';
 import 'package:pinmarker/services/modules/track/models.dart';
 import 'package:pinmarker/services/modules/track/queries.dart';
@@ -63,7 +64,7 @@ class StateGetMapsTrackBoard extends State<GetMapsTrackBoard> {
     );
   }
 
-  Widget _buildListView(List<LastTrackModel>? dt) {
+  Widget _buildListView(List<LastTrackModel>? data) {
     //Maps starting point.
     const initialCameraPosition = CameraPosition(
       target: LatLng(-6.226838579766097, 106.82157923228753),
@@ -78,17 +79,33 @@ class StateGetMapsTrackBoard extends State<GetMapsTrackBoard> {
         myLocationEnabled: true,
         initialCameraPosition: initialCameraPosition,
         onMapCreated: (controller) => googleMapController = controller,
-        markers: dt?.map((pin) {
+        markers: data?.map((dt) {
               i++;
               return Marker(
                 markerId: MarkerId(i.toString()),
-                infoWindow: InfoWindow(
-                    title: pin.trackType,
-                    snippet:
-                        "Battery Status : ${pin.batteryIndicator}%, Track At : ${pin.createdAt}"),
+                onTap: () {
+                  Get.dialog(AlertDialog(
+                    title: ComponentTextTitle(
+                        text: "Type : ${dt.trackType}", type: 'content_title'),
+                    content: SizedBox(
+                      height: 50,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ComponentTextTitle(
+                              type: 'content_body',
+                              text: "Battery Status : ${dt.batteryIndicator}%"),
+                          ComponentTextTitle(
+                              type: 'content_body',
+                              text: "Track At : ${dt.createdAt}"),
+                        ],
+                      ),
+                    ),
+                  ));
+                },
                 icon: BitmapDescriptor.defaultMarkerWithHue(
                     BitmapDescriptor.hueOrange),
-                position: LatLng(pin.trackLat, pin.trackLong),
+                position: LatLng(dt.trackLat, dt.trackLong),
               );
             }).toSet() ??
             {},

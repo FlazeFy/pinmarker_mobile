@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:pinmarker/components/button/button_primary.dart';
+import 'package:pinmarker/components/text/title.dart';
 import 'package:pinmarker/helpers/general/validator.dart';
+import 'package:pinmarker/helpers/variables/style.dart';
+import 'package:pinmarker/pages/list/detail/index.dart';
 import 'package:pinmarker/services/modules/pin/models.dart';
 import 'package:pinmarker/services/modules/pin/queries.dart';
 
@@ -63,7 +68,7 @@ class StateGetMapsBoard extends State<GetMapsBoard> {
     );
   }
 
-  Widget _buildListView(List<PinModelHeader>? dt) {
+  Widget _buildListView(List<PinModelHeader>? data) {
     //Maps starting point.
     const initialCameraPosition = CameraPosition(
       target: LatLng(-6.226838579766097, 106.82157923228753),
@@ -77,18 +82,83 @@ class StateGetMapsBoard extends State<GetMapsBoard> {
         myLocationEnabled: true,
         initialCameraPosition: initialCameraPosition,
         onMapCreated: (controller) => googleMapController = controller,
-        markers: dt?.map((pin) {
-              final coordinates = pin.pinCoordinate.split(',');
+        markers: data?.map((dt) {
+              final coordinates = dt.pinCoordinate.split(',');
               final lat = double.parse(coordinates[0]);
               final lng = double.parse(coordinates[1]);
 
               return Marker(
-                markerId: MarkerId(pin.pinName),
-                infoWindow:
-                    InfoWindow(title: pin.pinName, snippet: pin.pinDesc),
+                markerId: MarkerId(dt.pinName),
                 icon: BitmapDescriptor.defaultMarkerWithHue(
                     BitmapDescriptor.hueOrange),
                 position: LatLng(lat, lng),
+                onTap: () {
+                  Get.dialog(AlertDialog(
+                    title: ComponentTextTitle(
+                        text: dt.pinName, type: 'content_title'),
+                    content: SizedBox(
+                      height: 240,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              ComponentButtonPrimary(text: dt.pinCategory)
+                            ],
+                          ),
+                          SizedBox(
+                            height: spaceXMD,
+                          ),
+                          dt.pinDesc != ''
+                              ? ComponentTextTitle(
+                                  type: 'content_body', text: dt.pinDesc ?? '-')
+                              : const ComponentTextTitle(
+                                  text: '- No Description Provided -',
+                                  type: "no_data"),
+                          SizedBox(
+                            height: spaceMD,
+                          ),
+                          const ComponentTextTitle(
+                              type: 'content_sub_title',
+                              text: 'Person In Touch'),
+                          ComponentTextTitle(
+                              type: 'content_body', text: dt.pinPerson ?? '-'),
+                          SizedBox(
+                            height: spaceMD,
+                          ),
+                          const ComponentTextTitle(
+                              type: 'content_sub_title', text: 'Created At'),
+                          ComponentTextTitle(
+                              type: 'content_body', text: dt.createdAt),
+                        ],
+                      ),
+                    ),
+                    actions: <Widget>[
+                      InkWell(
+                          onTap: () {
+                            Get.to(() => DetailListPage(id: dt.id));
+                          },
+                          child: ComponentButtonPrimary(
+                            text: "See Detail",
+                            icon: FaIcon(
+                              size: iconMD,
+                              FontAwesomeIcons.circleInfo,
+                              color: whiteColor,
+                            ),
+                          )),
+                      InkWell(
+                          onTap: () {},
+                          child: ComponentButtonPrimary(
+                            text: "Set Direction",
+                            icon: FaIcon(
+                              size: iconMD,
+                              FontAwesomeIcons.locationArrow,
+                              color: whiteColor,
+                            ),
+                          ))
+                    ],
+                  ));
+                },
               );
             }).toSet() ??
             {},

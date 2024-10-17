@@ -10,6 +10,7 @@ class PinModelHeader {
   int totalVisit;
   bool isFavorite;
   String? lastVisit;
+  String createdAt;
 
   PinModelHeader(
       {required this.id,
@@ -20,7 +21,8 @@ class PinModelHeader {
       this.pinPerson,
       required this.totalVisit,
       required this.isFavorite,
-      this.lastVisit});
+      this.lastVisit,
+      required this.createdAt});
 
   factory PinModelHeader.fromJson(Map<dynamic, dynamic> map) {
     return PinModelHeader(
@@ -32,7 +34,8 @@ class PinModelHeader {
         pinPerson: map["pin_person"] ?? '',
         totalVisit: map["total_visit"],
         isFavorite: map["is_favorite"],
-        lastVisit: map['last_visit'] ?? '');
+        lastVisit: map['last_visit'] ?? '',
+        createdAt: map['created_at']);
   }
 }
 
