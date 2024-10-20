@@ -22,5 +22,6 @@ bool isOffline = false;
 int statsFetchRestTime = 180; // in second
 int allPinFetchRestTime = 60; // in second
 int nearestPinFetchRestTime = 60; // in second
+int dctFetchRestTime = 180; // in second
 double nearestPinFetchRestDistance = 10; // In meter
 double generalFetchRestDistance = 10; // In meter

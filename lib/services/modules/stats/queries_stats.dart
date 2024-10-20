@@ -16,10 +16,6 @@ class QueriesStatsServices {
   Future<DashboardModel?> getDashboard() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final connectivityResult = await (Connectivity().checkConnectivity());
-    final response = await client.get(
-      Uri.parse(
-          "$localUrl/api/v1/stats/dashboard/fcd3f23e-e5aa-11ee-892a-3216422910e9/user"),
-    );
     String backupKey = "dashboard-sess";
     DateTime? lastHit;
     lastHit = prefs.containsKey("last-hit-$backupKey")
@@ -49,6 +45,10 @@ class QueriesStatsServices {
           return null;
         }
       } else {
+        final response = await client.get(
+          Uri.parse(
+              "$localUrl/api/v1/stats/dashboard/fcd3f23e-e5aa-11ee-892a-3216422910e9/user"),
+        );
         if (response.statusCode == 200) {
           if (isOffline) {
             Get.snackbar(
@@ -95,10 +95,6 @@ class QueriesStatsServices {
     if (!prefs.containsKey(backupKey) ||
         lastHit == null ||
         now.difference(lastHit).inSeconds >= statsFetchRestTime) {
-      final response = await client.get(
-        Uri.parse(
-            "$localUrl/api/v1/stats/total_pin_by_category/fcd3f23e-e5aa-11ee-892a-3216422910e9"),
-      );
       if (connectivityResult == ConnectivityResult.none) {
         if (prefs.containsKey(backupKey)) {
           final data = prefs.getString(backupKey);
@@ -119,6 +115,10 @@ class QueriesStatsServices {
           return [];
         }
       } else {
+        final response = await client.get(
+          Uri.parse(
+              "$localUrl/api/v1/stats/total_pin_by_category/fcd3f23e-e5aa-11ee-892a-3216422910e9"),
+        );
         if (response.statusCode == 200) {
           if (isOffline) {
             Get.snackbar(
@@ -166,10 +166,6 @@ class QueriesStatsServices {
     if (!prefs.containsKey(backupKey) ||
         lastHit == null ||
         now.difference(lastHit).inSeconds >= statsFetchRestTime) {
-      final response = await client.get(
-        Uri.parse(
-            "$localUrl/api/v1/stats/total_visit_by_category/fcd3f23e-e5aa-11ee-892a-3216422910e9"),
-      );
       if (connectivityResult == ConnectivityResult.none) {
         if (prefs.containsKey(backupKey)) {
           final data = prefs.getString(backupKey);
@@ -190,6 +186,10 @@ class QueriesStatsServices {
           return [];
         }
       } else {
+        final response = await client.get(
+          Uri.parse(
+              "$localUrl/api/v1/stats/total_visit_by_category/fcd3f23e-e5aa-11ee-892a-3216422910e9"),
+        );
         if (response.statusCode == 200) {
           if (isOffline) {
             Get.snackbar(
@@ -237,10 +237,6 @@ class QueriesStatsServices {
     if (!prefs.containsKey(backupKey) ||
         lastHit == null ||
         now.difference(lastHit).inSeconds >= statsFetchRestTime) {
-      final response = await client.get(
-        Uri.parse(
-            "$localUrl/api/v1/stats/total_visit_by_by_pin/fcd3f23e-e5aa-11ee-892a-3216422910e9/$id"),
-      );
       if (connectivityResult == ConnectivityResult.none) {
         if (prefs.containsKey(backupKey)) {
           final data = prefs.getString(backupKey);
@@ -261,6 +257,10 @@ class QueriesStatsServices {
           return [];
         }
       } else {
+        final response = await client.get(
+          Uri.parse(
+              "$localUrl/api/v1/stats/total_visit_by_by_pin/fcd3f23e-e5aa-11ee-892a-3216422910e9/$id"),
+        );
         if (response.statusCode == 200) {
           if (isOffline) {
             Get.snackbar(
@@ -308,10 +308,6 @@ class QueriesStatsServices {
     if (!prefs.containsKey(backupKey) ||
         lastHit == null ||
         now.difference(lastHit).inSeconds >= statsFetchRestTime) {
-      final response = await client.get(
-        Uri.parse(
-            "$localUrl/api/v1/stats/total_gallery_by_pin/fcd3f23e-e5aa-11ee-892a-3216422910e9"),
-      );
       if (connectivityResult == ConnectivityResult.none) {
         if (prefs.containsKey(backupKey)) {
           final data = prefs.getString(backupKey);
@@ -332,6 +328,10 @@ class QueriesStatsServices {
           return [];
         }
       } else {
+        final response = await client.get(
+          Uri.parse(
+              "$localUrl/api/v1/stats/total_gallery_by_pin/fcd3f23e-e5aa-11ee-892a-3216422910e9"),
+        );
         if (response.statusCode == 200) {
           if (isOffline) {
             Get.snackbar(
@@ -370,10 +370,6 @@ class QueriesStatsServices {
     if (!prefs.containsKey(backupKey) ||
         lastHit == null ||
         now.difference(lastHit).inSeconds >= statsFetchRestTime) {
-      final response = await client.get(
-        Uri.parse(
-            "$localUrl/api/v1/track/year/2024/fcd3f23e-e5aa-11ee-892a-3216422910e9"),
-      );
       if (connectivityResult == ConnectivityResult.none) {
         if (prefs.containsKey(backupKey)) {
           final data = prefs.getString(backupKey);
@@ -394,6 +390,10 @@ class QueriesStatsServices {
           return [];
         }
       } else {
+        final response = await client.get(
+          Uri.parse(
+              "$localUrl/api/v1/track/year/2024/fcd3f23e-e5aa-11ee-892a-3216422910e9"),
+        );
         if (response.statusCode == 200) {
           if (isOffline) {
             Get.snackbar(
@@ -433,11 +433,6 @@ class QueriesStatsServices {
     if (!prefs.containsKey(backupKey) ||
         lastHit == null ||
         now.difference(lastHit).inSeconds >= statsFetchRestTime) {
-      final response = await client.get(
-        Uri.parse(
-            "$localUrl/api/v1/track/hour/2024/fcd3f23e-e5aa-11ee-892a-3216422910e9"),
-      );
-
       if (connectivityResult == ConnectivityResult.none) {
         if (prefs.containsKey(backupKey)) {
           final data = prefs.getString(backupKey);
@@ -458,6 +453,10 @@ class QueriesStatsServices {
           return [];
         }
       } else {
+        final response = await client.get(
+          Uri.parse(
+              "$localUrl/api/v1/track/hour/2024/fcd3f23e-e5aa-11ee-892a-3216422910e9"),
+        );
         if (response.statusCode == 200) {
           if (isOffline) {
             Get.snackbar(
