@@ -4,7 +4,6 @@ import 'package:pinmarker/components/bars/left_bar.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
 import 'package:pinmarker/pages/maps/list_view/add/usecases/post_pin.dart';
 import 'package:pinmarker/pages/maps/list_view/index.dart';
-import 'package:pinmarker/pages/maps/list_view/trash/usecases/get_list_deleted_pin.dart';
 
 class AddMarkerPage extends StatefulWidget {
   const AddMarkerPage({super.key});

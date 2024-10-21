@@ -2,6 +2,7 @@ import 'dart:convert';
 
 // ignore: depend_on_referenced_packages
 import 'package:http/http.dart' show Client;
+import 'package:pinmarker/services/modules/pin/models.dart';
 
 class PinCommandsService {
   final String baseUrl = "https://pinmarkerpy.leonardhors.com";
@@ -78,5 +79,33 @@ class PinCommandsService {
       "code": response.statusCode,
       "message": responseData["message"],
     };
+  }
+
+  Future<Object> postPin(PinModel data) async {
+    final header = {
+      'Accept': 'application/json',
+      'content-type': 'application/json',
+    };
+    final response = await client.post(
+      Uri.parse("$localUrl/api/v1/pin"),
+      headers: header,
+      body: pinModelToJson(data),
+    );
+
+    var responseData = jsonDecode(response.body);
+    if ([201, 400, 401, 422, 500].contains(response.statusCode)) {
+      return {
+        "code": response.statusCode,
+        "message": response.statusCode != 422
+            ? responseData["message"]
+            : responseData['errors'],
+        "data": response.statusCode != 201 ? responseData["data"] : null,
+      };
+    } else {
+      return {
+        "code": "error",
+        "message": "something wrong. please contact admin"
+      };
+    }
   }
 }

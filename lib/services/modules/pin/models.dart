@@ -246,3 +246,52 @@ List<RelatedPinModel> relatedPinModelFromJson(dynamic data) {
   return List<RelatedPinModel>.from(
       data.map((item) => RelatedPinModel.fromJson(item)));
 }
+
+class PinModel {
+  String pinName;
+  String? pinDesc;
+  String pinLat;
+  String pinLong;
+  String pinCategory;
+  String? pinPerson;
+  String? pinCall;
+  String? pinEmail;
+  String? pinAddress;
+  int isFavorite;
+  String createdBy;
+
+  PinModel({
+    required this.pinName,
+    this.pinDesc,
+    required this.pinLat,
+    required this.pinLong,
+    required this.pinCategory,
+    this.pinPerson,
+    this.pinCall,
+    this.pinEmail,
+    this.pinAddress,
+    required this.isFavorite,
+    required this.createdBy,
+  });
+
+  Map<String, dynamic> toJson() {
+    return {
+      "pin_name": pinName,
+      "pin_desc": pinDesc,
+      "pin_lat": pinLat,
+      "pin_long": pinLong,
+      "pin_category": pinCategory,
+      "pin_person": pinPerson,
+      "pin_call": pinCall,
+      "pin_email": pinEmail,
+      "pin_address": pinAddress,
+      "is_favorite": isFavorite,
+      "created_by": createdBy,
+    };
+  }
+}
+
+String pinModelToJson(PinModel data) {
+  final jsonData = data.toJson();
+  return json.encode(jsonData);
+}

@@ -6,7 +6,10 @@ import 'package:pinmarker/helpers/general/validator.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
 
 class MapsSelect extends StatefulWidget {
-  const MapsSelect({super.key});
+  const MapsSelect(
+      {super.key, required this.pinLatCtrl, required this.pinLongCtrl});
+  final TextEditingController pinLatCtrl;
+  final TextEditingController pinLongCtrl;
 
   @override
   StateMapsSelect createState() => StateMapsSelect();
@@ -16,6 +19,7 @@ class StateMapsSelect extends State<MapsSelect> {
   GoogleMapController? googleMapController;
   Position? position;
   String mylong = "", mylat = "";
+  Marker? _coordinate;
 
   @override
   void initState() {
@@ -60,6 +64,20 @@ class StateMapsSelect extends State<MapsSelect> {
           myLocationEnabled: true,
           initialCameraPosition: initialCameraPosition,
           onMapCreated: (controller) => googleMapController = controller,
+          markers: _coordinate != null ? {_coordinate!} : {},
+          onTap: ((LatLng pos) async {
+            setState(() {
+              _coordinate = Marker(
+                markerId: const MarkerId('origin'),
+                infoWindow: InfoWindow(title: 'Selected Location'.tr),
+                icon: BitmapDescriptor.defaultMarkerWithHue(
+                    BitmapDescriptor.hueOrange),
+                position: pos,
+              );
+              widget.pinLatCtrl.text = pos.latitude.toString();
+              widget.pinLongCtrl.text = pos.longitude.toString();
+            });
+          }),
         ),
       ),
     );
