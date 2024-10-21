@@ -83,7 +83,7 @@ class StatePostPin extends State<PostPin> {
           var status = responseData['code'];
           var msg = responseData['message'];
 
-          if (status != "error") {
+          if (status != "error" && status != 422) {
             if (!isSetDirection) {
               var res = responseData['data'];
               Get.to(DetailPinPage(id: res['id'], isFavorite: isFavorite));
@@ -133,7 +133,7 @@ class StatePostPin extends State<PostPin> {
         MapsSelect(pinLatCtrl: pinLatCtrl, pinLongCtrl: pinLongCtrl),
         getInputLabel('Pin Name', true),
         ComponentInput(ctrl: pinNameCtrl, type: 'text', maxLength: 75),
-        getInputLabel('Pin Category', false),
+        getInputLabel('Pin Category', true),
         GetAllDctByType(
           type: 'pin_category',
           selected: selectedPinCat,
@@ -168,13 +168,11 @@ class StatePostPin extends State<PostPin> {
           ],
         ),
         getInputLabel('Pin Desc', false),
-        ComponentInput(ctrl: pinDescCtrl, type: 'text', maxLength: 500),
+        ComponentInput(
+            ctrl: pinDescCtrl, type: 'text', maxLength: 500, maxLines: 5),
         getInputLabel('Pin Address', false),
         ComponentInput(
-          ctrl: pinAddressCtrl,
-          type: 'text',
-          maxLength: 500,
-        ),
+            ctrl: pinAddressCtrl, type: 'text', maxLength: 500, maxLines: 5),
         getInputLabel('Pin Person', false),
         ComponentInput(
           ctrl: pinPersonCtrl,

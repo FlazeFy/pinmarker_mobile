@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:intl/intl.dart';
+
 double toRadians(double degree) {
   return degree * pi / 180;
 }
@@ -87,4 +89,18 @@ String ucAll(String val) {
   words =
       words.map((word) => word[0].toUpperCase() + word.substring(1)).toList();
   return words.join(' ');
+}
+
+String convertDateTime(DateTime val, String type, bool isRealtime) {
+  String format = "";
+  if (type == "date") {
+    format = "dd-MM-yyyy";
+  } else if (type == "time") {
+    format = "HH:mm";
+  } else if (type == "datetime") {
+    format = "dd-MM-yyyy HH:mm";
+  }
+  String formattedDate = DateFormat(format).format(val);
+
+  return formattedDate;
 }

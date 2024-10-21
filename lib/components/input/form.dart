@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
+import 'package:pinmarker/components/button/button_primary.dart';
+import 'package:pinmarker/helpers/general/converter.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
 
 class ComponentInput extends StatelessWidget {
@@ -24,7 +27,10 @@ class ComponentInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (type != 'checkbox') {
+    if (type != 'checkbox' &&
+        type != 'date' &&
+        type != 'time' &&
+        type != 'datetime') {
       return TextFormField(
         obscureText: secure ?? false,
         cursorColor: primaryColor,
@@ -54,6 +60,22 @@ class ComponentInput extends StatelessWidget {
           ),
         ),
       );
+    } else if (type == 'date' || type == 'time' || type == 'datetime') {
+      return InkWell(
+          onTap: (() {
+            DatePicker.showDateTimePicker(context,
+                showTitleActions: true,
+                minTime: DateTime.now().add(const Duration(days: 365 * 2)),
+                maxTime: DateTime.now().add(const Duration(days: 365)),
+                onConfirm: action,
+                currentTime: DateTime.now(),
+                locale: LocaleType.en);
+          }),
+          child: ComponentButtonPrimary(
+              color: whiteColor,
+              text: ctrl != null
+                  ? convertDateTime(ctrl, 'datetime', false)
+                  : 'Select ${ucFirst(type)}'));
     } else {
       return Row(
         mainAxisAlignment: MainAxisAlignment.start,

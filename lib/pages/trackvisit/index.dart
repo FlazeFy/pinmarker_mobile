@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:pinmarker/components/bars/left_bar.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
+import 'package:pinmarker/pages/trackvisit/add_visit/index.dart';
 import 'package:pinmarker/pages/trackvisit/history/index.dart';
 import 'package:pinmarker/pages/trackvisit/related_pin/index.dart';
 import 'package:pinmarker/pages/trackvisit/track_history/index.dart';
@@ -59,6 +60,18 @@ class StateTrackVisit extends State<TrackVisit> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 FloatingActionButton(
+                  heroTag: 'add_visit',
+                  onPressed: () {
+                    Get.to(const AddVisitPage());
+                  },
+                  backgroundColor: primaryColor,
+                  child: const FaIcon(
+                    FontAwesomeIcons.plus,
+                    color: whiteColor,
+                  ),
+                ),
+                SizedBox(height: spaceXSM),
+                FloatingActionButton(
                   heroTag: 'related_pin_track',
                   onPressed: () {
                     Get.to(const RelatedPinTrackPage());
@@ -69,7 +82,7 @@ class StateTrackVisit extends State<TrackVisit> {
                     color: whiteColor,
                   ),
                 ),
-                SizedBox(height: spaceMD),
+                SizedBox(height: spaceXSM),
                 FloatingActionButton(
                   heroTag: 'track_history',
                   onPressed: () {

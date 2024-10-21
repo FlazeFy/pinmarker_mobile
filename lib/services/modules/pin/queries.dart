@@ -213,4 +213,75 @@ class QueriesPinServices {
       return [];
     }
   }
+
+  Future<List<PinNameModel>> getAllPinName() async {
+    final prefs = await SharedPreferences.getInstance();
+    final connectivityResult = await (Connectivity().checkConnectivity());
+    String backupKey = "pin-name-sess";
+    DateTime? lastHit;
+    lastHit = prefs.containsKey("last-hit-$backupKey")
+        ? DateTime.tryParse(prefs.getString("last-hit-$backupKey") ?? '')
+        : null;
+
+    if (!prefs.containsKey(backupKey) ||
+        lastHit == null ||
+        now.difference(lastHit).inSeconds > dctFetchRestTime) {
+      if (connectivityResult == ConnectivityResult.none) {
+        if (prefs.containsKey(backupKey)) {
+          final data = prefs.getString(backupKey);
+          if (data != null) {
+            if (!isOffline) {
+              Get.snackbar(
+                  "Warning", "Lost connection, all data shown are local",
+                  backgroundColor: whiteColor,
+                  borderColor: primaryColor,
+                  borderWidth: spaceMini / 2.5);
+              isOffline = true;
+            }
+            return pinNameModelFromJson(data);
+          } else {
+            return [];
+          }
+        } else {
+          return [];
+        }
+      } else {
+        final response = await client.get(
+          Uri.parse(
+              "$localUrl/api/v1/pin/fcd3f23e-e5aa-11ee-892a-3216422910e9"),
+        );
+        if (response.statusCode == 200) {
+          if (isOffline) {
+            Get.snackbar(
+                "Information", "Welcome back, all data are now realtime",
+                backgroundColor: whiteColor,
+                borderColor: primaryColor,
+                borderWidth: spaceMini / 2.5);
+            isOffline = false;
+          }
+          prefs.setString("last-hit-$backupKey", generateTempDataKey());
+          prefs.setString(backupKey, response.body);
+          return pinNameModelFromJson(response.body);
+        } else {
+          if (prefs.containsKey(backupKey)) {
+            final data = prefs.getString(backupKey);
+            if (data != null) {
+              return pinNameModelFromJson(response.body);
+            } else {
+              return [];
+            }
+          } else {
+            return [];
+          }
+        }
+      }
+    } else {
+      final data = prefs.getString(backupKey);
+      if (data != null) {
+        return pinNameModelFromJson(data);
+      } else {
+        return [];
+      }
+    }
+  }
 }

@@ -21,12 +21,6 @@ class DictionaryQueriesService {
     lastHit = prefs.containsKey("last-hit-$backupKey")
         ? DateTime.tryParse(prefs.getString("last-hit-$backupKey") ?? '')
         : null;
-    final token = prefs.getString('token_key');
-    final header = {
-      'Accept': 'application/json',
-      'Authorization': "Bearer $token",
-    };
-
     if (!prefs.containsKey(backupKey) ||
         lastHit == null ||
         now.difference(lastHit).inSeconds > dctFetchRestTime) {
@@ -50,10 +44,8 @@ class DictionaryQueriesService {
           return [];
         }
       } else {
-        final response = await client.get(
-            Uri.parse(
-                "$emuUrl/api/v1/dct/$type/fcd3f23e-e5aa-11ee-892a-3216422910e9"),
-            headers: header);
+        final response = await client.get(Uri.parse(
+            "$emuUrl/api/v1/dct/$type/fcd3f23e-e5aa-11ee-892a-3216422910e9"));
         if (response.statusCode == 200) {
           if (isOffline) {
             Get.snackbar(

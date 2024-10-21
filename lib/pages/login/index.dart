@@ -137,7 +137,7 @@ class StateLoginPageState extends State<LoginPage>
                 color: whiteColor,
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: spaceXSM),
             FloatingActionButton(
               heroTag: 2,
               backgroundColor: primaryColor,

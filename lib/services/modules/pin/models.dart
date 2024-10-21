@@ -295,3 +295,19 @@ String pinModelToJson(PinModel data) {
   final jsonData = data.toJson();
   return json.encode(jsonData);
 }
+
+class PinNameModel {
+  String pinName;
+  String id;
+
+  PinNameModel({required this.pinName, required this.id});
+  factory PinNameModel.fromJson(Map<String, dynamic> map) {
+    return PinNameModel(pinName: map["pin_name"], id: map["id"]);
+  }
+}
+
+List<PinNameModel> pinNameModelFromJson(String jsonData) {
+  final data = json.decode(jsonData);
+  return List<PinNameModel>.from(
+      data['data'].map((item) => PinNameModel.fromJson(item)));
+}

@@ -99,7 +99,7 @@ class PinCommandsService {
         "message": response.statusCode != 422
             ? responseData["message"]
             : responseData['errors'],
-        "data": response.statusCode != 201 ? responseData["data"] : null,
+        "data": response.statusCode == 201 ? responseData["data"] : null,
       };
     } else {
       return {
