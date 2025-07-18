@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pinmarker/components/button/button_primary.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
 import 'package:pinmarker/services/sqlite/helper.dart';
 
@@ -52,8 +53,23 @@ class StateGetCurrentCoor extends State<GetLastCoor> {
                       Text(
                           'Coordinate: ${tracker['track_lat']}, ${tracker['track_long']}'),
                       Text('Record At: ${tracker['created_at']}'),
-                      Text(
-                          'Is Sync: ${tracker['is_sync'] == 1 ? "Yes" : "No"}'),
+                      Row(
+                        children: [
+                          const Text('Is Sync:'),
+                          SizedBox(width: spaceSM),
+                          tracker['is_sync'] == 1
+                              ? const ComponentButtonPrimary(
+                                  text: "Yes",
+                                  icon: null,
+                                  color: successBG,
+                                  isBig: false)
+                              : const ComponentButtonPrimary(
+                                  text: "No",
+                                  icon: null,
+                                  color: dangerBG,
+                                  isBig: false)
+                        ],
+                      ),
                     ],
                   ),
                 );

@@ -119,4 +119,24 @@ class DatabaseHelper {
       limit: 10,
     );
   }
+
+  Future<List<Map<String, dynamic>>> getReadySaveTracker() async {
+    final db = await DatabaseHelper().database;
+    return await db.query(
+      'tracker',
+      orderBy: 'created_at DESC',
+      where: 'is_sync = ?',
+      whereArgs: [0],
+    );
+  }
+
+  Future<void> updateTrackerSyncStatus(int id, bool isSync) async {
+    final db = await database;
+    await db.update(
+      'tracker',
+      {'is_sync': isSync ? 1 : 0},
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
 }

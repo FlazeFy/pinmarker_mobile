@@ -5,12 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:intl/intl.dart';
 import 'package:pinmarker/components/bars/left_bar.dart';
 import 'package:pinmarker/components/text/title.dart';
 import 'package:pinmarker/helpers/general/converter.dart';
 import 'package:pinmarker/helpers/variables/global.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
 import 'package:pinmarker/pages/aroundme/usecases/get_nearest_pin.dart';
+import 'package:pinmarker/services/modules/track/command.dart';
 import 'package:pinmarker/services/modules/track/command_realtime.dart';
 import 'package:pinmarker/services/modules/track/models.dart';
 import 'package:pinmarker/services/sqlite/helper.dart';
@@ -27,17 +29,20 @@ class StateAroundMePage extends State<AroundMePage> {
   late CommandTrackRealtime realtimeService;
   late Timer timer;
   var battery = Battery();
+  late TrackCommandsService apiCommand;
 
   @override
   void initState() {
     super.initState();
+    apiCommand = TrackCommandsService();
     getLocation();
     realtimeService = CommandTrackRealtime();
-    getTimer();
+    getTimerTrackingToSqlite();
+    getTimerSqliteToRestAPI();
   }
 
   // Set timer interval based on battery level and power saving mode
-  Future<void> getTimer() async {
+  Future<void> getTimerTrackingToSqlite() async {
     int batteryIndicator = await battery.batteryLevel;
     bool isSaveMode = await battery.isInBatterySaveMode;
     int timerInterval = batteryIndicator > 60
@@ -49,6 +54,68 @@ class StateAroundMePage extends State<AroundMePage> {
     // Start periodic timer to fetch location
     timer = Timer.periodic(
         Duration(seconds: timerInterval), (Timer t) => getLocation());
+  }
+
+  Future<void> getTimerSqliteToRestAPI() async {
+    int batteryLevel = await battery.batteryLevel;
+    bool isSaveMode = await battery.isInBatterySaveMode;
+    int interval = batteryLevel > 30 || !isSaveMode ? 30 : 60;
+
+    timer = Timer.periodic(Duration(seconds: interval), (timer) async {
+      try {
+        final dbHelper = DatabaseHelper();
+        final List<Map<String, dynamic>> unsyncedTracks =
+            await dbHelper.getReadySaveTracker();
+
+        if (unsyncedTracks.isEmpty) return;
+
+        List<AddTrackModelGin> dataList = unsyncedTracks.map((row) {
+          final dt = DateTime.parse(row['created_at']).toLocal();
+          final offset = dt.timeZoneOffset;
+          final offsetStr =
+              '${offset.isNegative ? '-' : '+'}${offset.inHours.abs().toString().padLeft(2, '0')}:${(offset.inMinutes.abs() % 60).toString().padLeft(2, '0')}';
+          final createdAtFormatted =
+              DateFormat("yyyy-MM-ddTHH:mm:ss.SSSSSS").format(dt) + offsetStr;
+
+          return AddTrackModelGin(
+            trackLat: row['track_lat'].toString(),
+            trackLong: row['track_long'].toString(),
+            trackType: row['track_type'],
+            batteryIndicator: row['battery_indicator'],
+            createdAt: createdAtFormatted,
+            userId: "fcd3f23e-e5aa-11ee-892a-3216422910e9",
+          );
+        }).toList();
+
+        List<Map<String, dynamic>> jsonList =
+            dataList.map((e) => e.toJson()).toList();
+
+        var response = await apiCommand.postTrack(jsonList);
+
+        if (response['code'] == 201) {
+          for (var row in unsyncedTracks) {
+            await dbHelper.updateTrackerSyncStatus(row['id'], true);
+          }
+        } else {
+          var msg = response['message'] ?? 'Unknown error';
+          ArtSweetAlert.show(
+            context: context,
+            artDialogArgs: ArtDialogArgs(
+                type: ArtSweetAlertType.danger, title: "Failed", text: msg),
+          );
+        }
+      } catch (err) {
+        if (mounted) {
+          ArtSweetAlert.show(
+            context: context,
+            artDialogArgs: ArtDialogArgs(
+                type: ArtSweetAlertType.danger,
+                title: "Failed!",
+                text: err.toString()),
+          );
+        }
+      }
+    });
   }
 
   Future<void> getLocation() async {

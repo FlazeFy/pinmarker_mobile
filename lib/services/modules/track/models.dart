@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+// SQLite Model
 class AddTrackModel {
   double trackLat;
   double trackLong;
@@ -26,6 +27,41 @@ class AddTrackModel {
 }
 
 String addTrackModelToJson(AddTrackModel data) {
+  final jsonData = data.toJson();
+  return json.encode(jsonData);
+}
+
+// Gin Model
+class AddTrackModelGin {
+  String trackLat;
+  String trackLong;
+  int batteryIndicator;
+  String trackType;
+  String createdAt;
+  String userId;
+
+  AddTrackModelGin(
+      {required this.trackLat,
+      required this.trackLong,
+      required this.trackType,
+      required this.batteryIndicator,
+      required this.createdAt,
+      required this.userId});
+
+  Map<String, dynamic> toJson() {
+    return {
+      "track_lat": trackLat,
+      "track_long": trackLong,
+      "track_type": trackType,
+      "app_source": "pinmarker",
+      "battery_indicator": batteryIndicator,
+      "created_at": createdAt,
+      "created_by": userId
+    };
+  }
+}
+
+String addTrackModelGinToJson(AddTrackModelGin data) {
   final jsonData = data.toJson();
   return json.encode(jsonData);
 }
