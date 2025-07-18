@@ -7,7 +7,7 @@ import Foundation
 
 import battery_plus
 import cloud_firestore
-import connectivity_plus
+import connectivity_plus_macos
 import firebase_core
 import firebase_crashlytics
 import firebase_database

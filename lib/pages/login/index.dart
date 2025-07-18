@@ -124,7 +124,7 @@ class StateLoginPageState extends State<LoginPage>
         child: Column(
           children: [
             FloatingActionButton(
-              heroTag: 1,
+              heroTag: 'camera_capture',
               backgroundColor: primaryColor,
               onPressed: () async {
                 final imageFile = await captureImage();
@@ -139,7 +139,7 @@ class StateLoginPageState extends State<LoginPage>
             ),
             SizedBox(height: spaceXSM),
             FloatingActionButton(
-              heroTag: 2,
+              heroTag: 'camera_flash',
               backgroundColor: primaryColor,
               onPressed: () {
                 setState(() {

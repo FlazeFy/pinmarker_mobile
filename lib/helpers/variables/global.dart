@@ -8,6 +8,7 @@ FlashMode flashMode = FlashMode.off;
 int checkIntervalTimeHigh = 5; // in second
 int checkIntervalTimeMid = 7; // in second
 int checkIntervalTimeLow = 10; // in second
+int speedLimitWarning = 120; // in kmh
 
 bool isShownOffLocationPop = false;
 
@@ -25,3 +26,5 @@ int nearestPinFetchRestTime = 60; // in second
 int dctFetchRestTime = 180; // in second
 double nearestPinFetchRestDistance = 10; // In meter
 double generalFetchRestDistance = 10; // In meter
+
+double floatingActionButtonSize = 40;

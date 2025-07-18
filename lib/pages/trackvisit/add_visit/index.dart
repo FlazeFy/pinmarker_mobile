@@ -4,7 +4,6 @@ import 'package:pinmarker/components/bars/bottom_bar.dart';
 import 'package:pinmarker/components/bars/left_bar.dart';
 import 'package:pinmarker/helpers/variables/global.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
-import 'package:pinmarker/pages/maps/list_view/add/usecases/post_pin.dart';
 import 'package:pinmarker/pages/trackvisit/add_visit/usecases/post_visit.dart';
 
 class AddVisitPage extends StatefulWidget {

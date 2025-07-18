@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:pinmarker/components/bars/left_bar.dart';
+import 'package:pinmarker/helpers/variables/global.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
 import 'package:pinmarker/pages/trackvisit/add_visit/index.dart';
 import 'package:pinmarker/pages/trackvisit/history/index.dart';
@@ -56,44 +57,59 @@ class StateTrackVisit extends State<TrackVisit> {
           ),
           drawer: const LeftBar(),
           floatingActionButton: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                FloatingActionButton(
-                  heroTag: 'add_visit',
-                  onPressed: () {
-                    Get.to(const AddVisitPage());
-                  },
-                  backgroundColor: primaryColor,
-                  child: const FaIcon(
-                    FontAwesomeIcons.plus,
-                    color: whiteColor,
-                  ),
-                ),
+                SizedBox(
+                    height: floatingActionButtonSize,
+                    width: floatingActionButtonSize,
+                    child: FloatingActionButton(
+                      heroTag: 'add_visit',
+                      onPressed: () {
+                        Get.to(const AddVisitPage());
+                      },
+                      backgroundColor: primaryColor,
+                      child: FaIcon(
+                        FontAwesomeIcons.plus,
+                        color: whiteColor,
+                        size: floatingActionButtonSize -
+                            floatingActionButtonSize / 2,
+                      ),
+                    )),
                 SizedBox(height: spaceXSM),
-                FloatingActionButton(
-                  heroTag: 'related_pin_track',
-                  onPressed: () {
-                    Get.to(const RelatedPinTrackPage());
-                  },
-                  backgroundColor: primaryColor,
-                  child: const FaIcon(
-                    FontAwesomeIcons.table,
-                    color: whiteColor,
-                  ),
-                ),
+                SizedBox(
+                    height: floatingActionButtonSize,
+                    width: floatingActionButtonSize,
+                    child: FloatingActionButton(
+                      heroTag: 'related_pin_track',
+                      onPressed: () {
+                        Get.to(const RelatedPinTrackPage());
+                      },
+                      backgroundColor: primaryColor,
+                      child: FaIcon(
+                        FontAwesomeIcons.table,
+                        color: whiteColor,
+                        size: floatingActionButtonSize -
+                            floatingActionButtonSize / 2,
+                      ),
+                    )),
                 SizedBox(height: spaceXSM),
-                FloatingActionButton(
-                  heroTag: 'track_history',
-                  onPressed: () {
-                    Get.to(const TrackHistoryPage());
-                  },
-                  backgroundColor: primaryColor,
-                  child: const FaIcon(
-                    FontAwesomeIcons.rotateLeft,
-                    color: whiteColor,
-                  ),
-                ),
+                SizedBox(
+                    height: floatingActionButtonSize,
+                    width: floatingActionButtonSize,
+                    child: FloatingActionButton(
+                      heroTag: 'track_history',
+                      onPressed: () {
+                        Get.to(const TrackHistoryPage());
+                      },
+                      backgroundColor: primaryColor,
+                      child: FaIcon(
+                        FontAwesomeIcons.rotateLeft,
+                        color: whiteColor,
+                        size: floatingActionButtonSize -
+                            floatingActionButtonSize / 2,
+                      ),
+                    )),
                 SizedBox(height: spaceSM),
               ]),
           floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,

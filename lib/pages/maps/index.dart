@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pinmarker/components/bars/left_bar.dart';
+import 'package:pinmarker/helpers/variables/global.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
 import 'package:pinmarker/pages/maps/list_view/index.dart';
 import 'package:pinmarker/pages/maps/usecases/get_maps_board.dart';
@@ -19,16 +20,20 @@ class StateMapsPage extends State<MapsPage> {
       body: const GetMapsBoard(),
       drawer: const LeftBar(),
       floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Get.to(() => const MapsListViewPage());
-        },
-        backgroundColor: primaryColor,
-        child: const Icon(
-          Icons.list,
-          color: whiteColor,
-        ),
-      ),
+      floatingActionButton: SizedBox(
+          height: floatingActionButtonSize,
+          width: floatingActionButtonSize,
+          child: FloatingActionButton(
+            onPressed: () {
+              Get.to(() => const MapsListViewPage());
+            },
+            backgroundColor: primaryColor,
+            child: Icon(
+              Icons.list,
+              color: whiteColor,
+              size: floatingActionButtonSize - floatingActionButtonSize / 2,
+            ),
+          )),
     );
   }
 }

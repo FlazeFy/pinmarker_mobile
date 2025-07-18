@@ -9,14 +9,14 @@ Widget getBarChart(List<PieData> chartData, String? title, String? extra) {
         ? ChartTitle(
             text: title,
             textStyle: TextStyle(color: primaryColor, fontSize: textLG))
-        : const ChartTitle(),
-    legend: const Legend(isVisible: false),
-    primaryXAxis: const CategoryAxis(
+        : ChartTitle(),
+    legend: Legend(isVisible: false),
+    primaryXAxis: CategoryAxis(
       title: AxisTitle(
         text: '',
       ),
     ),
-    primaryYAxis: const NumericAxis(
+    primaryYAxis: NumericAxis(
       title: AxisTitle(
         text: '',
       ),

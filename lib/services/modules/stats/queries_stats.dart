@@ -59,6 +59,7 @@ class QueriesStatsServices {
             isOffline = false;
           }
           prefs.setString(backupKey, response.body);
+          prefs.setString("last-hit-$backupKey", generateTempDataKey());
           return dashboardModelFromJson(response.body);
         } else {
           if (prefs.containsKey(backupKey)) {

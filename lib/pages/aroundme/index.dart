@@ -2,32 +2,28 @@ import 'dart:async';
 import 'package:art_sweetalert/art_sweetalert.dart';
 import 'package:battery_plus/battery_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:pinmarker/components/bars/left_bar.dart';
 import 'package:pinmarker/components/text/title.dart';
 import 'package:pinmarker/helpers/general/converter.dart';
 import 'package:pinmarker/helpers/variables/global.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
-import 'package:pinmarker/pages/dashboard/usecases/get_last_coor.dart';
-import 'package:pinmarker/pages/dashboard/usecases/get_speed.dart';
+import 'package:pinmarker/pages/aroundme/usecases/get_nearest_pin.dart';
 import 'package:pinmarker/services/modules/track/command_realtime.dart';
 import 'package:pinmarker/services/modules/track/models.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:pinmarker/services/sqlite/helper.dart';
 
-class GetCurrentCoor extends StatefulWidget {
-  const GetCurrentCoor({super.key});
+class AroundMePage extends StatefulWidget {
+  const AroundMePage({super.key});
 
   @override
-  StateGetCurrentCoor createState() => StateGetCurrentCoor();
+  StateAroundMePage createState() => StateAroundMePage();
 }
 
-class StateGetCurrentCoor extends State<GetCurrentCoor> {
+class StateAroundMePage extends State<AroundMePage> {
   Position? currentPosition;
-  String? lastUpdated;
-  String? lastDistance;
-  String? lastSpeed;
-  double? topSpeed;
   late CommandTrackRealtime realtimeService;
   late Timer timer;
   var battery = Battery();
@@ -114,15 +110,10 @@ class StateGetCurrentCoor extends State<GetCurrentCoor> {
 
       // Calculate and update speed and distance
       setState(() {
-        lastDistance = '${distance.toStringAsFixed(2)} m';
         double speedRaw = countSpeed(distance, timerInterval);
-        lastSpeed = '${speedRaw.toStringAsFixed(2)} Km/h';
-        if (topSpeed == null || speedRaw > topSpeed!) {
-          topSpeed = speedRaw;
-        }
 
         // Warn if speed exceeds limit
-        if (speedRaw > speedLimitWarning) {
+        if (speedRaw > 120) {
           ArtSweetAlert.show(
               context: context,
               artDialogArgs: ArtDialogArgs(
@@ -162,9 +153,6 @@ class StateGetCurrentCoor extends State<GetCurrentCoor> {
           );
 
           if (!mounted) return;
-          setState(() {
-            lastUpdated = dateNow;
-          });
         } catch (error) {
           if (mounted) {
             ArtSweetAlert.show(
@@ -192,61 +180,36 @@ class StateGetCurrentCoor extends State<GetCurrentCoor> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      InkWell(
-        onTap: () {
-          ArtSweetAlert.show(
-              context: context,
-              artDialogArgs: ArtDialogArgs(
-                  title: null,
-                  customColumns: [
-                    const ComponentTextTitle(
-                        text: 'Last Coordinate', type: "section_title"),
-                    const GetLastCoor(),
-                  ],
-                  text: null));
-        },
-        child: Container(
-            padding: EdgeInsets.all(spaceMD),
-            width: Get.width,
-            margin: EdgeInsets.only(top: spaceMD),
-            decoration: BoxDecoration(
-                border: Border.all(width: 1.5, color: primaryColor),
-                borderRadius: BorderRadius.all(Radius.circular(roundedSM))),
-            child: Column(
-              children: [
-                const ComponentTextTitle(
-                    text: 'Current Coordinate', type: "section_title"),
-                if (currentPosition != null)
-                  Text(
-                    'Latitude: ${currentPosition!.latitude}, Longitude: ${currentPosition!.longitude}',
-                  )
-                else
-                  const Text('Get current location...'),
-                SizedBox(height: spaceSM),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Last Updated : ${lastUpdated ?? 'Updating...'}",
-                      style: TextStyle(
-                          fontStyle: FontStyle.italic, fontSize: textSM),
-                    ),
-                    Text(
-                      "Last Distance : ${lastDistance ?? 'Updating...'}",
-                      style: TextStyle(
-                          fontStyle: FontStyle.italic, fontSize: textSM),
-                    ),
-                  ],
-                )
-              ],
-            )),
+    return Scaffold(
+      drawer: const LeftBar(),
+      appBar: AppBar(
+        title:
+            const ComponentTextTitle(type: "content_title", text: "Around Me"),
+        actions: <Widget>[
+          IconButton(
+            icon: const FaIcon(FontAwesomeIcons.circleInfo),
+            tooltip: 'Show Snackbar',
+            onPressed: () {
+              ArtSweetAlert.show(
+                  context: context,
+                  artDialogArgs: ArtDialogArgs(
+                      type: ArtSweetAlertType.info,
+                      title: "Information!",
+                      text:
+                          "This will show nearest marker around you up to 10 KM"));
+            },
+          )
+        ],
       ),
-      GetSpeed(
-        lastSpeed: lastSpeed,
-        topSpeed: topSpeed,
-      ),
-    ]);
+      body: ListView(padding: EdgeInsets.all(spaceMD), children: [
+        if (currentPosition != null)
+          GetNearestPin(
+            lat: currentPosition!.latitude.toString(),
+            long: currentPosition!.longitude.toString(),
+          )
+        else
+          const Center(child: Text('Current position not available')),
+      ]),
+    );
   }
 }

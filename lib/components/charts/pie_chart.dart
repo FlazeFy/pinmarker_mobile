@@ -9,7 +9,7 @@ Widget getPieChart(List<PieData> chartData, String? title) {
           ? ChartTitle(
               text: title,
               textStyle: TextStyle(color: primaryColor, fontSize: textLG))
-          : const ChartTitle(),
+          : ChartTitle(),
       legend: Legend(
           isVisible: true,
           padding: spaceLG,

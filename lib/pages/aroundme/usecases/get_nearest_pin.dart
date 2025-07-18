@@ -49,7 +49,7 @@ class StateGetNearestPin extends State<GetNearestPin> {
                     borderRadius: BorderRadius.all(Radius.circular(roundedSM)),
                   ),
                   child: const Center(
-                    child: Text("No pin found in radius 3 Km"),
+                    child: Text("No pin found in radius 10 Km"),
                   ));
             }
             return _buildContent(contents);
@@ -64,62 +64,44 @@ class StateGetNearestPin extends State<GetNearestPin> {
   }
 
   Widget _buildContent(List<PinModelNearestHeader> data) {
-    return Container(
-      padding: EdgeInsets.all(spaceMD),
-      margin: EdgeInsets.only(top: spaceMD),
-      width: Get.width,
-      decoration: BoxDecoration(
-        border: Border.all(width: 1.5, color: primaryColor),
-        borderRadius: BorderRadius.all(Radius.circular(roundedSM)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const ComponentTextTitle(text: "Nearest Pin", type: "section_title"),
-          Column(
-              children: data.map<Widget>((dt) {
-            return Container(
-              width: Get.width,
-              padding: EdgeInsets.all(spaceSM),
-              margin: EdgeInsets.only(bottom: spaceSM),
-              decoration: BoxDecoration(
-                color: whiteColor,
-                borderRadius: BorderRadius.all(Radius.circular(roundedMD)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.35),
-                    blurRadius: 10.0,
-                    spreadRadius: 0.0,
-                    offset: const Offset(
-                      5.0,
-                      5.0,
-                    ),
-                  )
-                ],
+    return Column(
+        children: data.map<Widget>((dt) {
+      return Container(
+        width: Get.width,
+        padding: EdgeInsets.all(spaceSM),
+        margin: EdgeInsets.only(bottom: spaceSM),
+        decoration: BoxDecoration(
+          color: whiteColor,
+          borderRadius: BorderRadius.all(Radius.circular(roundedMD)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.35),
+              blurRadius: 10.0,
+              spreadRadius: 0.0,
+              offset: const Offset(
+                5.0,
+                5.0,
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      ComponentTextTitle(
-                          type: 'content_sub_title', text: dt.pinName),
-                      const Spacer(),
-                      ComponentTextTitle(
-                          type: 'content_tag', text: dt.pinCategory),
-                    ],
-                  ),
-                  ComponentTextTitle(
-                      type: 'content_body',
-                      text:
-                          "The distance about ${dt.distance.toStringAsFixed(2)} m")
-                ],
-              ),
-            );
-          }).toList())
-        ],
-      ),
-    );
+            )
+          ],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                ComponentTextTitle(type: 'content_sub_title', text: dt.pinName),
+                const Spacer(),
+                ComponentTextTitle(type: 'content_tag', text: dt.pinCategory),
+              ],
+            ),
+            ComponentTextTitle(
+                type: 'content_body',
+                text: "The distance about ${dt.distance.toStringAsFixed(2)} m")
+          ],
+        ),
+      );
+    }).toList());
   }
 }

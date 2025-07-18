@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pinmarker/components/bars/bottom_bar.dart';
 import 'package:pinmarker/helpers/variables/global.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
 import 'package:pinmarker/pages/login/index.dart';
@@ -23,6 +24,13 @@ class LeftBarState extends State<LeftBar> {
               color: primaryColor,
             ),
             child: Text('PinMarker', style: TextStyle(color: whiteColor)),
+          ),
+          ListTile(
+            title: const Text('Main Menu'),
+            selected: selectedIndexLeftBar == 0,
+            onTap: () {
+              Get.to(const BottomBar());
+            },
           ),
           ListTile(
             title: const Text('My Profile'),

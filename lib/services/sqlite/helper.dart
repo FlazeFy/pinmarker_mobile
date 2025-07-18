@@ -40,7 +40,6 @@ class DatabaseHelper {
         track_long DOUBLE,
         track_type TEXT,
         created_at TEXT,
-        created_by TEXT,
         is_sync BOOLEAN
       )
     ''');
@@ -96,7 +95,6 @@ class DatabaseHelper {
     required double trackLong,
     required String trackType,
     required String createdAt,
-    required String createdBy,
     required bool isSync,
   }) async {
     final db = await database;
@@ -107,7 +105,6 @@ class DatabaseHelper {
       'track_long': trackLong,
       'track_type': trackType,
       'created_at': createdAt,
-      'created_by': createdBy,
       'is_sync': isSync ? 1 : 0
     };
 
