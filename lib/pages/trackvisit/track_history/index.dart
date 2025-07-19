@@ -5,6 +5,7 @@ import 'package:pinmarker/components/bars/left_bar.dart';
 import 'package:pinmarker/helpers/variables/global.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
 import 'package:pinmarker/pages/trackvisit/track_history/usecases/get_track_history_period.dart';
+import 'package:pinmarker/pages/trackvisit/track_history/usecases/post_sycn_track.dart';
 
 class TrackHistoryPage extends StatefulWidget {
   const TrackHistoryPage({super.key});
@@ -23,6 +24,7 @@ class StateTrackHistoryPage extends State<TrackHistoryPage> {
           title:
               const Text('Track History', style: TextStyle(color: whiteColor)),
           actions: <Widget>[
+            const PostSycnTrack(),
             IconButton(
               icon: const Icon(Icons.arrow_back),
               tooltip: 'Back to List',
