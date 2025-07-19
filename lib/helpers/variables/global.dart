@@ -8,7 +8,9 @@ FlashMode flashMode = FlashMode.off;
 int checkIntervalTimeHigh = 5; // in second
 int checkIntervalTimeMid = 7; // in second
 int checkIntervalTimeLow = 10; // in second
+int checkIntervalRunExpiredTrackTime = 10; // in second
 int speedLimitWarning = 120; // in kmh
+int expiredTrackTime = 24; // in hour
 
 bool isShownOffLocationPop = false;
 

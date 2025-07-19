@@ -150,4 +150,19 @@ class DatabaseHelper {
       whereArgs: [id],
     );
   }
+
+  Future<int> deleteExpiredSyncedTrackers(int hours) async {
+    final db = await database;
+
+    final now = DateTime.now();
+    final cutoff = now.subtract(Duration(hours: hours)).toIso8601String();
+
+    final deletedCount = await db.delete(
+      'tracker',
+      where: 'is_sync = 1 AND created_at <= ?',
+      whereArgs: [cutoff],
+    );
+
+    return deletedCount;
+  }
 }

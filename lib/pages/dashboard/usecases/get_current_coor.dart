@@ -43,6 +43,7 @@ class StateGetCurrentCoor extends State<GetCurrentCoor> {
     realtimeService = CommandTrackRealtime();
     getTimerTrackingToSqlite();
     getTimerSqliteToRestAPI();
+    getTimerResetExpiredTrack();
   }
 
   // Set timer interval based on battery level and power saving mode
@@ -108,6 +109,26 @@ class StateGetCurrentCoor extends State<GetCurrentCoor> {
                 type: ArtSweetAlertType.danger, title: "Failed", text: msg),
           );
         }
+      } catch (err) {
+        if (mounted) {
+          ArtSweetAlert.show(
+            context: context,
+            artDialogArgs: ArtDialogArgs(
+                type: ArtSweetAlertType.danger,
+                title: "Failed!",
+                text: err.toString()),
+          );
+        }
+      }
+    });
+  }
+
+  Future<void> getTimerResetExpiredTrack() async {
+    timer = Timer.periodic(Duration(seconds: checkIntervalRunExpiredTrackTime),
+        (timer) async {
+      try {
+        final dbHelper = DatabaseHelper();
+        await dbHelper.deleteExpiredSyncedTrackers(expiredTrackTime);
       } catch (err) {
         if (mounted) {
           ArtSweetAlert.show(
