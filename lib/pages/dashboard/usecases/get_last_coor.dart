@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pinmarker/components/button/button_primary.dart';
+import 'package:pinmarker/components/container/container_track_history.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
 import 'package:pinmarker/services/sqlite/helper.dart';
 
@@ -37,41 +38,12 @@ class StateGetCurrentCoor extends State<GetLastCoor> {
               itemBuilder: (context, index) {
                 final tracker = trackers[index];
 
-                return Container(
-                  margin: EdgeInsets.only(bottom: spaceMD),
-                  padding: EdgeInsets.all(spaceMD),
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                          width: spaceMini / 2.5, color: primaryColor),
-                      borderRadius:
-                          BorderRadius.all(Radius.circular(roundedSM))),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                          'Battery Indicator: ${tracker['battery_indicator']}%'),
-                      Text(
-                          'Coordinate: ${tracker['track_lat']}, ${tracker['track_long']}'),
-                      Text('Record At: ${tracker['created_at']}'),
-                      Row(
-                        children: [
-                          const Text('Is Sync:'),
-                          SizedBox(width: spaceSM),
-                          tracker['is_sync'] == 1
-                              ? const ComponentButtonPrimary(
-                                  text: "Yes",
-                                  icon: null,
-                                  color: successBG,
-                                  isBig: false)
-                              : const ComponentButtonPrimary(
-                                  text: "No",
-                                  icon: null,
-                                  color: dangerBG,
-                                  isBig: false)
-                        ],
-                      ),
-                    ],
-                  ),
+                return ComponentContainerTrackHistory(
+                  batteryIndicator: tracker['battery_indicator'],
+                  trackLat: tracker['track_lat'],
+                  trackLong: tracker['track_long'],
+                  createdAt: tracker['created_at'],
+                  isSync: tracker['is_sync'],
                 );
               },
             ));

@@ -20,6 +20,7 @@ class DatabaseHelper {
     return _database!;
   }
 
+  // Init SQLite DB
   Future<Database> _initDatabase() async {
     final documentsDirectory = await getApplicationDocumentsDirectory();
     final path = join(documentsDirectory.path, 'pinmarker_stage.db');
@@ -55,6 +56,7 @@ class DatabaseHelper {
     ''');
   }
 
+  // Pin Module
   Future<List<Map<String, dynamic>>> getAllPinLocal() async {
     final db = await DatabaseHelper().database;
     return await db.query(
@@ -89,6 +91,7 @@ class DatabaseHelper {
     return await db.delete('pin_local');
   }
 
+  // Tracker Module
   Future<int> insertTracker({
     required int batteryIndicator,
     required double trackLat,
@@ -117,6 +120,14 @@ class DatabaseHelper {
       'tracker',
       orderBy: 'created_at DESC',
       limit: 10,
+    );
+  }
+
+  Future<List<Map<String, dynamic>>> getAllTracker() async {
+    final db = await DatabaseHelper().database;
+    return await db.query(
+      'tracker',
+      orderBy: 'created_at DESC',
     );
   }
 

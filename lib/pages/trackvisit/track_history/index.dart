@@ -17,27 +17,24 @@ class StateTrackHistoryPage extends State<TrackHistoryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: primaryColor,
-        automaticallyImplyLeading: false,
-        title: const Text('Track History', style: TextStyle(color: whiteColor)),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.arrow_back),
-            tooltip: 'Back to List',
-            onPressed: () {
-              selectedIndexBottomBar = 3;
-              Get.to(const BottomBar());
-            },
-            color: whiteColor,
-          ),
-        ],
-      ),
-      drawer: const LeftBar(),
-      body: ListView(
-        padding: EdgeInsets.all(spaceMD),
-        children: const <Widget>[GetTrackHistoryPeriod()],
-      ),
-    );
+        appBar: AppBar(
+          backgroundColor: primaryColor,
+          automaticallyImplyLeading: false,
+          title:
+              const Text('Track History', style: TextStyle(color: whiteColor)),
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.arrow_back),
+              tooltip: 'Back to List',
+              onPressed: () {
+                selectedIndexBottomBar = 3;
+                Get.to(const BottomBar());
+              },
+              color: whiteColor,
+            ),
+          ],
+        ),
+        drawer: const LeftBar(),
+        body: const GetTrackHistoryPeriod());
   }
 }
