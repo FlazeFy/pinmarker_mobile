@@ -57,6 +57,7 @@ dependencies:
   sqflite: ^2.4.2+1
   syncfusion_flutter_charts: ^33.2.13
   url_launcher: ^6.3.2
+  art_sweetalert_new: ^1.0.2
 
 dev_dependencies:
   flutter_test:

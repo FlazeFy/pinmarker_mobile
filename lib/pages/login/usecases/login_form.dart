@@ -1,5 +1,10 @@
+import 'package:art_sweetalert_new/art_sweetalert_new.dart';
 import 'package:flutter/material.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
+
+import '../../../components/bars/bottom_bar.dart';
+import '../../../services/modules/auth/model/commands.dart';
+import '../../../services/modules/auth/service/commands.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -12,6 +17,14 @@ class StateLoginFormState extends State<LoginForm> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _obscurePassword = true;
+
+  late AuthCommandsService apiService;
+
+  @override
+  void initState() {
+    super.initState();
+    apiService = AuthCommandsService();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +107,40 @@ class StateLoginFormState extends State<LoginForm> {
             width: double.infinity,
             height: 52,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () async {
+                LoginModel data = LoginModel(
+                  username: _usernameController.text,
+                  password: _passwordController.text,
+                );
+
+                if (data.username.isNotEmpty && data.password.isNotEmpty) {
+                  apiService.postLogin(data).then((response) {
+                    setState(() {});
+                    var status = response[0]['status'];
+                    var message = response[0]['message'];
+
+                    if (status == "success") {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const BottomBar()),
+                      );
+                    } else {
+                      ArtSweetAlert.show(
+                        context: context,
+                        title: Text(message),
+                        type: ArtAlertType.error,
+                      );
+                    }
+                  });
+                } else {
+                  ArtSweetAlert.show(
+                    context: context,
+                    title: Text("Login failed, field can't be empty"),
+                    type: ArtAlertType.error,
+                  );
+                }
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: primaryColor,
                 foregroundColor: Colors.white,

@@ -25,6 +25,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.0.5"
+  art_sweetalert_new:
+    dependency: "direct main"
+    description:
+      name: art_sweetalert_new
+      sha256: eb895bf99fa8fbce7750f07668fedf87436bbe2018a9db71754c96f57cd37a18
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.2"
   async:
     dependency: transitive
     description:
