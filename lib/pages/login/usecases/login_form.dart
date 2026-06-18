@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
 
 import '../../../components/bars/bottom_bar.dart';
+import '../../../helpers/general/converter.dart';
 import '../../../services/modules/auth/model/commands.dart';
 import '../../../services/modules/auth/service/commands.dart';
 
@@ -45,10 +46,13 @@ class StateLoginFormState extends State<LoginForm> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Center(
-            child: Text(
-              'Welcome Back',
-              style: TextStyle(fontSize: textJumbo, fontWeight: FontWeight.w700),
-            ),
+            child: Semantics(
+            identifier: 'page_title',
+              child: Text(
+                'Welcome Back',
+                style: TextStyle(fontSize: textJumbo, fontWeight: FontWeight.w700),
+              ),
+            )
           ),
           Center(
             child: Text(
@@ -68,6 +72,7 @@ class StateLoginFormState extends State<LoginForm> {
           _buildTextField(
             controller: _usernameController,
             hint: 'Enter your email',
+            id: "username_field",
             icon: Icons.person_outline,
           ),
           SizedBox(height: spaceMD),
@@ -91,6 +96,7 @@ class StateLoginFormState extends State<LoginForm> {
           _buildTextField(
             controller: _passwordController,
             hint: '••••••••',
+            id: "password_field",
             icon: Icons.lock_outline,
             obscure: _obscurePassword,
             suffixIcon: IconButton(
@@ -106,52 +112,66 @@ class StateLoginFormState extends State<LoginForm> {
           SizedBox(
             width: double.infinity,
             height: 52,
-            child: ElevatedButton(
-              onPressed: () async {
-                LoginModel data = LoginModel(
-                  username: _usernameController.text,
-                  password: _passwordController.text,
-                );
-
-                if (data.username.isNotEmpty && data.password.isNotEmpty) {
-                  apiService.postLogin(data).then((response) {
-                    setState(() {});
-                    var status = response[0]['status'];
-                    var message = response[0]['message'];
-
-                    if (status == "success") {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const BottomBar()),
-                      );
-                    } else {
-                      ArtSweetAlert.show(
-                        context: context,
-                        title: Text(message),
-                        type: ArtAlertType.error,
-                      );
-                    }
-                  });
-                } else {
-                  ArtSweetAlert.show(
-                    context: context,
-                    title: Text("Login failed, field can't be empty"),
-                    type: ArtAlertType.error,
+            child: Semantics(
+              identifier: "login_button",
+              child:ElevatedButton(
+                onPressed: () async {
+                  LoginModel data = LoginModel(
+                    username: _usernameController.text.trim(),
+                    password: _passwordController.text.trim(),
                   );
-                }
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: primaryColor,
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                elevation: 0,
+
+                  if (data.username.isNotEmpty && data.password.isNotEmpty) {
+                    apiService.postLogin(data).then((response) {
+                      setState(() {});
+                      String status = response[0]['status'];
+                      String message = response[0]['message'];
+
+                      if (status == "success") {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const BottomBar()),
+                        );
+                      } else {
+                        final data = response[0]['data'] as String?;
+
+                        if (data != null) {
+                          message += ". " + stripHtmlTags(data);
+                        }
+
+                        ArtSweetAlert.show(
+                          context: context,
+                          title: Semantics(
+                            identifier: 'error_alert',
+                            child: Text(message)),
+                          type: ArtAlertType.error,
+                        );
+                      }
+                    });
+                  } else {
+                    ArtSweetAlert.show(
+                      context: context,
+                      title: Semantics(
+                        identifier: 'error_alert',
+                        child: Text("username and password cannot be empty")
+                      ),
+                      type: ArtAlertType.error,
+                    );
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: primaryColor,
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                  elevation: 0,
+                ),
+                child: Text(
+                  'Sign In',
+                  style: TextStyle(fontSize: textLG, fontWeight: FontWeight.w600),
+                ),
               ),
-              child: Text(
-                'Sign In',
-                style: TextStyle(fontSize: textLG, fontWeight: FontWeight.w600),
-              ),
-            ),
+            )
           ),
           SizedBox(height: spaceXLG),
           Row(
@@ -202,12 +222,14 @@ class StateLoginFormState extends State<LoginForm> {
     required TextEditingController controller,
     required String hint,
     required IconData icon,
+    required String id,
     bool obscure = false,
     Widget? suffixIcon,
   }) {
     return TextField(
       controller: controller,
       obscureText: obscure,
+      key: ValueKey(id),
       decoration: InputDecoration(
         hintText: hint,
         hintStyle: const TextStyle(color: greyColor),

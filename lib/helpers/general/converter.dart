@@ -104,3 +104,8 @@ String convertDateTime(DateTime val, String type, bool isRealtime) {
 
   return formattedDate;
 }
+
+String stripHtmlTags(String htmlString) {
+  final RegExp exp = RegExp(r'<[^>]*>', multiLine: true, caseSensitive: false);
+  return htmlString.replaceAll(exp, '');
+}

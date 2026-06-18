@@ -26,7 +26,8 @@ class AuthCommandsService {
     return [
       {
         "status": response.statusCode == 200 ? "success" : "failed",
-        "message": response.statusCode != 500 ? responseData['message'] : "Unknown error"
+        "message": response.statusCode != 500 ? responseData['message'] : "Unknown error",
+        "data": responseData['data']
       }
     ];
   }
