@@ -75,9 +75,9 @@ class StateGetAllDctByType extends State<GetAllDctByType> {
           'Select Total Type',
           style: TextStyle(fontSize: textMD, color: primaryColor),
         ),
-        value: selectedValue,
+        // valueListenable: selectedValue,
         items: data
-            .map((item) => DropdownMenuItem<String>(
+            .map((item) => DropdownItem<String>(
                   value: item.dctName,
                   child: Text(
                     ucAll(item.dctName),

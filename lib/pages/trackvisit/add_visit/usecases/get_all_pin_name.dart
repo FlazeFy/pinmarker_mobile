@@ -72,9 +72,9 @@ class StateGetAllPinName extends State<GetAllPinName> {
           'Select Pin Name',
           style: TextStyle(fontSize: textMD, color: primaryColor),
         ),
-        value: selectedValue,
+        // value: selectedValue,
         items: data
-            .map((item) => DropdownMenuItem<String>(
+            .map((item) => DropdownItem<String>(
                   value: item.id,
                   child: Text(
                     item.pinName,

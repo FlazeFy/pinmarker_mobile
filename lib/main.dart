@@ -5,19 +5,20 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:pinmarker/components/bars/bottom_bar.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:pinmarker/pages/login/index.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  await GetStorage.init();
-
-  FlutterError.onError = (errorDetails) {
-    FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
-  };
-  PlatformDispatcher.instance.onError = (error, stack) {
-    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
-    return true;
-  };
+  // await Firebase.initializeApp();
+  // await GetStorage.init();
+  //
+  // FlutterError.onError = (errorDetails) {
+  //   FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+  // };
+  // PlatformDispatcher.instance.onError = (error, stack) {
+  //   FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+  //   return true;
+  // };
 
   runApp(const MyApp());
 }
@@ -40,7 +41,7 @@ class StateMyApp extends State<MyApp> {
     return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'PinMarker',
-      home: BottomBar(),
+      home: LoginPage(),
     );
   }
 }
