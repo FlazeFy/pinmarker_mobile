@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 double roundedCircle = 100;
 double roundedJumbo = 30;
-double roundedXLG = 20;
+double roundedXLG = 24;
 double roundedLG = 18;
 double roundedMD = 14;
 double roundedSM = 10;
@@ -18,6 +18,7 @@ double textXMD = 14;
 double textMD = 13;
 double textSM = 12;
 double textXSM = 11;
+double textMini = 8;
 
 // Height & Width
 double btnHeightMD = 55;
@@ -47,5 +48,5 @@ const Color dangerBG = Color(0xFFdc3545);
 const Color warningBG = Color(0xFFffc107);
 const Color primaryColor = Color(0xFF635BFF);
 const Color whiteColor = Color(0xFFFFFFFF);
-const Color secondaryColor = Color(0xFF414141);
 const Color greyColor = Color(0xFF777587);
+const Color secondaryColor = Color(0xFF1E2124);

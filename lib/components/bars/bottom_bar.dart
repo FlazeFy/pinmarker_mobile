@@ -3,8 +3,9 @@ import 'package:pinmarker/helpers/variables/global.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
 import 'package:pinmarker/pages/dashboard/index.dart';
 import 'package:pinmarker/pages/list/index.dart';
-import 'package:pinmarker/pages/maps/index.dart';
 import 'package:pinmarker/pages/trackvisit/index.dart';
+
+import '../../pages/maps/index.dart';
 
 class BottomBar extends StatefulWidget {
   const BottomBar({key}) : super(key: key);

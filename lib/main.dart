@@ -6,6 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:pinmarker/components/bars/bottom_bar.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:pinmarker/pages/login/index.dart';
+import 'package:pinmarker/pages/maps/index.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,7 +42,7 @@ class StateMyApp extends State<MyApp> {
     return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'PinMarker',
-      home: LoginPage(),
+      home: MapsPage(),
     );
   }
 }

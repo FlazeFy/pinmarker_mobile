@@ -1,0 +1,39 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:pinmarker/components/bars/left_bar.dart';
+import 'package:pinmarker/helpers/variables/global.dart';
+import 'package:pinmarker/helpers/variables/style.dart';
+import 'package:pinmarker/pages/maps/list_view/index.dart';
+import 'package:pinmarker/pages/maps/usecases/get_maps_board.dart';
+
+class MapsOldPage extends StatefulWidget {
+  const MapsOldPage({super.key});
+
+  @override
+  StateMapsOldPage createState() => StateMapsOldPage();
+}
+
+class StateMapsOldPage extends State<MapsOldPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: const GetMapsBoard(),
+      drawer: const LeftBar(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
+      floatingActionButton: SizedBox(
+          height: floatingActionButtonSize,
+          width: floatingActionButtonSize,
+          child: FloatingActionButton(
+            onPressed: () {
+              Get.to(() => const MapsListViewPage());
+            },
+            backgroundColor: primaryColor,
+            child: Icon(
+              Icons.list,
+              color: whiteColor,
+              size: floatingActionButtonSize - floatingActionButtonSize / 2,
+            ),
+          )),
+    );
+  }
+}
