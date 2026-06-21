@@ -2,11 +2,13 @@ import 'dart:async';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
+import 'package:pinmarker/services/controllers/maps_controller.dart';
 
 class MapsBoard extends StatefulWidget {
   const MapsBoard({super.key});
@@ -17,6 +19,7 @@ class MapsBoard extends StatefulWidget {
 
 class StateMapsBoard extends State<MapsBoard> {
   final MapController _mapController = MapController();
+  final MapsController mapsController = Get.find<MapsController>();
   StreamSubscription<Position>? _locationSub;
   double? _userLat;
   double? _userLng;
@@ -96,9 +99,16 @@ class StateMapsBoard extends State<MapsBoard> {
   }
 
   void _updateUserLocation(Position position) {
-    setState(() {
-      _userLat = position.latitude;
-      _userLng = position.longitude;
+    _locationSub = Geolocator.getPositionStream().listen((position) {
+      setState(() {
+        _userLat = position.latitude;
+        _userLng = position.longitude;
+      });
+
+      mapsController.updateLocation(
+        latitude: position.latitude,
+        longitude: position.longitude,
+      );
     });
 
     _mapController.move(LatLng(position.latitude, position.longitude), 12);

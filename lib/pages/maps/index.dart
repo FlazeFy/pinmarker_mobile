@@ -8,6 +8,7 @@ import 'package:pinmarker/pages/maps/usecases/maps_board.dart';
 import 'package:pinmarker/pages/maps/usecases/maps_footer.dart';
 import 'package:pinmarker/pages/maps/usecases/maps_toolbar.dart';
 import 'package:pinmarker/pages/maps/usecases/maps_weather.dart';
+import 'package:pinmarker/services/controllers/maps_controller.dart';
 
 import '../../components/button/maps_zoom_button.dart';
 
@@ -19,6 +20,7 @@ class MapsPage extends StatefulWidget {
 }
 
 class StateMapsPage extends State<MapsPage> {
+  final MapsController mapsController = Get.put(MapsController());
   final TextEditingController _searchController = TextEditingController();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
