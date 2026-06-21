@@ -49,4 +49,5 @@ const Color warningBG = Color(0xFFffc107);
 const Color primaryColor = Color(0xFF635BFF);
 const Color whiteColor = Color(0xFFFFFFFF);
 const Color greyColor = Color(0xFF777587);
+const Color lightGreyColor = Color(0xFFf2f3f7);
 const Color secondaryColor = Color(0xFF1E2124);
