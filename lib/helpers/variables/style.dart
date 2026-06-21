@@ -45,7 +45,8 @@ double iconSM = 12; //For content header ...
 
 const Color successBG = Color(0xFF198754);
 const Color dangerBG = Color(0xFFdc3545);
-const Color warningBG = Color(0xFFffc107);
+const Color infoBG = Color(0xFF008cff);
+const Color warningBG = Color(0xFFff9f43);
 const Color primaryColor = Color(0xFF635BFF);
 const Color whiteColor = Color(0xFFFFFFFF);
 const Color greyColor = Color(0xFF777587);

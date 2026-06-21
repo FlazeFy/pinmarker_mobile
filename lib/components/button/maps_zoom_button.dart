@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+import 'package:get/get.dart';
+import 'package:pinmarker/services/controllers/maps_controller.dart';
 import '../../helpers/variables/style.dart';
 
 class MapsZoomButton extends StatefulWidget {
@@ -12,6 +12,8 @@ class MapsZoomButton extends StatefulWidget {
 }
 
 class StateMapsZoomButton extends State<MapsZoomButton> {
+  final MapsController mapsController = Get.find<MapsController>();
+
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -21,12 +23,12 @@ class StateMapsZoomButton extends State<MapsZoomButton> {
         children: [
           _ZoomButton(
             icon: FontAwesomeIcons.plus,
-            onTap: () {},
+            onTap: mapsController.zoomIn,
           ),
           Container(height: 1, width: 36, color: greyColor),
           _ZoomButton(
             icon: FontAwesomeIcons.minus,
-            onTap: () {},
+            onTap: mapsController.zoomOut,
           ),
         ],
       ),

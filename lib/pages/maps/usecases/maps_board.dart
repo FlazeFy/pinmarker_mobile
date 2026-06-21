@@ -18,7 +18,6 @@ class MapsBoard extends StatefulWidget {
 }
 
 class StateMapsBoard extends State<MapsBoard> {
-  final MapController _mapController = MapController();
   final MapsController mapsController = Get.find<MapsController>();
   StreamSubscription<Position>? _locationSub;
   double? _userLat;
@@ -111,7 +110,7 @@ class StateMapsBoard extends State<MapsBoard> {
       );
     });
 
-    _mapController.move(LatLng(position.latitude, position.longitude), 12);
+    mapsController.mapController.move(LatLng(position.latitude, position.longitude), 12);
   }
 
   void _showSettingsDialog() {
@@ -145,25 +144,25 @@ class StateMapsBoard extends State<MapsBoard> {
   }
 
   void zoomIn() {
-    final current = _mapController.camera;
-    _mapController.move(current.center, current.zoom + 1);
+    final current = mapsController.mapController.camera;
+    mapsController.mapController.move(current.center, current.zoom + 1);
   }
 
   void zoomOut() {
-    final current = _mapController.camera;
-    _mapController.move(current.center, current.zoom - 1);
+    final current = mapsController.mapController.camera;
+    mapsController.mapController.move(current.center, current.zoom - 1);
   }
 
   void moveToMyLocation() {
     if (_userLat != null && _userLng != null) {
-      _mapController.move(LatLng(_userLat!, _userLng!), 13);
+      mapsController.mapController.move(LatLng(_userLat!, _userLng!), 13);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return FlutterMap(
-      mapController: _mapController,
+      mapController: mapsController.mapController,
       options: const MapOptions(
         initialCenter: LatLng(-6.2088, 106.8456),
         initialZoom: 13,

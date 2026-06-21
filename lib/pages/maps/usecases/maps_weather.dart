@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:pinmarker/helpers/general/generator.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
 import 'package:pinmarker/services/controllers/maps_controller.dart';
 import 'package:pinmarker/services/modules/location/model/current_weather.dart';
@@ -53,58 +54,6 @@ class StateMapsWeather extends State<MapsWeather> {
       lastUpdate = update;
       isLoading = false;
     });
-  }
-
-  String getTemperatureLabel(double temp) {
-    if (temp <= 15) return "Cold";
-    if (temp <= 25) return "Cool";
-    if (temp <= 32) return "Warm";
-    return "Hot";
-  }
-
-  Color getTemperatureColor(double temp) {
-    if (temp <= 15) return Colors.blue;
-    if (temp <= 25) return Colors.lightBlue;
-    if (temp <= 32) return successBG;
-    return dangerBG;
-  }
-
-  String getHumidityLabel(int humidity) {
-    if (humidity < 30) return "Dry";
-    if (humidity <= 60) return "Normal";
-    return "Humid";
-  }
-
-  Color getHumidityColor(int humidity) {
-    if (humidity < 30) return Colors.orange;
-    if (humidity <= 60) return successBG;
-    return Colors.lightBlue;
-  }
-
-  String getWindLabel(double wind) {
-    if (wind <= 5) return "Calm";
-    if (wind <= 20) return "Breezy";
-    return "Danger";
-  }
-
-  Color getWindColor(double wind) {
-    if (wind <= 5) return successBG;
-    if (wind <= 20) return Colors.orange;
-    return dangerBG;
-  }
-
-  String getAqiLabel(int aqi) {
-    if (aqi <= 50) return "Good";
-    if (aqi <= 100) return "Moderate";
-    if (aqi <= 150) return "Unhealthy";
-    return "Bad";
-  }
-
-  Color getAqiColor(int aqi) {
-    if (aqi <= 50) return successBG;
-    if (aqi <= 100) return Colors.orange;
-    if (aqi <= 150) return dangerBG;
-    return dangerBG;
   }
 
   bool get hasDangerWeather {
