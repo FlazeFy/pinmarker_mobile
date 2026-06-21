@@ -143,22 +143,6 @@ class StateMapsBoard extends State<MapsBoard> {
     );
   }
 
-  void zoomIn() {
-    final current = mapsController.mapController.camera;
-    mapsController.mapController.move(current.center, current.zoom + 1);
-  }
-
-  void zoomOut() {
-    final current = mapsController.mapController.camera;
-    mapsController.mapController.move(current.center, current.zoom - 1);
-  }
-
-  void moveToMyLocation() {
-    if (_userLat != null && _userLng != null) {
-      mapsController.mapController.move(LatLng(_userLat!, _userLng!), 13);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return FlutterMap(

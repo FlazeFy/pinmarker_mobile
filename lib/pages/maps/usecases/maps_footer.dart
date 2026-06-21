@@ -2,7 +2,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:get/get.dart';
+import 'package:pinmarker/components/button/maps_focus_button.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
+import 'package:pinmarker/services/controllers/maps_controller.dart';
 
 class MapsFooter extends StatefulWidget {
   const MapsFooter({super.key});
@@ -12,6 +15,7 @@ class MapsFooter extends StatefulWidget {
 }
 
 class StateMapsFooter extends State<MapsFooter> {
+  final MapsController mapsController = Get.find<MapsController>();
   String _currentTime = '';
   Color _networkColor = successBG;
   Timer? _clockTimer;
@@ -120,11 +124,7 @@ class StateMapsFooter extends State<MapsFooter> {
                     style: TextStyle(
                         fontWeight: FontWeight.bold, fontSize: textXMD)),
               ),
-              GestureDetector(
-                onTap: () {},
-                child: FaIcon(FontAwesomeIcons.locationCrosshairs,
-                    color: Colors.grey[700], size: textXLG),
-              ),
+              MapsFocusButton(userLat: mapsController.latitude.value, userLng: mapsController.longitude.value),
               GestureDetector(
                 onTap: () {},
                 child: Container(

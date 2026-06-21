@@ -1,5 +1,6 @@
 import 'package:flutter_map/flutter_map.dart';
 import 'package:get/get.dart';
+import 'package:latlong2/latlong.dart';
 
 class MapsController extends GetxController {
   final MapController mapController = MapController();
@@ -28,5 +29,9 @@ class MapsController extends GetxController {
       camera.center,
       camera.zoom - 1,
     );
+  }
+
+  void moveToMyLocation(double userLat, double userLng) {
+    mapController.move(LatLng(userLat, userLng), 13);
   }
 }
