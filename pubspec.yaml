@@ -60,6 +60,7 @@ dependencies:
   art_sweetalert_new: ^1.0.2
   flutter_map: ^8.3.0
   latlong2: ^0.9.1
+  permission_handler: ^12.0.3
 
 dev_dependencies:
   flutter_test:
