@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:pinmarker/helpers/variables/style.dart';
 import 'package:pinmarker/pages/maps/list_view/index.dart';
+import 'package:pinmarker/pages/maps/usecases/maps_control.dart';
 
 import '../../../components/button/maps_circle_button.dart';
 
@@ -82,12 +83,7 @@ class StateMapsToolbar extends State<MapsToolbar> {
             SizedBox(width: spaceXSM),
             Column(
               children: [
-                MapsCircleButton(
-                  color: primaryColor,
-                  onTap: () => _scaffoldKey.currentState?.openDrawer(),
-                  child: FaIcon(FontAwesomeIcons.bars,
-                      color: whiteColor, size: textLG),
-                ),
+                MapsControl(),
                 SizedBox(height: spaceXXSM),
                 Stack(
                   clipBehavior: Clip.none,

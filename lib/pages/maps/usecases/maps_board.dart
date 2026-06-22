@@ -145,101 +145,106 @@ class StateMapsBoard extends State<MapsBoard> {
 
   @override
   Widget build(BuildContext context) {
-    return FlutterMap(
-      mapController: mapsController.mapController,
-      options: const MapOptions(
-        initialCenter: LatLng(-6.2088, 106.8456),
-        initialZoom: 13,
-        interactionOptions: InteractionOptions(flags: InteractiveFlag.all),
-      ),
-      children: [
-        TileLayer(
-          urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-          userAgentPackageName: 'com.example.pinmarker',
+    return Obx(
+      () => FlutterMap(
+        mapController: mapsController.mapController,
+        options: const MapOptions(
+          initialCenter: LatLng(-6.2088, 106.8456),
+          initialZoom: 13,
+          interactionOptions: InteractionOptions(flags: InteractiveFlag.all),
         ),
-
-        if (_userLat != null && _userLng != null)
-          CircleLayer(
-            circles: [
-              CircleMarker(
-                point: LatLng(_userLat!, _userLng!),
-                radius: 5000,
-                useRadiusInMeter: true,
-                color: primaryColor.withOpacity(0.12),
-                borderColor: primaryColor,
-                borderStrokeWidth: 3,
-              ),
-            ],
+        children: [
+          TileLayer(
+            urlTemplate: mapsController.tileUrl,
+            userAgentPackageName: 'com.example.pinmarker',
+            additionalOptions: {
+              'attribution': mapsController.attribution,
+            },
           ),
 
-        MarkerLayer(
-          markers: _pins.map((pin) {
-            return Marker(
-              point: LatLng(pin['lat'], pin['lng']),
-              width: 40,
-              height: 50,
-              child: GestureDetector(
-                onTap: () => _showPinInfo(context, pin),
-                child: Column(
-                  children: [
-                    Container(
-                      width: 32,
-                      height: 32,
-                      decoration: BoxDecoration(
-                        color: primaryColor,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: secondaryColor.withOpacity(0.3),
-                            blurRadius: 6,
-                            offset: const Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                      child: Center(
-                        child: FaIcon(FontAwesomeIcons.locationDot,
-                            color: whiteColor, size: textLG),
-                      ),
-                    ),
-                    CustomPaint(
-                      size: const Size(12, 10),
-                      painter: _MarkerTailPainter(color: primaryColor),
-                    ),
-                  ],
+          if (_userLat != null && _userLng != null)
+            CircleLayer(
+              circles: [
+                CircleMarker(
+                  point: LatLng(_userLat!, _userLng!),
+                  radius: 5000,
+                  useRadiusInMeter: true,
+                  color: primaryColor.withOpacity(0.12),
+                  borderColor: primaryColor,
+                  borderStrokeWidth: 3,
                 ),
-              ),
-            );
-          }).toList(),
-        ),
+              ],
+            ),
 
-        if (_userLat != null && _userLng != null)
           MarkerLayer(
-            markers: [
-              Marker(
-                point: LatLng(_userLat!, _userLng!),
-                width: 24,
-                height: 24,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: primaryColor,
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: whiteColor,
-                      width: 4,
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: primaryColor.withOpacity(0.4),
-                        blurRadius: 8,
-                        spreadRadius: 2,
+            markers: _pins.map((pin) {
+              return Marker(
+                point: LatLng(pin['lat'], pin['lng']),
+                width: 40,
+                height: 50,
+                child: GestureDetector(
+                  onTap: () => _showPinInfo(context, pin),
+                  child: Column(
+                    children: [
+                      Container(
+                        width: 32,
+                        height: 32,
+                        decoration: BoxDecoration(
+                          color: primaryColor,
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: secondaryColor.withOpacity(0.3),
+                              blurRadius: 6,
+                              offset: const Offset(0, 3),
+                            ),
+                          ],
+                        ),
+                        child: Center(
+                          child: FaIcon(FontAwesomeIcons.locationDot,
+                              color: whiteColor, size: textLG),
+                        ),
+                      ),
+                      CustomPaint(
+                        size: const Size(12, 10),
+                        painter: _MarkerTailPainter(color: primaryColor),
                       ),
                     ],
                   ),
                 ),
-              ),
-            ],
+              );
+            }).toList(),
           ),
-      ],
+
+          if (_userLat != null && _userLng != null)
+            MarkerLayer(
+              markers: [
+                Marker(
+                  point: LatLng(_userLat!, _userLng!),
+                  width: 24,
+                  height: 24,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: primaryColor,
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: whiteColor,
+                        width: 4,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: primaryColor.withOpacity(0.4),
+                          blurRadius: 8,
+                          spreadRadius: 2,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+        ],
+      )
     );
   }
 

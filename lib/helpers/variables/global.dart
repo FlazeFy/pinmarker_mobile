@@ -30,3 +30,5 @@ double nearestPinFetchRestDistance = 10; // In meter
 double generalFetchRestDistance = 10; // In meter
 
 double floatingActionButtonSize = 40;
+
+enum MapType { defaultMap, satellite, terrain }
